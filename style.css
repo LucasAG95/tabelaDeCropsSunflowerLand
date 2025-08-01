@@ -1,0 +1,259 @@
+/* ====================
+   ESTILO GERAL DO SITE
+======================= */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ce9f80;
+  padding: 30px;
+  color: #3e3e3e;
+}
+
+h1 {
+  font-size: 32px;
+  color: #2e7d32;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 20px;
+  color: #388e3c;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #c8e6c9;
+  padding-bottom: 4px;
+}
+
+/* ====================
+   NFTS E CHECKBOXES
+======================= */
+.checkbox-bloco {
+  margin-bottom: 30px;
+}
+
+.nft-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.nft-wrapper {
+  position: relative;
+  text-align: center;
+}
+
+.nft-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.6);
+  padding: 4px;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border 0.2s;
+  cursor: pointer;
+}
+
+.nft-img:hover {
+  transform: scale(1.1);
+  border-color: #66bb6a;
+}
+
+input[type="checkbox"] {
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 180px;
+  background-color: #222;
+  color: #fff;
+  text-align: left;
+  padding: 8px;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 12px;
+  pointer-events: none;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.nft-wrapper:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ====================
+   FORMULÁRIO & SELETOR
+======================= */
+label[for="estacaoSelect"] {
+  font-weight: bold;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+#estacaoSelect {
+  margin: 10px;
+  padding: 6px 10px;
+  font-size: 16px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fdfdfd;
+  cursor: pointer;
+}
+
+input[type="number"] {
+  padding: 6px 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  width: 50px;
+  margin-left: 10px;
+  background-color: #fefefe;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+}
+
+input[type="number"]:focus {
+  border-color: #66bb6a;
+  outline: none;
+  box-shadow: 0 0 4px rgba(102, 187, 106, 0.4);
+}
+
+button {
+  padding: 8px 16px;
+  margin-left: 10px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+button:hover {
+  background-color: #388e3c;
+}
+
+/* ====================
+   ÁREA DE RESULTADOS
+======================= */
+#saida {
+  white-space: pre-line;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* ====================
+   TABELA DE CROPS
+======================= */
+.tabela-crops {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 30px;
+  font-size: 14px;
+}
+
+.tabela-crops th,
+.tabela-crops td {
+  border: 1px solid #000000;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.tabela-crops th {
+  background-color: #e0f2f1;
+  color: #2e7d32;
+}
+
+.tabela-crops tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.crop-img {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  margin-right: 6px;
+  object-fit: contain;
+}
+
+.quantidade-input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 4px rgba(76, 175, 80, 0.4);
+  outline: none;
+}
+
+td input.quantidade-input {
+  display: block;
+  margin: 0 auto;
+}
+
+/*deixar checkbox 'invisivel'*/
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/*dar estilo quando a nft/skill é marcada'*/
+input[type="checkbox"]:checked + .nft-img {
+  border: 2px solid #4caf50;
+  background-color: #5a5e5a;
+  box-shadow: 0 0 8px #66bb6a;
+  transform: scale(1.1);
+}
+
+/* Largura da coluna CROP */
+.tabela-crops th:nth-child(1),
+.tabela-crops td:nth-child(1) {
+  width: 100px;
+}
+/* Largura da coluna tempo */
+.tabela-crops th:nth-child(2),
+.tabela-crops td:nth-child(2) {
+  width: 18px;
+}
+/* Largura da crop por plot */
+.tabela-crops th:nth-child(3),
+.tabela-crops td:nth-child(3) {
+  width: 100px;
+}
+/* Largura da coluna colheita total */
+.tabela-crops th:nth-child(4),
+.tabela-crops td:nth-child(4) {
+  width: 100px;
+}
+/* Largura da coluna custo(sementes) */
+.tabela-crops th:nth-child(5),
+.tabela-crops td:nth-child(5) {
+  width: 100px;
+}
+/* Largura da coluna venda(crops) */
+.tabela-crops th:nth-child(6),
+.tabela-crops td:nth-child(6) {
+  width: 100px;
+}
+/* Largura da coluna lucro final */
+.tabela-crops th:nth-child(7),
+.tabela-crops td:nth-child(7) {
+  width: 100px;
+}
+/* Largura da coluna estoque */
+.tabela-crops th:nth-child(8),
+.tabela-crops td:nth-child(8) {
+  width: 100px;
+}
