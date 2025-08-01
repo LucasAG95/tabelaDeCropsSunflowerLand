@@ -100,6 +100,7 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
         let tempoCrop = 1; //buffs de tempo serao adicionados aqui
         let vendaCoins = 1; //buffs que aumentam o valor da venda de crops por coins serao adicionados aqui
         let custoCoins = 1; //buffs que reduzem o valor de compra das sementes por coins serao adicionados aqui
+        let somaArea = 0; //buffs que afetam quantidade em area serao somados aqui
 
         //vai passar por cada skill e conferir as condições pedidas dentro do forEach
         skillCrops.forEach(skill => {
@@ -173,6 +174,12 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
             (collectibles.cropAfetada === 'todas' || collectibles.cropAfetada.includes(crop.tier) || collectibles.cropAfetada.includes(crop.name))) {
                 custoCoins *= collectibles.buff;
             };
+
+            //todas collectibles que afetarem quantidade em area e possuirem essas condições serao adicionadas ao custoCoins!
+            if (collectibles.possui === true && collectibles.afeta.includes('areaQtd') && collectibles.sinal === '+' && (collectibles.estacao === 'todas' || collectibles.estacao.includes(temporada)) &&
+            (collectibles.cropAfetada === 'todas' || collectibles.cropAfetada.includes(crop.tier) || collectibles.cropAfetada.includes(crop.name))) {
+                somaArea += collectibles.buff;
+            };
         });
 
         //vai passar por cada wearables e conferir as condições pedidas dentro do forEach
@@ -211,7 +218,7 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
         });
 
         //Quantidade de Crop
-        let colheitaPorPlot = ((1 * multiCrop) + somaCrop) - menosCrop;
+        let colheitaPorPlot = (1 * multiCrop) + somaCrop + (somaArea / plots) - menosCrop;
         let colheitaTotal = colheitaPorPlot * plots;
 
         //Tempo final de Crop

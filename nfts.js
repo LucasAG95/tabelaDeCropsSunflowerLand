@@ -17,7 +17,7 @@ let collectiblesCrops = [
         descricao: '-20% no tempo de Crops Basicas - Efeito em 9 Plots',
         estacao: 'todas',
         cropAfetada: 'basic',
-        afeta: 'area / tempo',
+        afeta: 'areaTemp',
         sinal: 'x',
         buffBase: 0.8,
         condicionalSkill: {
@@ -33,14 +33,14 @@ let collectiblesCrops = [
         descricao: '+0.2 Medium Crops - Efeito em 9 Plots',
         estacao: 'todas',
         cropAfetada: 'medium',
-        afeta: 'area / quantidade',
+        afeta: 'areaQtd',
         sinal: '+',
-        buffBase: (0.2 * 9) / plots,
+        buffBase: 0.2 * 9,
         condicionalSkill: {
             dependeDe: 'horrorMike',
-            novoBuff: (0.2 * 49) / plots,
+            novoBuff: 0.2 * 49
         },
-        buff: (0.2 * 9) / plots,
+        buff: 0.2 * 9,
         possui: false
     },
     {
@@ -49,14 +49,14 @@ let collectiblesCrops = [
         descricao: '+0.2 Advanced Crops - Efeito em 9 Plots',
         estacao: 'todas',
         cropAfetada: 'advanced',
-        afeta: 'area / quantidade',
+        afeta: 'areaQtd',
         sinal: '+',
-        buffBase: (0.2 * 9) / plots,
+        buffBase: 0.2 * 9,
         condicionalSkill: {
             dependeDe: 'lauriesGains',
-            novoBuff: (0.2 * 49) / plots,
+            novoBuff: 0.2 * 49
         },
-        buff: (0.2 * 9) / plots,
+        buff: 0.2 * 9,
         possui: false
     },
     //Collectibles - Crops
@@ -154,9 +154,9 @@ let collectiblesCrops = [
         descricao: '+10 Medium ou Advanced Crops - Efeito em 1 Plot',
         estacao: 'todas',
         cropAfetada: 'medium / advanced',
-        afeta: 'area / quantidade',
+        afeta: 'areaQtd',
         sinal: '+',
-        buff: 10 / plots,
+        buff: 10,
         possui: false
     },
     {
@@ -165,9 +165,9 @@ let collectiblesCrops = [
         descricao: '+0.5 Crops - Efeito em 12 Plots',
         estacao: 'todas',
         cropAfetada: 'todas',
-        afeta: 'area / quantidade',
+        afeta: 'areaQtd',
         sinal: '+',
-        buff: (0.5 * 12) / plots,
+        buff: 0.5 * 12,
         possui: false
     },
     {
@@ -417,9 +417,9 @@ let collectiblesCrops = [
         descricao: '+1 Corn - Efeito em 10 Plots',
         estacao: 'todas',
         cropAfetada: 'Corn',
-        afeta: 'quantidade / area',
+        afeta: 'areaQtd',
         sinal: '+',
-        buff: (1 * 10) / plots,
+        buff: 1 * 10,
         possui: false
     },
     {
