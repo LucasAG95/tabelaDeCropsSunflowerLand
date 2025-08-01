@@ -7,7 +7,7 @@ document.getElementById('estacaoSelect').addEventListener('change', () => { // v
 });
 
 //Status da farm
-let plots = parseInt(0);
+let plots = parseInt(9);
 
 
 
