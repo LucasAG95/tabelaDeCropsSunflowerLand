@@ -22,7 +22,7 @@ let collectiblesCrops = [
         buffBase: 0.8,
         condicionalSkill: {
             dependeDe: 'chonkyScarecrow',
-            novoBuff: 0.8,
+            novoBuff: 0.7,
         },
         buff: 0.8,
         possui: false
@@ -38,7 +38,7 @@ let collectiblesCrops = [
         buffBase: 0.2 * 9,
         condicionalSkill: {
             dependeDe: 'horrorMike',
-            novoBuff: 0.2 * 49
+            novoBuff: 0.3 * 49
         },
         buff: 0.2 * 9,
         possui: false
@@ -54,7 +54,7 @@ let collectiblesCrops = [
         buffBase: 0.2 * 9,
         condicionalSkill: {
             dependeDe: 'lauriesGains',
-            novoBuff: 0.2 * 49
+            novoBuff: 0.3 * 49
         },
         buff: 0.2 * 9,
         possui: false
