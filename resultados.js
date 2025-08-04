@@ -101,6 +101,8 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
         let vendaCoins = 1; //buffs que aumentam o valor da venda de crops por coins serao adicionados aqui
         let custoCoins = 1; //buffs que reduzem o valor de compra das sementes por coins serao adicionados aqui
         let somaArea = 0; //buffs que afetam quantidade em area serao somados aqui
+        let instaCrop = 1; //buffs que coletam crop instantaneamente serao adicionados aqui
+        let estoqueCrops = 1; //buffs que afetarem o estoque serao adicionados aqui
 
         //vai passar por cada skill e conferir as condições pedidas dentro do forEach
         skillCrops.forEach(skill => {
@@ -175,11 +177,18 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
                 custoCoins *= collectibles.buff;
             };
 
-            //todas collectibles que afetarem quantidade em area e possuirem essas condições serao adicionadas ao custoCoins!
+            //todas collectibles que afetarem quantidade em area e possuirem essas condições serao adicionadas ao somaArea!
             if (collectibles.possui === true && collectibles.afeta.includes('areaQtd') && collectibles.sinal === '+' && (collectibles.estacao === 'todas' || collectibles.estacao.includes(temporada)) &&
             (collectibles.cropAfetada === 'todas' || collectibles.cropAfetada.includes(crop.tier) || collectibles.cropAfetada.includes(crop.name))) {
                 somaArea += collectibles.buff;
             };
+
+            //todas collectibles que afetarem estoque e possuirem essas condições serao adicionadas a estoqueCrops!
+            if (collectibles.possui === true && collectibles.afeta.includes('estoque') && collectibles.sinal === 'x' && (collectibles.estacao === 'todas' || collectibles.estacao.includes(temporada)) &&
+            (collectibles.cropAfetada === 'todas' || collectibles.cropAfetada.includes(crop.tier) || collectibles.cropAfetada.includes(crop.name))) {
+                estoqueCrops *= collectibles.buff;
+            };
+
         });
 
         //vai passar por cada wearables e conferir as condições pedidas dentro do forEach
@@ -215,10 +224,16 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
                 custoCoins *= wearables.buff;
             };
 
+            //todas wearables que forem de coleta instantanea e possuirem essas condições serao adicionadas ao instaCrop
+            if (wearables.possui === true && wearables.afeta.includes('instantaneo') && wearables.sinal === 'x' && (wearables.estacao === 'todas' || wearables.estacao.includes(temporada)) &&
+            (wearables.cropAfetada === 'todas' || wearables.cropAfetada.includes(crop.tier) || wearables.cropAfetada.includes(crop.name))) {
+                instaCrop *= wearables.buff;
+            };
+
         });
 
         //Quantidade de Crop
-        let colheitaPorPlot = (1 * multiCrop) + somaCrop + (somaArea / plots) - menosCrop;
+        let colheitaPorPlot = ((1 * multiCrop) + somaCrop + (somaArea / plots) - menosCrop) * instaCrop;
         let colheitaTotal = colheitaPorPlot * plots;
 
         //Tempo final de Crop
@@ -228,6 +243,9 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
         let compraSemente = (crop.custoDaSemente * custoCoins) * plots
         let vendaCrops = (colheitaPorPlot * crop.vendaDaCrop * vendaCoins) * plots;
         let lucro = vendaCrops - compraSemente;
+
+        //Estoque de sementes de cada Crop
+        let estoqueSemente = crop.estoqueDeSementes * estoqueCrops;
             
         tabela += `
             <tr>
@@ -238,7 +256,7 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
                 <td>${compraSemente.toFixed(2)}</td>
                 <td>${vendaCrops.toFixed(2)}</td>
                 <td>${lucro.toFixed(2)}</td>
-                <td>${crop.estoqueDeSementes}</td>
+                <td>${estoqueSemente}</td>
             </tr>
             `; //toLowerCase() é para tranformar tudo em letra minuscula
             

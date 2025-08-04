@@ -531,8 +531,8 @@ const wearablesCrops = [
         estacao: 'todas',
         cropAfetada: 'todas',
         afeta: 'instantaneo',
-        sinal: '+',
-        buff: 3,
+        sinal: 'x',
+        buff: 1.3,
         possui: false
     },
     {
