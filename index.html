@@ -38,7 +38,7 @@
 
   <!-- Área de preenchimento -->
   <td>Quantidade de plots:</td>
-  <input id="quantidadePlantada" type="number" placeholder="Qtd.">
+  <input id="quantidadePlantada" type="number" placeholder="Quantos plots possui?">
   <button onclick="sementesPlantadas()">Clique para salvar!</button>  <!-- rever isso ou apagar dps -->
 
   <!-- Área de resultados -->
@@ -47,9 +47,11 @@
   <!-- Scripts -->
   <script src="statusFarm.js"></script>
   <script src="recursos.js"></script>
+  <script src="api.js"></script>
   <script src="skills.js"></script>
   <script src="nfts.js"></script>
   <script src="resultados.js"></script>
+  
   <script>
     function renderNFTs(lista, containerId) {
       const container = document.getElementById(containerId);

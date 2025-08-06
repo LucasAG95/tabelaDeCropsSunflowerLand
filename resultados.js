@@ -86,6 +86,7 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
           <th><img src="imagens/coins.png" class="crop-img">Venda(Crops)</th>
           <th><img src="imagens/coins.png" class="crop-img">Lucro Final</th>
           <th><img src="imagens/reestock.png" class="crop-img">Estoque</th>
+          <th><img src="imagens/flower.png" class="crop-img">Valor P2P</th>
         </tr>
       </thead>
       <tbody>
@@ -249,7 +250,7 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
             
         tabela += `
             <tr>
-                <td> <img src="imagens/${crop.name}.png" alt="${crop.name}" class="crop-img"> ${crop.name} </td> 
+                <td> <img src="imagens/${crop.name}.png" alt="${crop.name}" class="crop-img"> ${crop.name} </td>
                 <td>${formatarTempo(tempoFinal)}</td>
                 <td>${colheitaPorPlot.toFixed(2)}</td>
                 <td>${colheitaTotal.toFixed(2)}</td>
@@ -257,6 +258,7 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
                 <td>${vendaCrops.toFixed(2)}</td>
                 <td>${lucro.toFixed(2)}</td>
                 <td>${estoqueSemente}</td>
+                <td>${crop.vendaFlower}</td>
             </tr>
             `; //toLowerCase() é para tranformar tudo em letra minuscula
             

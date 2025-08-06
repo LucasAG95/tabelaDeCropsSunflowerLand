@@ -257,3 +257,8 @@ input[type="checkbox"]:checked + .nft-img {
 .tabela-crops td:nth-child(8) {
   width: 100px;
 }
+/* Largura da coluna P2P */
+.tabela-crops th:nth-child(9),
+.tabela-crops td:nth-child(9) {
+  width: 100px;
+}
