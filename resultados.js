@@ -1,9 +1,9 @@
 //api para puxar valores do flower das crops entre outros recursos
-fetch('https://sfl.world/api/v1/prices')
+fetch('https://opensheet.elk.sh/1Hx7RI8NKIsOAbke7zqaN-j9ieR3RCiWe3MNatDZu7jc/1')
   .then(res => res.json())
   .then(data => {  
-    atualizarValoresDeVendaPorFlower(data.data.p2p) //vai mandar para a funcção digitada o que ela puxou da api de preços do sfl.world, primeiro data(nome da variavel), o outro data é um objeto que tem p2p como outro objeto dentro, que por sua vez tem outros resultados dentro
-    console.log(data.data.p2p)
+    atualizarValoresDeVendaPorFlower(data[0]) //vai mandar para a funcção digitada o que ela puxou da api de preços do sfl.world, primeiro data(nome da variavel), o outro data é um objeto que tem p2p como outro objeto dentro, que por sua vez tem outros resultados dentro
+    console.log(data[0])
   })
   .catch(err => {
     console.error('Erro ao puxar a planilha:', err);
