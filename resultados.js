@@ -281,7 +281,7 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
                 <td><img src="imagens/coins.png" class="crop-img">${vendaCrops.toFixed(2)}</td>
                 <td><img src="imagens/coins.png" class="crop-img">${lucro.toFixed(2)}</td>
                 <td><img src="imagens/flower.png" class="crop-img">${crop.vendaFlower}</td>
-                <td><img src="imagens/flower.png" class="crop-img">${crop.vendaFlower * colheitaTotal}</td>
+                <td><img src="imagens/flower.png" class="crop-img">${(crop.vendaFlower * colheitaTotal).toFixed(5)}</td>
             </tr>
             `; //toLowerCase() é para tranformar tudo em letra minuscula
             
