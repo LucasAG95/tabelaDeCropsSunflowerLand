@@ -91,22 +91,28 @@ input[type="checkbox"] {
 }
 
 /* ====================
-   FORMULÁRIO & SELETOR
+   SELECTS E INPUTS
 ======================= */
-label[for="estacaoSelect"] {
+label[for="estacaoSelect"],
+label[for="ilhaSelect"],
+label[for="vipSelect"] {
   font-weight: bold;
   display: inline-block;
   margin-top: 20px;
+  color: #2e7d32;
 }
 
-#estacaoSelect {
-  margin: 10px;
+#estacaoSelect,
+#ilhaSelect,
+#vipSelect {
+  margin: 10px 0;
   padding: 6px 10px;
   font-size: 16px;
   border-radius: 6px;
   border: 1px solid #ccc;
   background-color: #fdfdfd;
   cursor: pointer;
+  width: 180px;
 }
 
 input[type="number"] {
@@ -114,7 +120,7 @@ input[type="number"] {
   font-size: 15px;
   border: 1px solid #ccc;
   border-radius: 6px;
-  width: 50px;
+  width: 80px;
   margin-left: 10px;
   background-color: #fefefe;
   box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
@@ -202,14 +208,14 @@ td input.quantidade-input {
   margin: 0 auto;
 }
 
-/*deixar checkbox 'invisivel'*/
+/* Estilo das checkboxes ocultas */
 input[type="checkbox"] {
   position: absolute;
   opacity: 0;
   pointer-events: none;
 }
 
-/*dar estilo quando a nft/skill é marcada'*/
+/* Estilo visual quando a checkbox é marcada */
 input[type="checkbox"]:checked + .nft-img {
   border: 2px solid #4caf50;
   background-color: #5a5e5a;
@@ -217,48 +223,112 @@ input[type="checkbox"]:checked + .nft-img {
   transform: scale(1.1);
 }
 
-/* Largura da coluna CROP */
+/* Largura das colunas da tabela */
+.tabela-crops th,
+.tabela-crops td {
+  width: 100px;
+}
+
+/* ==========================
+   NOVO ESTILO - SELECTS LADO A LADO
+============================= */
+.linha-selects {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-top: 30px;
+  flex-wrap: wrap;
+}
+
+.select-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.select-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #2e7d32;
+}
+
+/* Campo de plots abaixo */
+.input-plots {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.input-plots label {
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+/* Largura da coluna 1: Nome da Crop */
 .tabela-crops th:nth-child(1),
 .tabela-crops td:nth-child(1) {
   width: 100px;
 }
-/* Largura da coluna tempo */
+
+/* Largura da coluna 2: Média de Crop por Plot */
 .tabela-crops th:nth-child(2),
 .tabela-crops td:nth-child(2) {
-  width: 18px;
+  width: 100px;
 }
-/* Largura da crop por plot */
+
+/* Largura da coluna 3: Tempo de Crescimento */
 .tabela-crops th:nth-child(3),
 .tabela-crops td:nth-child(3) {
   width: 100px;
 }
-/* Largura da coluna colheita total */
+
+/* Largura da coluna 4: Estoque */
 .tabela-crops th:nth-child(4),
 .tabela-crops td:nth-child(4) {
   width: 100px;
 }
-/* Largura da coluna custo(sementes) */
+
+/* Largura da coluna 5: Input - Qtd de Sementes */
 .tabela-crops th:nth-child(5),
 .tabela-crops td:nth-child(5) {
   width: 100px;
 }
-/* Largura da coluna venda(crops) */
+
+/* Largura da coluna 6: Sementes Plantadas */
 .tabela-crops th:nth-child(6),
 .tabela-crops td:nth-child(6) {
   width: 100px;
 }
-/* Largura da coluna lucro final */
+
+/* Largura da coluna 7: Colheita Total */
 .tabela-crops th:nth-child(7),
 .tabela-crops td:nth-child(7) {
   width: 100px;
 }
-/* Largura da coluna estoque */
+
+/* Largura da coluna 8: Gasto com Sementes */
 .tabela-crops th:nth-child(8),
 .tabela-crops td:nth-child(8) {
   width: 100px;
 }
-/* Largura da coluna P2P */
+
+/* Largura da coluna 9: Venda das Crops */
 .tabela-crops th:nth-child(9),
 .tabela-crops td:nth-child(9) {
+  width: 100px;
+}
+
+/* Largura da coluna 10: Lucro Final */
+.tabela-crops th:nth-child(10),
+.tabela-crops td:nth-child(10) {
+  width: 100px;
+}
+
+/* Largura da coluna 11: Valor do Market P2P */
+.tabela-crops th:nth-child(11),
+.tabela-crops td:nth-child(11) {
   width: 100px;
 }

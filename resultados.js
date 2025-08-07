@@ -1,3 +1,26 @@
+//api para puxar valores do flower das crops entre outros recursos
+fetch('https://sfl.world/api/v1/prices')
+  .then(res => res.json())
+  .then(data => {  
+    atualizarValoresDeVendaPorFlower(data.data.p2p) //vai mandar para a funcção digitada o que ela puxou da api de preços do sfl.world, primeiro data(nome da variavel), o outro data é um objeto que tem p2p como outro objeto dentro, que por sua vez tem outros resultados dentro
+    console.log(data.data.p2p)
+  })
+  .catch(err => {
+    console.error('Erro ao puxar a planilha:', err);
+  });
+
+//essa função irá inserir o valor de venda por flower das crops em vendaFlower
+function atualizarValoresDeVendaPorFlower(apiValores) {
+  crops.forEach(crop => {
+    if (apiValores[crop.name]) {
+      crop.vendaFlower = apiValores[crop.name];
+      console.log(`Crop: ${crop.name} Valor: ${crop.vendaFlower}`);
+      atualizarStatusDasCrops();
+    };  
+  });
+  
+};
+
 // 1 hora = 3 600 000 - 1 minuto = 60 000 - 1 segundo = 1000
 function formatarTempo(tempoDaCrop, mostrarNoHtml) { //ms é de milissegundos
     const horas = Math.floor(tempoDaCrop / 3_600_000); // esse sinal _ serve para separar apenas casa decimais, é visual!
@@ -77,16 +100,16 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
     <table class="tabela-crops">
       <thead>
         <tr>
-          <h1>Resultado das Crops</h1>
-          <th>Crop</th>
-          <th><img src="imagens/tempo.png" class="crop-img">Tempo</th>
-          <th><img src="imagens/cropplot.png" class="crop-img">Crop por Plot</th>
-          <th>Colheita Total</th>
-          <th><img src="imagens/coins.png" class="crop-img">Custo(Sementes)</th>
-          <th><img src="imagens/coins.png" class="crop-img">Venda(Crops)</th>
-          <th><img src="imagens/coins.png" class="crop-img">Lucro Final</th>
-          <th><img src="imagens/reestock.png" class="crop-img">Estoque</th>
-          <th><img src="imagens/flower.png" class="crop-img">Valor P2P</th>
+            <h1>Resultado das Crops</h1>
+            <th>Crop\nEstoque</th>
+            <th>Crop por Plot\nTempo da Crop</th>
+            <th> <button onclick="sementesPlantadas()">Salvar sementes que vai plantar!</button></th>
+            <th> Sementes Plantadas\nCusto Total</th>
+            <th>Colheita Total</th>
+            <th>Venda das Crops\n(Loja do jogo)</th>
+            <th>Lucro Final\npor Coins</th>
+            <th>Valor do Market P2P</th>
+            <th>Ganho vendendo no Market\n(sem desconto)</th>
         </tr>
       </thead>
       <tbody>
@@ -235,30 +258,30 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
 
         //Quantidade de Crop
         let colheitaPorPlot = ((1 * multiCrop) + somaCrop + (somaArea / plots) - menosCrop) * instaCrop;
-        let colheitaTotal = colheitaPorPlot * plots;
+        let colheitaTotal = colheitaPorPlot * crop.quantidade;
 
         //Tempo final de Crop
         let tempoFinal = crop.tempo * tempoCrop;
 
         //Lucro das Crops
-        let compraSemente = (crop.custoDaSemente * custoCoins) * plots
-        let vendaCrops = (colheitaPorPlot * crop.vendaDaCrop * vendaCoins) * plots;
+        let compraSemente = (crop.custoDaSemente * custoCoins) * crop.quantidade
+        let vendaCrops = (colheitaPorPlot * crop.vendaDaCrop * vendaCoins) * crop.quantidade;
         let lucro = vendaCrops - compraSemente;
 
         //Estoque de sementes de cada Crop
         let estoqueSemente = crop.estoqueDeSementes * estoqueCrops;
-            
+          
         tabela += `
             <tr>
-                <td> <img src="imagens/${crop.name}.png" alt="${crop.name}" class="crop-img"> ${crop.name} </td>
-                <td>${formatarTempo(tempoFinal)}</td>
-                <td>${colheitaPorPlot.toFixed(2)}</td>
-                <td>${colheitaTotal.toFixed(2)}</td>
-                <td>${compraSemente.toFixed(2)}</td>
-                <td>${vendaCrops.toFixed(2)}</td>
-                <td>${lucro.toFixed(2)}</td>
-                <td>${estoqueSemente}</td>
-                <td>${crop.vendaFlower}</td>
+                <td> <img src="imagens/${crop.name}.png" alt="${crop.name}" class="crop-img"> ${crop.name} \n <img src="imagens/reestock.png" class="crop-img">${estoqueSemente} </td>
+                <td> <img src="imagens/${crop.name}.png" class="crop-img">${colheitaPorPlot.toFixed(2)} \n <img src="imagens/tempo.png" class="crop-img">${formatarTempo(tempoFinal)} </td>
+                <td> <input type="number" placeholder="Qtd" data-name="${crop.name}" class="quantidade-input" value="${crop.quantidade}"> </td>
+                <td> <img src="imagens/seeds.png" class="crop-img">${crop.quantidade} \n <img src="imagens/coins.png" class="crop-img">${compraSemente.toFixed(2)} </td>
+                <td> <img src="imagens/${crop.name}.png" class="crop-img">${colheitaTotal.toFixed(2)}</td>
+                <td><img src="imagens/coins.png" class="crop-img">${vendaCrops.toFixed(2)}</td>
+                <td><img src="imagens/coins.png" class="crop-img">${lucro.toFixed(2)}</td>
+                <td><img src="imagens/flower.png" class="crop-img">${crop.vendaFlower}</td>
+                <td><img src="imagens/flower.png" class="crop-img">${crop.vendaFlower * colheitaTotal}</td>
             </tr>
             `; //toLowerCase() é para tranformar tudo em letra minuscula
             
@@ -304,8 +327,8 @@ function atualizarStatusDasCrops() { //limpara as crops ao ser chamada e reinici
 
 
     } while (buffNftsAtualizados); //a repetição vai parar quando todos buff condicionais forem atualizados.
-    
     statusCrops();
+    
 };
 
 

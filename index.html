@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -27,19 +26,43 @@
     <div id="wearables-container" class="nft-container"></div>
   </div>
 
-  <!-- Seletor de Estação -->
-  <label for="estacaoSelect"><strong>Estação atual:</strong></label>
-  <select id="estacaoSelect">
-    <option value="Spring">Spring</option>
-    <option value="Summer">Summer</option>
-    <option value="Autumn">Autumn</option>
-    <option value="Winter">Winter</option>
-  </select>
+  <!-- Linha de Selects (Estação, Ilha, Vip) -->
+  <div class="linha-selects">
+    <div class="select-group">
+      <label for="estacaoSelect">Estação atual:</label>
+      <select id="estacaoSelect">
+        <option value="Spring">Spring</option>
+        <option value="Summer">Summer</option>
+        <option value="Autumn">Autumn</option>
+        <option value="Winter">Winter</option>
+      </select>
+    </div>
 
-  <!-- Área de preenchimento -->
-  <td>Quantidade de plots:</td>
-  <input id="quantidadePlantada" type="number" placeholder="Quantos plots possui?">
-  <button onclick="sementesPlantadas()">Clique para salvar!</button>  <!-- rever isso ou apagar dps -->
+    <div class="select-group">
+      <label for="ilhaSelect">Ilha atual:</label>
+      <select id="ilhaSelect">
+        <option value="Basic">Basic</option>
+        <option value="Spring">Spring</option>
+        <option value="Desert">Desert</option>
+        <option value="Vulcano">Vulcano</option>
+      </select>
+    </div>
+
+    <div class="select-group">
+      <label for="vipSelect">Possui Vip?</label>
+      <select id="vipSelect">
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Área de preenchimento de plots -->
+  <div class="input-plots">
+    <label for="plotsPossuidos">Quantidade de plots:</label>
+    <input id="plotsPossuidos" type="number" placeholder="Ex: 70">
+    <button onclick="quantidadePlots()">Salvar</button>
+  </div>
 
   <!-- Área de resultados -->
   <div id="saida"></div>
@@ -47,11 +70,11 @@
   <!-- Scripts -->
   <script src="statusFarm.js"></script>
   <script src="recursos.js"></script>
-  <script src="api.js"></script>
   <script src="skills.js"></script>
   <script src="nfts.js"></script>
   <script src="resultados.js"></script>
-  
+
+  <!-- Renderização das NFTs -->
   <script>
     function renderNFTs(lista, containerId) {
       const container = document.getElementById(containerId);
@@ -82,15 +105,15 @@
         container.appendChild(wrapper);
       });
     }
-    
+
     window.onload = function () {
       renderNFTs(skillCrops, 'skills-container');
       renderNFTs(collectiblesCrops, 'collectibles-container');
       renderNFTs(wearablesCrops, 'wearables-container');
-      configurarCheckboxes(); //para as checkbox serem carregadas e fazer com que funcione na hora q são marcadas e desmarcadas
-      statusCrops();
+      configurarCheckboxes(); // Carrega os checkboxes corretamente
+      statusCrops();          // Mostra status inicial das crops
     };
   </script>
-  
+
 </body>
 </html>
