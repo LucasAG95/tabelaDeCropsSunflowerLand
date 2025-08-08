@@ -9,12 +9,12 @@ document.getElementById('estacaoSelect').addEventListener('change', () => { // v
 //Status da farm
 let plots = parseInt(9);
 
+function quantidadePlots() {
+    plots = document.getElementById('plotsPossuidos').value;
+    atualizarStatusDasCrops();
+}
 
-
-//<input type="number" placeholder="Qtd" data-name="${crop.name}" class="quantidade-input"></input>
-//<td> <input id="input-${crop.id}" type="number" placeholder="Qtd" class="quantidade-input"> </td>
-
-
+//Sementes plantadas individualmente
 function sementesPlantadas() {
 
     document.querySelectorAll('.quantidade-input').forEach(input => { //Procura todos os inputs no HTML que têm a classe quantidade-input.
@@ -29,8 +29,34 @@ function sementesPlantadas() {
     atualizarStatusDasCrops();
 };
 
+let ilha = '';
+let taxa = 1;
 
-function quantidadePlots() {
-    plots = document.getElementById('plotsPossuidos').value;
+document.getElementById('ilhaSelect').addEventListener('change', () => {
+    ilha = document.getElementById('ilhaSelect').value;
+    if (ilha === 'Basic') {
+        taxa = 'Não pode vender';
+    } else if (ilha === 'Spring') {
+        taxa = 0.5;
+    } else if (ilha === 'Desert') {
+        taxa = 0.2
+    } else if (ilha === 'Vulcano') {
+        taxa = 0.15
+    };
     atualizarStatusDasCrops();
-}
+});
+
+let vip = '';
+let desconto = 1;
+
+document.getElementById('vipSelect').addEventListener('change', () => {
+    vip = document.getElementById('vipSelect').value;
+    if (vip === 'Sim') {
+        desconto = 0.5;
+    } else {
+        desconto = 1;
+    }
+    atualizarStatusDasCrops();
+});
+
+

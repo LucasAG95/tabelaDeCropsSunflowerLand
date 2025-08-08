@@ -69,7 +69,7 @@ let collectiblesCrops = [
         afeta: 'tempo',
         sinal: 'x',
         buff: 0.85,
-        possui: false
+        possui: false,
     },
     {
         id: 'scarecrow',
@@ -80,7 +80,7 @@ let collectiblesCrops = [
         afeta: 'quantidade',
         sinal: 'x',
         buff: 1.2,
-        possui: false
+        possui: false,
     },
     {
         id: 'kuebiko',
@@ -91,7 +91,7 @@ let collectiblesCrops = [
         afeta: 'desconto',
         sinal: 'x',
         buff: 0,
-        possui: false
+        possui: false,
     },
     {
         id: 'springGuardian', 

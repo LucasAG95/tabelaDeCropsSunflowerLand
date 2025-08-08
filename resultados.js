@@ -52,7 +52,7 @@ function configurarCheckboxes() {
             nft.possui = checkbox.checked; 
 
             checkbox.addEventListener('change', function() { //vai verificar se a box esta marcada ou deesmarcada e toda vez que eu alterar vai chamar oque esta abaixo
-                nft.possui = checkbox.checked; 
+                nft.possui = checkbox.checked;
                 atualizarStatusDasCrops();
             });
         }
@@ -103,13 +103,13 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
             <h1>Resultado das Crops</h1>
             <th>Crop\nEstoque</th>
             <th>Crop por Plot\nTempo da Crop</th>
-            <th> <button onclick="sementesPlantadas()">Salvar sementes que vai plantar!</button></th>
+            <th> Sementes que vai Plantar <button onclick="sementesPlantadas()">Salvar</button></th>
             <th> Sementes Plantadas\nCusto Total</th>
             <th>Colheita Total</th>
             <th>Venda das Crops\n(Loja do jogo)</th>
             <th>Lucro Final\npor Coins</th>
             <th>Valor do Market P2P</th>
-            <th>Ganho vendendo no Market\n(sem desconto)</th>
+            <th>Vendendo no Market\nTaxa: ${(taxa * 100) * desconto}%</th>
         </tr>
       </thead>
       <tbody>
@@ -270,7 +270,9 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
 
         //Estoque de sementes de cada Crop
         let estoqueSemente = crop.estoqueDeSementes * estoqueCrops;
-          
+        
+        let lucroFlower = (crop.vendaFlower * colheitaTotal) * (1 - taxa);
+
         tabela += `
             <tr>
                 <td> <img src="imagens/${crop.name}.png" alt="${crop.name}" class="crop-img"> ${crop.name} \n <img src="imagens/reestock.png" class="crop-img">${estoqueSemente} </td>
@@ -281,9 +283,9 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
                 <td><img src="imagens/coins.png" class="crop-img">${vendaCrops.toFixed(2)}</td>
                 <td><img src="imagens/coins.png" class="crop-img">${lucro.toFixed(2)}</td>
                 <td><img src="imagens/flower.png" class="crop-img">${crop.vendaFlower}</td>
-                <td><img src="imagens/flower.png" class="crop-img">${(crop.vendaFlower * colheitaTotal).toFixed(5)}</td>
+                <td><img src="imagens/flower.png" class="crop-img">${(lucroFlower).toFixed(5)}</td>
             </tr>
-            `; //toLowerCase() é para tranformar tudo em letra minuscula
+            `;
             
     });
     
@@ -321,15 +323,13 @@ function atualizarStatusDasCrops() { //limpara as crops ao ser chamada e reinici
 
                 if (nft.buff !== buffAplicado) {
                     nft.buff = buffAplicado;
-                    };
+                    buffNftsAtualizados = true;
                 };
+            };
         });
-
 
     } while (buffNftsAtualizados); //a repetição vai parar quando todos buff condicionais forem atualizados.
     statusCrops();
     
 };
-
-
 
