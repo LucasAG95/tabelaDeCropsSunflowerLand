@@ -11,22 +11,21 @@ fetch('https://opensheet.elk.sh/1Hx7RI8NKIsOAbke7zqaN-j9ieR3RCiWe3MNatDZu7jc/1')
 
 //essa função irá inserir o valor de venda por flower das crops em vendaFlower
 function atualizarValoresDeVendaPorFlower(apiValores) {
-  crops.forEach(crop => {
-    if (apiValores[crop.name]) {
-      crop.vendaFlower = apiValores[crop.name];
-      console.log(`Crop: ${crop.name} Valor: ${crop.vendaFlower}`);
-      atualizarStatusDasCrops();
-    };  
-  });
+    crops.forEach(crop => {
+        if (apiValores[crop.name]) {
+        crop.vendaFlower = apiValores[crop.name];
+        console.log(`Crop: ${crop.name} Valor: ${crop.vendaFlower}`);
+        atualizarStatusDasCrops();
+        };  
+    });
   
 };
 
 // 1 hora = 3 600 000 - 1 minuto = 60 000 - 1 segundo = 1000
-function formatarTempo(tempoDaCrop, mostrarNoHtml) { //ms é de milissegundos
+function formatarTempo(tempoDaCrop) { //ms é de milissegundos
     const horas = Math.floor(tempoDaCrop / 3_600_000); // esse sinal _ serve para separar apenas casa decimais, é visual!
     const minutos = Math.floor((tempoDaCrop % 3_600_000) / 60_000); // % serve para dividir e pegar o resto da divisão!
     const segundos = Math.floor((tempoDaCrop % 60_000) / 1_000); // Math.floor arredonda o numero pra baixo
-    const milissegundos = tempoDaCrop % 1_000;
 
     //para adicionar 0 a frente da hora!
     const hh = horas < 10 ? '0' + horas : horas;
@@ -36,6 +35,24 @@ function formatarTempo(tempoDaCrop, mostrarNoHtml) { //ms é de milissegundos
     //vai mostrar o resultado dentro das outras funções que puxar ela
     return `${hh}:${mm}:${ss}`;
 };
+
+function tempoParaColherTudo(tempoDaCrop, quantidadePlantada) {
+    
+    let tempo = Math.ceil(quantidadePlantada / plots) * tempoDaCrop
+
+    const horas = Math.floor(tempo / 3_600_000); // esse sinal _ serve para separar apenas casa decimais, é visual!
+    const minutos = Math.floor((tempo % 3_600_000) / 60_000); // % serve para dividir e pegar o resto da divisão!
+    const segundos = Math.floor((tempo % 60_000) / 1_000); // Math.floor arredonda o numero pra baixo
+
+    //para adicionar 0 a frente da hora!
+    const hh = horas < 10 ? '0' + horas : horas;
+    const mm = minutos < 10 ? '0' + minutos : minutos;
+    const ss = segundos < 10 ? '0' + segundos : segundos;
+
+    //vai mostrar o resultado dentro das outras funções que puxar ela
+    return `${hh}:${mm}:${ss}`;
+};
+
 
 let mapaDeNfts = {}; //vai mapear as nfts, pelo que entendi
 collectiblesCrops.forEach(nft => { //vai verificar e adicionar o id das NFTs no mapaDeNfts, foi oque entendi
@@ -100,13 +117,13 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
     <table class="tabela-crops">
       <thead>
         <tr>
-            <h1>Resultado das Crops</h1>
-            <th>Crop\nEstoque</th>
-            <th>Crop por Plot\nTempo da Crop</th>
-            <th> Sementes que vai Plantar <button onclick="sementesPlantadas()">Salvar</button></th>
-            <th> Sementes Plantadas\nCusto Total</th>
-            <th>Colheita Total</th>
-            <th>Venda das Crops\n(Loja do jogo)</th>
+            <h1> Resultado das Crops </h1>
+            <th> Crop\nEstoque </th>
+            <th> Crop por Plot\nTempo da Crop </th>
+            <th> Sementes que vai Plantar <button onclick="sementesPlantadas()">Salvar</button> </th>
+            <th> Sementes Plantadas\nTempo Plantando</th>
+            <th> Colheita Total </th>
+            <th> Custo em Sementes\nVenda das Crops </th>
             <th>Lucro Final\npor Coins</th>
             <th>Valor do Market P2P</th>
             <th>Vendendo no Market\nTaxa: ${(taxa * 100) * desconto}%</th>
@@ -262,7 +279,7 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
 
         //Tempo final de Crop
         let tempoFinal = crop.tempo * tempoCrop;
-
+        
         //Lucro das Crops
         let compraSemente = (crop.custoDaSemente * custoCoins) * crop.quantidade
         let vendaCrops = (colheitaPorPlot * crop.vendaDaCrop * vendaCoins) * crop.quantidade;
@@ -271,22 +288,26 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
         //Estoque de sementes de cada Crop
         let estoqueSemente = crop.estoqueDeSementes * estoqueCrops;
         
-        let lucroFlower = (crop.vendaFlower * colheitaTotal) * (1 - taxa);
+        //Lucro vendendo recursos por Flower
+        let lucroFlower = (crop.vendaFlower * colheitaTotal) * (1 - (taxa * desconto));
+        
+        let tempoPlantando = tempoParaColherTudo(tempoFinal, crop.quantidade);
+        
 
         tabela += `
             <tr>
                 <td> <img src="imagens/${crop.name}.png" alt="${crop.name}" class="crop-img"> ${crop.name} \n <img src="imagens/reestock.png" class="crop-img">${estoqueSemente} </td>
                 <td> <img src="imagens/${crop.name}.png" class="crop-img">${colheitaPorPlot.toFixed(2)} \n <img src="imagens/tempo.png" class="crop-img">${formatarTempo(tempoFinal)} </td>
                 <td> <input type="number" placeholder="Qtd" data-name="${crop.name}" class="quantidade-input" value="${crop.quantidade}"> </td>
-                <td> <img src="imagens/seeds.png" class="crop-img">${crop.quantidade} \n <img src="imagens/coins.png" class="crop-img">${compraSemente.toFixed(2)} </td>
+                <td> <img src="imagens/seeds.png" class="crop-img">${crop.quantidade} \n <img src="imagens/tempo.png" class="crop-img">${tempoPlantando} </td>
                 <td> <img src="imagens/${crop.name}.png" class="crop-img">${colheitaTotal.toFixed(2)}</td>
-                <td><img src="imagens/coins.png" class="crop-img">${vendaCrops.toFixed(2)}</td>
+                <td> <img src="imagens/coins.png" class="crop-img">${compraSemente.toFixed(2)} \n <img src="imagens/coins.png" class="crop-img">${vendaCrops.toFixed(2)}</td>
                 <td><img src="imagens/coins.png" class="crop-img">${lucro.toFixed(2)}</td>
-                <td><img src="imagens/flower.png" class="crop-img">${crop.vendaFlower}</td>
+                <td><img src="imagens/${crop.name}.png" class="crop-img"> \n <img src="imagens/flower.png" class="crop-img">${crop.vendaFlower}</td>
                 <td><img src="imagens/flower.png" class="crop-img">${(lucroFlower).toFixed(5)}</td>
             </tr>
             `;
-            
+            //<img src="imagens/coins.png" class="crop-img">${compraSemente.toFixed(2)}
     });
     
     tabela += `</tbody></table>`;

@@ -25,4 +25,3 @@ const crops = [
     {name: 'Barley',      tempo: 172_800_000, custoDaSemente: 10,   vendaDaCrop: 12,   vendaFlower: 0, estoqueDeSementes: 60,  quantidade: '', tier: 'advanced', estacao: 'Spring, Autumn'}
 ];
 
-

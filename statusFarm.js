@@ -7,7 +7,7 @@ document.getElementById('estacaoSelect').addEventListener('change', () => { // v
 });
 
 //Status da farm
-let plots = parseInt(9);
+let plots = parseInt(1);
 
 function quantidadePlots() {
     plots = document.getElementById('plotsPossuidos').value;
@@ -58,5 +58,7 @@ document.getElementById('vipSelect').addEventListener('change', () => {
     }
     atualizarStatusDasCrops();
 });
+
+
 
 
