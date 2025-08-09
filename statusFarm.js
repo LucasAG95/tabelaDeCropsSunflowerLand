@@ -1,3 +1,6 @@
+//Duração do dia
+let vinteQuatroHoras = parseFloat(86_400_000);
+
 //Estação
 let temporada = 'Spring';
 

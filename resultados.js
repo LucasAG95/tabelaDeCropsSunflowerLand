@@ -109,7 +109,6 @@ function configurarCheckboxes() {
 
 const mostrarNoHtml = document.getElementById('saida');
 
-
 //Função que retornara os status das crops
 function statusCrops() { //o parametro não precisa ser puxado exatamente de fora, ele pode ser um parametro que quiser dentro dele sem puxar infos de fora
     
@@ -117,7 +116,7 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
     <table class="tabela-crops">
       <thead>
         <tr>
-            <h1> Resultado das Crops </h1>
+            <h1> Resultado das Crops</h1>
             <th> Crop\nEstoque </th>
             <th> Crop por Plot\nTempo da Crop </th>
             <th> Sementes que vai Plantar <button onclick="sementesPlantadas()">Salvar</button> </th>
@@ -131,6 +130,9 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
       </thead>
       <tbody>
   `;
+    //Criação da variavel para calcular o lucro total com o combo montado e o tempo total do combo montado
+    let lucroVendendoTudo = 0;
+    let tempoTotal = 0;
 
     crops.forEach(crop => {
         if(!crop.estacao.includes(temporada)) return;        
@@ -277,8 +279,11 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
         let colheitaPorPlot = ((1 * multiCrop) + somaCrop + (somaArea / plots) - menosCrop) * instaCrop;
         let colheitaTotal = colheitaPorPlot * crop.quantidade;
 
-        //Tempo final de Crop
+        //Tempo de cada Crop e tempo total plantando as sementes
         let tempoFinal = crop.tempo * tempoCrop;
+        let tempoPlantando = tempoParaColherTudo(tempoFinal, crop.quantidade);
+        //tempo total do combo
+        tempoTotal += (Math.ceil(crop.quantidade / plots) * tempoFinal);
         
         //Lucro das Crops
         let compraSemente = (crop.custoDaSemente * custoCoins) * crop.quantidade
@@ -290,9 +295,9 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
         
         //Lucro vendendo recursos por Flower
         let lucroFlower = (crop.vendaFlower * colheitaTotal) * (1 - (taxa * desconto));
-        
-        let tempoPlantando = tempoParaColherTudo(tempoFinal, crop.quantidade);
-        
+
+        //somar o combo
+        lucroVendendoTudo += lucroFlower;
 
         tabela += `
             <tr>
@@ -306,10 +311,16 @@ function statusCrops() { //o parametro não precisa ser puxado exatamente de for
                 <td><img src="imagens/${crop.name}.png" class="crop-img"> \n <img src="imagens/flower.png" class="crop-img">${crop.vendaFlower}</td>
                 <td><img src="imagens/flower.png" class="crop-img">${(lucroFlower).toFixed(5)}</td>
             </tr>
+
             `;
             //<img src="imagens/coins.png" class="crop-img">${compraSemente.toFixed(2)}
     });
+
+    //pegar o total do tempo do combo e ver a média que rende em 24h
+    let lucroDiario = (vinteQuatroHoras / tempoTotal) * lucroVendendoTudo;
+
     
+    tabela += `<p> Lucro Total do Combo: <img src="imagens/flower.png" class="crop-img">${(lucroVendendoTudo).toFixed(3)}\n Média de Lucro em 24h: <img src="imagens/flower.png" class="crop-img">${(lucroDiario).toFixed(3)}</p>`
     tabela += `</tbody></table>`;
     mostrarNoHtml.innerHTML = tabela;
     
