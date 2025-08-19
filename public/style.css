@@ -1,0 +1,290 @@
+/* ====================
+   ESTILO GERAL DO SITE - SUNFLOWERLAND
+======================= */
+body {
+  font-family: 'Comic Neue', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to bottom, #080808, #082f81);
+  padding: 30px;
+  color: #4e4e4e;
+}
+
+h1 {
+  font-size: 36px;
+  color: #ffb74d;
+  margin-bottom: 20px;
+  text-align: center;
+  text-shadow: 1px 1px 2px #fff3e0;
+}
+
+h2 {
+  font-size: 22px;
+  color: #ffa726;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  border-bottom: 3px solid #ffe0b2;
+  padding-bottom: 6px;
+  text-shadow: 0px 1px 1px #000000;
+}
+
+p {
+  font-size: 12px;
+  color: #5d4037;
+  margin-bottom: 6px;
+  text-align: left;
+}
+
+p1 {
+  font-size: 15px;
+  color: #d8d087;
+  margin-top: 40px;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  text-shadow: 0px 1px 1px #000000;
+}
+
+/* ====================
+   NFTS E CHECKBOXES
+======================= */
+.checkbox-bloco {
+  margin-bottom: 10px;
+}
+
+.nft-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.nft-wrapper {
+  position: relative;
+  text-align: center;
+}
+
+.nft-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain; /* mantém a imagem inteira */
+  border-radius: 12px;
+  background-color: #fff3e0;
+  padding: 6px;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.nft-img:hover {
+  transform: scale(1.15) rotate(-3deg);
+  border-color: #ffb74d;
+  box-shadow: 0 4px 8px rgba(255, 183, 77, 0.5);
+}
+
+.skill-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.skill-wrapper {
+  position: relative;
+  text-align: center;
+}
+
+.skill-img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain; /* mantém a imagem inteira */
+  border-radius: 12px;
+  background-color: #fff3e0;
+  padding: 6px;
+  border: 2px solid transparent;
+  transition: transform 0.2s, border 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.skill-img:hover {
+  transform: scale(1.15) rotate(-3deg);
+  border-color: #ffb74d;
+  box-shadow: 0 4px 8px rgba(255, 183, 77, 0.5);
+}
+
+input[type="checkbox"] {
+  margin-bottom: 6px;
+  cursor: pointer;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 200px;
+  background-color: #ffecb3;
+  color: #6d4c41;
+  text-align: left;
+  padding: 8px;
+  border-radius: 10px;
+  position: absolute;
+  z-index: 1;
+  bottom: 110%;
+  left: 150%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  font-size: 13px;
+  pointer-events: none;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.nft-wrapper:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+.skill-wrapper:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(-50%) translateY(-4px);
+}
+
+/* ====================
+   SELECTS E INPUTS - ALINHADOS
+======================= */
+.linha-selects {
+  display: flex;
+  justify-content: left;
+  gap: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.select-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.select-group label {
+  font-weight: bold;
+  margin-bottom: 1px;
+  color: #ffa726;
+}
+
+select, input[type="number"] {
+  padding: 6px 12px;
+  font-size: 15px;
+  border-radius: 10px;
+  border: 1px solid #ffd54f;
+  background-color: #fff8e1;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+select:focus, input[type="number"]:focus {
+  border-color: #ffa726;
+  outline: none;
+  box-shadow: 0 0 6px #ffb74d80;
+}
+
+/* Botão fofinho */
+button {
+  padding: 8px 18px;
+  background-color: #ffb74d;
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  background-color: #ffa726;
+  box-shadow: 0 4px 8px rgba(255, 183, 77, 0.4);
+}
+
+/* ====================
+   ÁREA DE RESULTADOS
+======================= */
+#saida {
+  white-space: pre-line;
+  background: #fff3e0;
+  border: 2px solid #ffd54f;
+  padding: 20px;
+  border-radius: 14px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(255, 183, 77, 0.2);
+  font-size: 15px;
+  font-weight: bold;
+}
+
+/* ====================
+   TABELA DE CROPS
+======================= */
+.tabela-crops {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 30px;
+  font-size: 14px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tabela-crops th, .tabela-crops td {
+  padding: 10px 12px;
+  text-align: center;
+}
+
+.tabela-crops th {
+  background-color: #ffe0b2;
+  color: #6d4c41;
+}
+
+.tabela-crops tr:nth-child(even) {
+  background-color: #fff3e0;
+}
+
+.tabela-crops tr:nth-child(odd) {
+  background-color: #fff8e1;
+}
+
+.crop-img {
+  width: 15px;
+  height: 15px;
+  vertical-align: middle;
+  margin-right: 6px;
+  object-fit: contain; /* mantém inteira */
+  border-radius: 6px;
+}
+
+td input.quantidade-input {
+  display: block;
+  margin: 0 auto;
+  border-radius: 8px;
+  border: 1px solid #ffd54f;
+  background-color: #fff8e1;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Checkboxes fofinhas */
+input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+input[type="checkbox"]:checked + .nft-img {
+  border: 2px solid #ffa726;
+  background-color: #ffe082;
+  box-shadow: 0 0 10px #ffb74d80;
+  transform: scale(1.15);
+}
+
+input[type="checkbox"]:checked + .skill-img {
+  border: 2px solid #ffa726;
+  background-color: #ffe082;
+  box-shadow: 0 0 10px #ffb74d80;
+  transform: scale(1.15);
+}

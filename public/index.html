@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Planilha SunflowerLand</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <div class="select-group">
+    <div class="input-numero-da-farm">
+      <label for="numeroFarm">Numero da Farm:</label><br>
+      <input id="numeroFarm" type="number" placeholder="Ex: 3661">
+      <button id="procurarFarm" onclick="numeroDaFarm()">Pesquisar</button>
+    </div>
+  </div>
+
+  <div class="select-group">
+
+  </div>   
+
+  <!-- Bloco de Skills -->
+  <h2>Skills</h2>
+
+  <p>Skills - Legacy</p>
+  <div class="checkbox-bloco">
+    <div id="skills-legacy-container" class="skill-container"></div>
+  </div>
+  
+  <p>Skills Land Expansion</p>
+  <div class="checkbox-bloco">
+    <div id="skills-tier1-container" class="skill-container"></div>
+  </div>
+
+  <div class="checkbox-bloco">
+    <div id="skills-tier2-container" class="skill-container"></div>
+  </div>
+
+  <div class="checkbox-bloco">
+    <div id="skills-tier3-container" class="skill-container"></div>
+  </div>
+
+  <!-- Bloco de NFTs Dinâmicos -->
+  <div class="checkbox-bloco">
+    <h2>Collectibles</h2>
+    <div id="collectibles-container" class="nft-container"></div>
+  </div>
+
+  <div class="checkbox-bloco">
+    <h2>Wearables</h2>
+    <div id="wearables-container" class="nft-container"></div>
+  </div>
+
+  <!-- div é pra separar e pro css poder estilizar (tem mais coisas, mas é basicamente isso) -->
+  <div class="linha-selects">
+    <div class="select-group">
+      <label for="estacaoSelect">Estação atual:</label>
+      <select id="estacaoSelect">
+        <option value="Spring">Spring</option>
+        <option value="Summer">Summer</option>
+        <option value="Autumn">Autumn</option>
+        <option value="Winter">Winter</option>
+      </select>
+    </div>
+
+    <div class="select-group">
+      <label for="ilhaSelect">Ilha atual:</label>
+      <select id="ilhaSelect">
+        <option value="Basic">Basic</option>
+        <option value="Spring">Spring</option>
+        <option value="Desert">Desert</option>
+        <option value="Vulcano">Vulcano</option>
+      </select>
+    </div>
+
+    <div class="select-group">
+      <label for="vipSelect">Possui Vip?</label>
+      <select id="vipSelect">
+        <option value="Não">Não</option>
+        <option value="Sim">Sim</option>
+      </select>
+    </div>
+
+    <div class="select-group">
+      <div class="input-plots">
+        <label for="plotsPossuidos">Quantidade de plots:</label><br>
+        <input id="plotsPossuidos" type="number" placeholder="Ex: 70">
+        <button id="salvarPlots" onclick="quantidadePlots()">Salvar</button>
+      </div>
+    </div> 
+
+  </div>
+
+
+
+  <div id="saida"></div>
+
+
+  <script src="./recursos.js"></script>
+  <script src="./skills.js"></script>
+  <script src="./nfts.js"></script>
+
+  <script src="./formatarTempo.js"></script>
+  <script src="./calculos.js"></script>
+  <script src="./resultados.js"></script>
+
+  <script src="./statusFarm.js"></script>
+  <script src="./checkbox.js"></script>
+
+  
+
+</body>
+</html>
+
