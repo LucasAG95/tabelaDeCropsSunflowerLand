@@ -176,9 +176,10 @@ window.onload = function () {
 
 function numeroDaFarm() {
     let numeroFarmId = document.getElementById('numeroFarm').value;
-
+    console.log("🔎 Buscando farm ID:", numeroFarmId);
     // Faz uma requisição para a API do Sunflower Land, pegando os dados da farm pelo número (numeroFarm).
-    fetch(`https://api.sunflower-land.com/community/farms/${numeroFarmId}`)
+    
+    fetch(`https://corsproxy.io/?https://api.sunflower-land.com/community/farms/${numeroFarmId}`)
         .then(res => res.json()) // Quando a resposta chegar, converte o conteúdo dela para JSON.
         .then(data => {
 
