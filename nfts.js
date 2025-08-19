@@ -501,7 +501,7 @@ let collectiblesCrops = [
     }
 ];
   
-const wearablesCrops = [
+let wearablesCrops = [
     {
         id: 'greenAmulet',
         name: 'Green Amulet',

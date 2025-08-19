@@ -251,20 +251,3 @@ let skillsCrops = {
 
 let todasSkillsDeCrops = [].concat(skillsCrops.tierLegacy, skillsCrops.tier1, skillsCrops.tier2, skillsCrops.tier3);
 console.log(todasSkillsDeCrops);
-
-
-skillsCrops.tierLegacy.forEach(skill => {
-    console.log(`Skill Legacy: ${skill.name}`);
-});
-
-skillsCrops.tier1.forEach(skill => {
-    console.log(`Skill Tier 1: ${skill.name}`);
-});
-
-skillsCrops.tier2.forEach(skill => {
-    console.log(`Skill Tier 2: ${skill.name}`);
-});
-
-skillsCrops.tier3.forEach(skill => {
-    console.log(`Skill Tier 3: ${skill.name}`);
-});

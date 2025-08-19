@@ -1,3 +1,5 @@
+//Duração do dia - 24h
+let vinteQuatroHoras = parseFloat(86_400_000);
 
 //Status da farm
 let plots = parseInt(1);
@@ -6,15 +8,6 @@ function quantidadePlots() {
     buffsAdicionados();
     statusCrops();
 };
-
-//Duração do dia - 24h
-let vinteQuatroHoras = parseFloat(86_400_000);
-
-//idioma
-let idioma = 'portugues';
-document.getElementById('idioma').addEventListener('change', () => { // vou ter que analisar oque faz ainda!
-    idioma = document.getElementById('idioma').value;
-});
 
 //Estação
 let estacao = 'Spring';
@@ -66,3 +59,4 @@ function sementesPlantadas() {
     });
     statusCrops();
 };
+

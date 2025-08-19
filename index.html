@@ -2,18 +2,22 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>Saída</title>
+  <title>Planilha SunflowerLand</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
   <div class="select-group">
-    <label for="idioma">Idioma Atual:</label>
-    <select id="idioma">
-      <option value="portugues">Português</option>
-      <option value="ingles">English</option>
-    </select>
+    <div class="input-numero-da-farm">
+      <label for="numeroFarm">Numero da Farm:</label><br>
+      <input id="numeroFarm" type="number" placeholder="Ex: 3661">
+      <button id="procurarFarm" onclick="numeroDaFarm()">Pesquisar</button>
+    </div>
   </div>
+
+  <div class="select-group">
+
+  </div>   
 
   <!-- Bloco de Skills -->
   <h2>Skills</h2>
@@ -81,7 +85,7 @@
       <div class="input-plots">
         <label for="plotsPossuidos">Quantidade de plots:</label><br>
         <input id="plotsPossuidos" type="number" placeholder="Ex: 70">
-        <button onclick="quantidadePlots()">Salvar</button>
+        <button id="salvarPlots" onclick="quantidadePlots()">Salvar</button>
       </div>
     </div> 
 

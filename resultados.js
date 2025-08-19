@@ -40,7 +40,7 @@ function statusCrops() {
             <td><input type="number" placeholder="Qtd" data-name="${crop.name}" class="quantidade-input" value="${crop.seedsPlantadas}"></td>
             <td><img src="crops/${crop.name}.png" class="crop-img">${colheitaTotal.toFixed(2)} <br> <img src="icones/tempo.png" class="crop-img">${formatarTempoDaCrop(tempoFinalDaCrop)}</td>
             <td><img src="icones/coins.png" class="crop-img">${(crop.custoFinal * crop.seedsPlantadas).toFixed(2)} <br> <img src="icones/coins.png" class="crop-img">${(crop.vendaFinal * colheitaTotal).toFixed(2)}</td>
-            <td><img src="icones/coins.png" class="crop-img">${lucroCoins.toFixed(2)}</td>
+            <td><img src="icones/coins.png" class="crop-img">${lucroCoins.toFixed(3)}</td>
             <td><img src="crops/${crop.name}.png" class="crop-img"> <br> <img src="icones/flower.png" class="crop-img">${crop.vendaFlower}</td>
             <td><img src="icones/flower.png" class="crop-img">${lucroFlower.toFixed(4)}</td>
         </tr>
