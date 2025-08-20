@@ -21,6 +21,10 @@ function buffsAdicionados() {
         let coinsCustoBuff = 1; //buffs que reduz o custo da coins será calculado aqui (Loja de sementes)!
         let coinsVendaBuff = 1; //buffs que aumenta o valor de venda em coins será calculado aqui (Loja de sementes)!
 
+        //buffs que alteram o valor recebido no evento ocorrido em sunflowerland!
+        let buffDeEventoSunshower = 1;
+        let buffDeEventoBountifulHarvest = 1;
+
         skillsCrops.tierLegacy.forEach(legacy => {
 
             if (legacy.possui === true && legacy.afeta.includes('quantidade') && legacy.sinal === 'x' && 
@@ -219,6 +223,18 @@ function buffsAdicionados() {
             (collectibles.tipoDeCrop === 'todas' || collectibles.tipoDeCrop.includes(crop.tier) || collectibles.tipoDeCrop.includes(crop.name))) {
                 coinsVendaBuff *= collectibles.buff;
             };
+
+            //buffs que alteram o evento Sunshower serao calculados aqui
+            if(collectibles.possui === true && collectibles.afeta.includes('melhorarEvento') && collectibles.sinal === 'x' && (collectibles.estacao.includes(estacao) || collectibles.estacao === 'todas') &&
+            (collectibles.tipoDeCrop === 'todas' || collectibles.tipoDeCrop.includes(crop.tier) || collectibles.tipoDeCrop.includes(crop.name)) && eventoBonus === 'sunshower') {
+                buffDeEventoSunshower *= collectibles.buff;
+            };
+
+            //buffs que alteram o evento Bountiful Harvest serao calculados aqui
+            if(collectibles.possui === true && collectibles.afeta.includes('melhorarEvento') && collectibles.sinal === 'x' && (collectibles.estacao.includes(estacao) || collectibles.estacao === 'todas') &&
+            (collectibles.tipoDeCrop === 'todas' || collectibles.tipoDeCrop.includes(crop.tier) || collectibles.tipoDeCrop.includes(crop.name)) && eventoBonus === 'bountifulHarvest') {
+                buffDeEventoBountifulHarvest *= collectibles.buff;
+            };
             
         });
 
@@ -270,16 +286,9 @@ function buffsAdicionados() {
 
         });
 
-        //buffs temporarios caso possua evento no dia
-        if (eventoBonus === 'sunshower') {
-            tempoReduzido *= 0.5;
-        } else if (eventoBonus === 'bountifulHarvest') {
-            somaBuff += 1;
-        };
-
         //altera resultados dentro da lista de Crops
-        crop.quantidadePorPlot = (multiplicaBuff + somaBuff + (somaAreaBuff / plots) - somaDebuff) * instaCrop;
-        crop.tempoFinal = crop.tempo * tempoReduzido;
+        crop.quantidadePorPlot = (multiplicaBuff + somaBuff + (somaAreaBuff / plots) - somaDebuff + (eventoBountifulHarvest * buffDeEventoBountifulHarvest)) * instaCrop;
+        crop.tempoFinal = crop.tempo * tempoReduzido * (eventoSunshower / buffDeEventoSunshower);
         crop.custoFinal = crop.custoDaSemente * coinsCustoBuff;
         crop.vendaFinal = crop.vendaDaCrop * coinsVendaBuff;
         crop.estoqueFinal = crop.estoqueDeSementes * estoqueBuff;
@@ -287,6 +296,7 @@ function buffsAdicionados() {
     });
     statusCrops();
 };
+
 
 // Ele vai servir como um "atalho" para encontrar qualquer NFT pelo seu id
 let mapaDeCollectibles = {}; // cria objeto vazio para guardar NFTs por id

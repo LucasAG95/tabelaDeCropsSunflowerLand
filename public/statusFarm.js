@@ -49,8 +49,20 @@ document.getElementById('vipSelect').addEventListener('change', () => {
 
 //Selecionar qual evento bonus esta ocorrendo no game no momento
 let eventoBonus = 'nenhum';
-document.getElementById('evento-bonus').addEventListener('change', () => { // vou ter que analisar oque faz ainda!
+let eventoSunshower = 1; //crops crescem 2x mais rapido
+let eventoBountifulHarvest = 0; //ganha +1 ao colher frutas e crops
+document.getElementById('evento-bonus').addEventListener('change', () => { 
     eventoBonus = document.getElementById('evento-bonus').value;
+    if (eventoBonus === 'sunshower') {
+        eventoSunshower = 0.5
+        eventoBountifulHarvest = 0;
+    } else if (eventoBonus === 'bountifulHarvest') {
+        eventoBountifulHarvest = 1;
+        eventoSunshower = 1;
+    } else {
+        eventoSunshower = 1;
+        eventoBountifulHarvest = 0;
+    }
     buffsAdicionados();
     statusCrops();
 });

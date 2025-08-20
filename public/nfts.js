@@ -99,7 +99,7 @@ let collectiblesCrops = [
         descricao: 'Proteção contra Desastres de Primavera, Eventos de Primavera Abençoados',
         estacao: 'Spring',
         tipoDeCrop: 'todas',
-        afeta: 'dobra evento positivo',
+        afeta: 'melhorarEvento',
         sinal: 'x',
         buff: 2,
         possui: false
@@ -110,7 +110,7 @@ let collectiblesCrops = [
         descricao: 'Proteção contra Desastres de Verão, Eventos de Verão Abençoados',
         estacao: 'Summer',
         tipoDeCrop: 'todas',
-        afeta: 'dobra evento positivo',
+        afeta: 'melhorarEvento',
         sinal: 'x',
         buff: 2,
         possui: false
@@ -121,7 +121,7 @@ let collectiblesCrops = [
         descricao: 'Proteção contra Desastres de Outono, Eventos de Outono Abençoados',
         estacao: 'Autumn',
         tipoDeCrop: 'todas',
-        afeta: 'dobra evento positivo',
+        afeta: 'melhorarEvento',
         sinal: 'x',
         buff: 2,
         possui: false
@@ -132,7 +132,7 @@ let collectiblesCrops = [
         descricao: 'Proteção contra Desastres de Inverno, Eventos de Inverno Abençoados',
         estacao: 'Winter',
         tipoDeCrop: 'todas',
-        afeta: 'dobra evento positivo',
+        afeta: 'melhorarEvento',
         sinal: 'x',
         buff: 2,
         possui: false
