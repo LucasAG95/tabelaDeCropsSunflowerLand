@@ -714,6 +714,10 @@ let wearablesCrops = [
     {
         id: 'factionQuiver',
         name: '"Faction" Quiver',
+        name1: 'Bumpkin Quiver',
+        name2: 'Goblin Quiver',
+        name3: 'Nightshade Quiver',
+        name4: 'Sunflorian Quiver',
         descricao: '+0.25 Crops e Fruits',
         estacao: 'todas',
         tipoDeCrop: 'todas',

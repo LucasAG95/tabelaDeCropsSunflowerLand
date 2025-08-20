@@ -266,12 +266,18 @@ function buffsAdicionados() {
             if(wearables.possui === true && wearables.afeta.includes('vendaCoins') && wearables.sinal === 'x' && (wearables.estacao.includes(estacao) || wearables.estacao === 'todas') &&
             (wearables.tipoDeCrop === 'todas' || wearables.tipoDeCrop.includes(crop.tier) || wearables.tipoDeCrop.includes(crop.name))) {
                 coinsVendaBuff *= wearables.buff;
-            };
-            
-
+            };   
 
         });
-        //altera dentro da lista de Crops
+
+        //buffs temporarios caso possua evento no dia
+        if (eventoBonus === 'sunshower') {
+            tempoReduzido *= 0.5;
+        } else if (eventoBonus === 'bountifulHarvest') {
+            somaBuff += 1;
+        };
+
+        //altera resultados dentro da lista de Crops
         crop.quantidadePorPlot = (multiplicaBuff + somaBuff + (somaAreaBuff / plots) - somaDebuff) * instaCrop;
         crop.tempoFinal = crop.tempo * tempoReduzido;
         crop.custoFinal = crop.custoDaSemente * coinsCustoBuff;
@@ -291,11 +297,12 @@ console.log(mapaDeCollectibles)
 
 // Ele vai servir como um "atalho" para encontrar qualquer Skill pelo seu id
 let mapaDeSkills = {};
-todasSkillsDeCrops.forEach(skills => { //vai verificar e organizar por id das NFTs no mapaDeCollectibles, foi oque entendi
-    mapaDeSkills[skills.id] = skills; // vai colocar no mapaDeCollectibles o nome por id de cada NFT e em ordem alfabetica pelo que vi, parace q transforma a lista em objetos 
+todasSkillsDeCrops.forEach(skills => { //vai verificar e organizar por id das Skills no mapaDeSkills, foi oque entendi
+    mapaDeSkills[skills.id] = skills; // vai colocar no mapaDeSkills o nome por id de cada NFT e em ordem alfabetica pelo que vi, parace q transforma a lista em objetos 
 });
 console.log(mapaDeSkills);
 
+//função responsavel por verificar se skills/NFTs possuem algum bonus ativado por outra skill/NFT
 function ativarBonusDasNftsESkills() {
     let mudouBuff;
 
@@ -320,25 +327,8 @@ function ativarBonusDasNftsESkills() {
                 mudouBuff = true;
             };
 
-
         });
 
     } while (mudouBuff);
 
 };
-
-// ?? significa: use collectibles.buffBase, mas se for null ou undefined, use collectibles.buff
-
-/*        mudouBuff = false;
-
-        collectiblesCrops.forEach(collectibles => {
-            if(collectibles.condicional) {
-                let depende = mapaDeCollectibles[collectibles.condicional.dependeDe]; //vai armazenar qual o nome da NFT de condição
-                let buffAplicado = (depende && depende.possui) ? collectibles.condicional.novoBuff : collectibles.buffBase //Ex: Cabbage Boy depende de Cabbage Girl pra aumentar o buff, entende depende seria CabbageGirl && possui CabbageGirl, se sim, altera o buff do cabbageBoy
-                
-                if (collectibles.buff !== buffAplicado) {
-                    collectibles.buff = buffAplicado;
-                    mudouBuff = true;
-                };
-            };
-        });*/

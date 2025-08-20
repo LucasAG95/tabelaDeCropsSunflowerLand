@@ -47,6 +47,14 @@ document.getElementById('vipSelect').addEventListener('change', () => {
     statusCrops();
 });
 
+//Selecionar qual evento bonus esta ocorrendo no game no momento
+let eventoBonus = 'nenhum';
+document.getElementById('evento-bonus').addEventListener('change', () => { // vou ter que analisar oque faz ainda!
+    eventoBonus = document.getElementById('evento-bonus').value;
+    buffsAdicionados();
+    statusCrops();
+});
+
 //Sementes plantadas individualmente
 function sementesPlantadas() {
     document.querySelectorAll('.quantidade-input').forEach(input => { //Procura todos os inputs no HTML que têm a classe quantidade-input.

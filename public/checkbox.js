@@ -257,7 +257,7 @@ function numeroDaFarm() {
 
         wearablesCrops.forEach(wearables => {
             let checkbox = document.getElementById(wearables.id);
-            if (wearablesQuePossui[wearables.name]) {
+            if (wearablesQuePossui[wearables.name] || wearablesQuePossui[wearables.name1] || wearablesQuePossui[wearables.name2] || wearablesQuePossui[wearables.name3] || wearablesQuePossui[wearables.name4]) {
                 checkbox.checked = true;
                 wearables.possui = true;
             } else {

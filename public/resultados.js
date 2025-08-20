@@ -7,7 +7,7 @@ function statusCrops() {
     let lucroTotalFlower = 0; // soma do lucro em flower
 
     // tabela principal
-    let tabelaPrincipal = `
+    let tabelaCrops = `
     <table class="tabela-crops">
         <thead>
         <tr>
@@ -34,7 +34,7 @@ function statusCrops() {
         tempoTotal += tempoFinalDaCrop;
         lucroTotalFlower += lucroFlower;
         
-        tabelaPrincipal += `
+        tabelaCrops += `
         <tr>
             <td><img src="./crops/${crop.name}.png" class="crop-img">${crop.name} <br> <img src="./icones/reestock.png" class="crop-img">${crop.estoqueFinal}</td>
             <td><img src="./crops/${crop.name}.png" class="crop-img">${crop.quantidadePorPlot.toFixed(2)} <br> <img src="./icones/tempo.png" class="crop-img">${formatarTempoDaCrop(crop.tempoFinal)}</td>
@@ -48,13 +48,13 @@ function statusCrops() {
         `;
     });
 
-    tabelaPrincipal += `</tbody></table>`;
+    tabelaCrops += `</tbody></table>`;
 
     // cálculo de média de lucro diário
     let mediaLucroDiario = (vinteQuatroHoras / tempoTotal) * lucroTotalFlower;
 
     // tabela de resumo
-    let tabelaResumo = `
+    let tabelaResultadoFinal = `
     <table class="tabela-crops totais">
     <thead>
         <tr>
@@ -81,8 +81,8 @@ function statusCrops() {
     // coloca as duas tabelas lado a lado
     mostrarNoHtml.innerHTML = `
     <div class="tabelas-lado-a-lado">
-        ${tabelaPrincipal}
-        ${tabelaResumo}
+        ${tabelaCrops}
+        ${tabelaResultadoFinal}
     </div>
     `;
 }
