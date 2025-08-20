@@ -1,4 +1,5 @@
 const mostrarNoHtml = document.getElementById('saida');
+const resultadoFinal = document.getElementById('resultado-final');
 
 //Lista de Crops Existentes no game - seus status principais- o tempo de crescimento esta em milissegundos
 const crops = [

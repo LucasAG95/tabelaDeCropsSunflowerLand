@@ -13,6 +13,7 @@ function quantidadePlots() {
 let estacao = 'Spring';
 document.getElementById('estacaoSelect').addEventListener('change', () => { // vou ter que analisar oque faz ainda!
     estacao = document.getElementById('estacaoSelect').value;
+    buffsAdicionados();
     statusCrops();
 });
 

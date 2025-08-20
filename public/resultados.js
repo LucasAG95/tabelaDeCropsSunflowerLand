@@ -3,12 +3,12 @@
 function statusCrops() {
     mostrarNoHtml.innerHTML = '';
 
-    let tempoTotal = 0; //variavel para zerar o tempo e abaixo somar o tempo das crops que for plantando!
-    let lucroTotalFlower = 0;//variavel para zerar o flower ganho e abaixo somar o lucro das crops que for plantando!
+    let tempoTotal = 0; // soma do tempo das crops
+    let lucroTotalFlower = 0; // soma do lucro em flower
 
-    let tabela = `
+    // tabela principal
+    let tabelaPrincipal = `
     <table class="tabela-crops">
-        <h1>Resultado das Crops</h1>
         <thead>
         <tr>
             <th>Crop<br>Estoque</th>
@@ -23,6 +23,7 @@ function statusCrops() {
         </thead>
         <tbody>
     `;
+
     crops.forEach(crop => {
         if(!crop.estacao.includes(estacao)) return;
 
@@ -33,7 +34,7 @@ function statusCrops() {
         tempoTotal += tempoFinalDaCrop;
         lucroTotalFlower += lucroFlower;
         
-        tabela += `
+        tabelaPrincipal += `
         <tr>
             <td><img src="./crops/${crop.name}.png" class="crop-img">${crop.name} <br> <img src="./icones/reestock.png" class="crop-img">${crop.estoqueFinal}</td>
             <td><img src="./crops/${crop.name}.png" class="crop-img">${crop.quantidadePorPlot.toFixed(2)} <br> <img src="./icones/tempo.png" class="crop-img">${formatarTempoDaCrop(crop.tempoFinal)}</td>
@@ -47,12 +48,41 @@ function statusCrops() {
         `;
     });
 
+    tabelaPrincipal += `</tbody></table>`;
+
+    // cálculo de média de lucro diário
     let mediaLucroDiario = (vinteQuatroHoras / tempoTotal) * lucroTotalFlower;
 
-    tabela += `<p>Tempo para plantar todo combo: <img src="icones/tempo.png" class="crop-img">${formatarTempoDaCropComDia(tempoTotal)}</p><br>
-                <p>Lucro Total plantando o combo: <img src="icones/flower.png" class="crop-img">${lucroTotalFlower.toFixed(2)}</p><br>
-                <p>Média de Lucro por Dia: <img src="icones/flower.png" class="crop-img">${mediaLucroDiario.toFixed(2)}</p>
-                `
-    tabela += `</tbody></table>`;
-    mostrarNoHtml.innerHTML = tabela;
-};
+    // tabela de resumo
+    let tabelaResumo = `
+    <table class="tabela-crops totais">
+    <thead>
+        <tr>
+        <th colspan="2">Resumo do Combo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <td>Tempo para plantar todo combo:</td>
+        <td><img src="icones/tempo.png" class="crop-img">${formatarTempoDaCropComDia(tempoTotal)}</td>
+        </tr>
+        <tr>
+        <td>Média de Lucro por Dia:</td>
+        <td><img src="icones/flower.png" class="crop-img">${mediaLucroDiario.toFixed(2)}</td>
+        </tr>
+        <tr>
+        <td>Lucro Total plantando o combo:</td>
+        <td><img src="icones/flower.png" class="crop-img">${lucroTotalFlower.toFixed(2)}</td>
+        </tr>
+    </tbody>
+    </table>
+    `;
+
+    // coloca as duas tabelas lado a lado
+    mostrarNoHtml.innerHTML = `
+    <div class="tabelas-lado-a-lado">
+        ${tabelaPrincipal}
+        ${tabelaResumo}
+    </div>
+    `;
+}
