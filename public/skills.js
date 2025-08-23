@@ -251,3 +251,10 @@ let skillsCrops = {
 
 let todasSkillsDeCrops = [].concat(skillsCrops.tierLegacy, skillsCrops.tier1, skillsCrops.tier2, skillsCrops.tier3);
 console.log(todasSkillsDeCrops);
+
+// Ele vai servir como um "atalho" para encontrar qualquer Skill pelo seu id
+let mapaDeSkills = {};
+todasSkillsDeCrops.forEach(skills => { //vai verificar e organizar por id das Skills no mapaDeSkills, foi oque entendi
+    mapaDeSkills[skills.id] = skills; // vai colocar no mapaDeSkills o nome por id de cada NFT e em ordem alfabetica pelo que vi, parace q transforma a lista em objetos 
+});
+console.log(mapaDeSkills);

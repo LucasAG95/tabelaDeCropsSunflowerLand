@@ -728,3 +728,9 @@ let wearablesCrops = [
     }
 ];
 
+// Ele vai servir como um "atalho" para encontrar qualquer NFT pelo seu id
+let mapaDeCollectibles = {}; // cria objeto vazio para guardar NFTs por id
+collectiblesCrops.forEach(collectibles => { //vai verificar e organizar por id das NFTs no mapaDeCollectibles, foi oque entendi
+    mapaDeCollectibles[collectibles.id] = collectibles; // adiciona cada NFT no objeto usando o id como chave
+});
+console.log(mapaDeCollectibles)

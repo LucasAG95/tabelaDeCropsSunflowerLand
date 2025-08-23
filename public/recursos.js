@@ -1,5 +1,4 @@
 const mostrarNoHtml = document.getElementById('saida');
-const resultadoFinal = document.getElementById('resultado-final');
 
 //Lista de Crops Existentes no game - seus status principais- o tempo de crescimento esta em milissegundos
 const crops = [
@@ -27,26 +26,3 @@ const crops = [
     {name: 'Artichoke',   tempo: 129_600_000, tempoFinal: 129_600_000, custoDaSemente: 7,    custoFinal: '', vendaDaCrop: 12,   vendaFinal: '', vendaFlower: 0, estoqueDeSementes: 60,  estoqueFinal: 60,  quantidadePorPlot: 1, seedsPlantadas: '', tier: 'advanced', estacao: 'Autumn'},
     {name: 'Barley',      tempo: 172_800_000, tempoFinal: 172_800_000, custoDaSemente: 10,   custoFinal: '', vendaDaCrop: 12,   vendaFinal: '', vendaFlower: 0, estoqueDeSementes: 60,  estoqueFinal: 60,  quantidadePorPlot: 1, seedsPlantadas: '', tier: 'advanced', estacao: 'Spring, Autumn'}
 ];
-
-//api para puxar valores do flower das crops entre outros recursos
-fetch(`/api/proxy?url=https://sfl.world/api/v1/prices`)
-  .then(res => res.json())
-  .then(data => {  
-    atualizarValoresDeVendaPorFlower(data.data.p2p) //vai mandar para a funcção digitada o que ela puxou da api de preços do sfl.world, primeiro data(nome da variavel), o outro data é um objeto que tem p2p como outro objeto dentro, que por sua vez tem outros resultados dentro
-    console.log(data.data.p2p)
-  })
-  .catch(err => {
-    console.error('Erro ao puxar a planilha:', err);
-  });
-
-//essa função irá inserir o valor de venda por flower das crops em vendaFlower
-function atualizarValoresDeVendaPorFlower(apiValores) {
-    crops.forEach(crop => {
-        if (apiValores[crop.name]) {
-        crop.vendaFlower = apiValores[crop.name];
-        console.log(`Crop: ${crop.name} Valor: ${crop.vendaFlower}`);
-        statusCrops();
-        };  
-    });
-  
-};

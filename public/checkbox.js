@@ -69,6 +69,7 @@ function configurarCheckbox() {
 
             checkbox.addEventListener('change', function() {
                 collectibles.possui = checkbox.checked;
+                nftsDeTierQuePossuemBuffDoAntecessor();
                 ativarBonusDasNftsESkills();
                 buffsAdicionados();
                 statusCrops();
@@ -168,110 +169,30 @@ window.onload = function () {
 
     // Wearables
     renderNFTs(wearablesCrops, 'wearables-container', './wearables');
+
     configurarCheckbox();
+    nftsDeTierQuePossuemBuffDoAntecessor();
     numeroDaFarm();
     statusCrops();
 };
 
-function numeroDaFarm() {
-    let numeroFarmId = document.getElementById('numeroFarm').value;
-    console.log("🔎 Buscando farm ID:", numeroFarmId);
-    // Faz uma requisição para a API do Sunflower Land, pegando os dados da farm pelo número (numeroFarm).
-    
-    if (!numeroFarmId) {
-        console.error('Por favor, digite o numero da farm para pesquisar!');
-        return; // Sai da função se o campo estiver vazio
+//==================================================================================================================================================================
+
+//responsavel por ativar buffs de NFTs com tier
+function nftsDeTierQuePossuemBuffDoAntecessor() {
+    if (kuebiko.checked || scarecrow.checked || nancy.checked) { // ? serve pra evitar erro caso mapaDeCollectibles['scarecrow'] não exista.
+        mapaDeCollectibles['nancy'].possui = true;
+    } else {
+        mapaDeCollectibles['nancy'].possui = false;
     }
 
-    fetch(`/api/proxy?url=https://api.sunflower-land.com/community/farms/${numeroFarmId}`)
-        .then(res => res.json()) // Quando a resposta chegar, converte o conteúdo dela para JSON.
-        .then(data => {
-            
-            const skillsLegacyQuePossui = data.farm.inventory;
-            const skillQuePossui = data.farm.bumpkin.skills;
-            const collectiblesQuePossui = data.farm.inventory;
-            const wearablesQuePossui = data.farm.wardrobe;
-            marcarNftsESkillsQuePossui(skillsLegacyQuePossui, skillQuePossui, collectiblesQuePossui, wearablesQuePossui);
-            console.log(data);
-        })
-        .catch(err => {
-            console.error('Erro ao puxar a API da farm:', err); // Caso dê erro na requisição, mostra a mensagem de erro no console.
-        });
+    if (kuebiko.checked || scarecrow.checked) {
+        mapaDeCollectibles['scarecrow'].possui = true;
+    } else {
+        mapaDeCollectibles['scarecrow'].possui = false;
+    }
 
-    function marcarNftsESkillsQuePossui(skillsLegacyQuePossui, skillQuePossui, collectiblesQuePossui, wearablesQuePossui) {
-        
-        skillsCrops.tierLegacy.forEach(legacy => {
-            let checkbox = document.getElementById(legacy.id);
-            if (skillsLegacyQuePossui[legacy.name]) {
-                checkbox.checked = true;
-                legacy.possui = true;
-            } else {
-                checkbox.checked = false;
-                legacy.possui = false;
-            };      
-        });
-
-        skillsCrops.tier1.forEach(tier1 => {
-            let checkbox = document.getElementById(tier1.id);
-            if (skillQuePossui[tier1.name]) {
-                checkbox.checked = true;
-                tier1.possui = true;
-            } else {
-                checkbox.checked = false;
-                tier1.possui = false;
-            };    
-        });
-
-        skillsCrops.tier2.forEach(tier2 => {
-            let checkbox = document.getElementById(tier2.id);
-            if (skillQuePossui[tier2.name]) {
-                checkbox.checked = true;
-                tier2.possui = true;
-            } else {
-                checkbox.checked = false;
-                tier2.possui = false;
-            };
-        });
-
-        skillsCrops.tier3.forEach(tier3 => {
-            let checkbox = document.getElementById(tier3.id);
-            if (skillQuePossui[tier3.name]) {
-                checkbox.checked = true;
-                tier3.possui = true;
-            } else {
-                checkbox.checked = false;
-                tier3.possui = false;
-            };
-        });
-
-        collectiblesCrops.forEach(collectibles => {
-            let checkbox = document.getElementById(collectibles.id);
-            if (collectiblesQuePossui[collectibles.name]) {
-                checkbox.checked = true;
-                collectibles.possui = true;
-            } else {
-                checkbox.checked = false;
-                collectibles.possui = false;
-            };
-        });
-
-        wearablesCrops.forEach(wearables => {
-            let checkbox = document.getElementById(wearables.id);
-            if (wearablesQuePossui[wearables.name] || wearablesQuePossui[wearables.name1] || wearablesQuePossui[wearables.name2] || wearablesQuePossui[wearables.name3] || wearablesQuePossui[wearables.name4]) {
-                checkbox.checked = true;
-                wearables.possui = true;
-            } else {
-                checkbox.checked = false;
-                wearables.possui = false;
-            };
-        });
-        ativarBonusDasNftsESkills();
-        buffsAdicionados();
-        statusCrops();
-    };
-
-}
-
-//https://api.allorigins.win/raw?url=https://api.sunflower-land.com/community/farms/${numeroFarmId}
-//http://localhost:3001/farm/${numeroFarmId}
-
+    // Recalcular buffs normalmente
+    buffsAdicionados();
+    statusCrops();
+};

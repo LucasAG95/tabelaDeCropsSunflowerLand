@@ -1,13 +1,31 @@
 //Duração do dia - 24h
 let vinteQuatroHoras = parseFloat(86_400_000);
 
-//Status da farm
-let plots = parseInt(1);
-function quantidadePlots() {
+//valor de 1 flower em coins
+let flowerEmCoins = 320;
+document.getElementById('flowerEmCoins').value = flowerEmCoins;
+
+//=====================================================================================================================================================================
+
+//reposnavel por inserir informações da farm, como plots e nodes que possui!
+let plots = parseInt(9);
+document.getElementById('plotsPossuidos').value = plots; // Isso serve para ja mostrar o valor de plots no html
+
+function salvarInformacoes() {
     plots = document.getElementById('plotsPossuidos').value;
+    if (plots < 9) {
+        alert('Não pode colocar menos que 9 plots!');
+        plots = 9;
+        document.getElementById('plotsPossuidos').value = plots;
+    };
+
+    flowerEmCoins = document.getElementById('flowerEmCoins').value;
+    console.log(flowerEmCoins)
     buffsAdicionados();
     statusCrops();
 };
+
+//=====================================================================================================================================================================
 
 //Estação
 let estacao = 'Spring';
@@ -17,11 +35,14 @@ document.getElementById('estacaoSelect').addEventListener('change', () => { // v
     statusCrops();
 });
 
+//=====================================================================================================================================================================
+
 //Prestigio em que a pessoa está e calculo da taxa
-let ilha = '';
-let taxa = 1;
-document.getElementById('ilhaSelect').addEventListener('change', () => {
-    ilha = document.getElementById('ilhaSelect').value;
+let ilha = 'Spring'; // guarda o nome da ilha selecionada
+let taxa = 1; // guarda a taxa calculada para a ilha
+
+function ilhaPrestigioAtual() { // Função central que lê o <select>, calcula a taxa e atualiza a UI
+    ilha = document.getElementById('ilhaSelect').value; //ela pega o <select id="ilhaSelect"> no HTML e guarda o valor escolhido dentro de ilha.
     if (ilha === 'Basic') {
         taxa = 'Não pode vender';
     } else if (ilha === 'Spring') {
@@ -32,12 +53,18 @@ document.getElementById('ilhaSelect').addEventListener('change', () => {
         taxa = 0.15
     };
     statusCrops();
-});
+};
+//registra um ouvinte de evento no <select id="ilhaSelect">.
+//toda vez que o usuário mudar a ilha manualmente, a função atualizarTaxa() será chamada.
+document.getElementById('ilhaSelect').addEventListener('change', ilhaPrestigioAtual);
+console.log(ilha)
+//=====================================================================================================================================================================
 
 //Se a pessoa possui VIP ou não e desconto que recebe na taxa
 let vip = '';
 let desconto = 1;
-document.getElementById('vipSelect').addEventListener('change', () => {
+
+function sePossuiVipOuNao() {
     vip = document.getElementById('vipSelect').value;
     if (vip === 'Sim') {
         desconto = 0.5;
@@ -45,7 +72,10 @@ document.getElementById('vipSelect').addEventListener('change', () => {
         desconto = 1;
     }
     statusCrops();
-});
+}
+document.getElementById('vipSelect').addEventListener('change', sePossuiVipOuNao);
+
+//=====================================================================================================================================================================
 
 //Selecionar qual evento bonus esta ocorrendo no game no momento
 let eventoBonus = 'nenhum';
@@ -67,6 +97,8 @@ document.getElementById('evento-bonus').addEventListener('change', () => {
     statusCrops();
 });
 
+//=====================================================================================================================================================================
+
 //Sementes plantadas individualmente
 function sementesPlantadas() {
     document.querySelectorAll('.quantidade-input').forEach(input => { //Procura todos os inputs no HTML que têm a classe quantidade-input.
@@ -81,3 +113,4 @@ function sementesPlantadas() {
     statusCrops();
 };
 
+//=====================================================================================================================================================================

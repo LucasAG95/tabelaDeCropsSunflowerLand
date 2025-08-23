@@ -11,7 +11,7 @@ function statusCrops() {
     <table class="tabela-crops">
         <thead>
         <tr>
-            <th>Crop<br>Estoque</th>
+            <th><img src="./icones/${estacao}.png" class="crop-img">Crops<br>Estoque</th>
             <th>Crop por Plot<br>Tempo da Crop</th>
             <th>Sementes que vai Plantar <br><button onclick="sementesPlantadas()">Salvar</button></th>
             <th>Colheita Total<br>Tempo Plantando</th>
@@ -80,7 +80,7 @@ function statusCrops() {
 
     // coloca as duas tabelas lado a lado
     mostrarNoHtml.innerHTML = `
-    <div class="tabelas-lado-a-lado">
+    <div class="tabelas-em-ordem">
         ${tabelaCrops}
         ${tabelaResultadoFinal}
     </div>

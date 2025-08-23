@@ -298,19 +298,9 @@ function buffsAdicionados() {
 };
 
 
-// Ele vai servir como um "atalho" para encontrar qualquer NFT pelo seu id
-let mapaDeCollectibles = {}; // cria objeto vazio para guardar NFTs por id
-collectiblesCrops.forEach(collectibles => { //vai verificar e organizar por id das NFTs no mapaDeCollectibles, foi oque entendi
-    mapaDeCollectibles[collectibles.id] = collectibles; // adiciona cada NFT no objeto usando o id como chave
-});
-console.log(mapaDeCollectibles)
 
-// Ele vai servir como um "atalho" para encontrar qualquer Skill pelo seu id
-let mapaDeSkills = {};
-todasSkillsDeCrops.forEach(skills => { //vai verificar e organizar por id das Skills no mapaDeSkills, foi oque entendi
-    mapaDeSkills[skills.id] = skills; // vai colocar no mapaDeSkills o nome por id de cada NFT e em ordem alfabetica pelo que vi, parace q transforma a lista em objetos 
-});
-console.log(mapaDeSkills);
+
+
 
 //função responsavel por verificar se skills/NFTs possuem algum bonus ativado por outra skill/NFT
 function ativarBonusDasNftsESkills() {
@@ -341,4 +331,23 @@ function ativarBonusDasNftsESkills() {
 
     } while (mudouBuff);
 
+};
+
+//==================================================================================================================================================================
+
+//responsavel por ativar buffs de NFTs com tier
+function nftsDeTierQuePossuemBuffDoAntecessor() {
+    if (kuebiko.checked || scarecrow.checked || nancy.checked) { // ? serve pra evitar erro caso mapaDeCollectibles['scarecrow'] não exista.
+        mapaDeCollectibles['nancy'].possui = true;
+    } else {
+        mapaDeCollectibles['nancy'].possui = false;
+    }
+
+    if (kuebiko.checked || scarecrow.checked) {
+        mapaDeCollectibles['scarecrow'].possui = true;
+    } else {
+        mapaDeCollectibles['scarecrow'].possui = false;
+    }
+    buffsAdicionados();
+    statusCrops();
 };
