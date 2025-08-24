@@ -94,6 +94,8 @@ function configurarCheckbox() {
 
 };
 
+//==================================================================================================================================================================
+
 function renderSkills(lista, containerId, pastaImagens) {
     const container = document.getElementById(containerId);
 
@@ -157,6 +159,8 @@ function renderNFTs(lista, containerId, pastaImagens) {
     });
 };
 
+//==================================================================================================================================================================
+
 window.onload = function () {
     // Skills
     renderSkills(skillsCrops.tierLegacy, 'skills-legacy-container', './skills');
@@ -177,22 +181,3 @@ window.onload = function () {
 };
 
 //==================================================================================================================================================================
-
-//responsavel por ativar buffs de NFTs com tier
-function nftsDeTierQuePossuemBuffDoAntecessor() {
-    if (kuebiko.checked || scarecrow.checked || nancy.checked) { // ? serve pra evitar erro caso mapaDeCollectibles['scarecrow'] não exista.
-        mapaDeCollectibles['nancy'].possui = true;
-    } else {
-        mapaDeCollectibles['nancy'].possui = false;
-    }
-
-    if (kuebiko.checked || scarecrow.checked) {
-        mapaDeCollectibles['scarecrow'].possui = true;
-    } else {
-        mapaDeCollectibles['scarecrow'].possui = false;
-    }
-
-    // Recalcular buffs normalmente
-    buffsAdicionados();
-    statusCrops();
-};

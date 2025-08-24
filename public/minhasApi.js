@@ -157,6 +157,7 @@ function numeroDaFarm() {
             document.getElementById('ilhaSelect').value = 'Basic';            
         }
         ilhaPrestigioAtual();
+        sePossuiVipOuNao();
     };
     
 };

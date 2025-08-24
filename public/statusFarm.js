@@ -3,7 +3,7 @@ let vinteQuatroHoras = parseFloat(86_400_000);
 
 //valor de 1 flower em coins
 let flowerEmCoins = 320;
-document.getElementById('flowerEmCoins').value = flowerEmCoins;
+document.getElementById('flower-em-coins').value = 320;
 
 //=====================================================================================================================================================================
 
@@ -19,7 +19,7 @@ function salvarInformacoes() {
         document.getElementById('plotsPossuidos').value = plots;
     };
 
-    flowerEmCoins = document.getElementById('flowerEmCoins').value;
+    flowerEmCoins = document.getElementById('flower-em-coins').value;
     console.log(flowerEmCoins)
     buffsAdicionados();
     statusCrops();
@@ -38,7 +38,7 @@ document.getElementById('estacaoSelect').addEventListener('change', () => { // v
 //=====================================================================================================================================================================
 
 //Prestigio em que a pessoa está e calculo da taxa
-let ilha = 'Spring'; // guarda o nome da ilha selecionada
+let ilha = 'Basic'; // guarda o nome da ilha selecionada
 let taxa = 1; // guarda a taxa calculada para a ilha
 
 function ilhaPrestigioAtual() { // Função central que lê o <select>, calcula a taxa e atualiza a UI
@@ -57,20 +57,22 @@ function ilhaPrestigioAtual() { // Função central que lê o <select>, calcula 
 //registra um ouvinte de evento no <select id="ilhaSelect">.
 //toda vez que o usuário mudar a ilha manualmente, a função atualizarTaxa() será chamada.
 document.getElementById('ilhaSelect').addEventListener('change', ilhaPrestigioAtual);
+document.getElementById('ilhaSelect').addEventListener('change', sePossuiVipOuNao); //para que quando eu mude de ilha ele chame a função para mudar autimaticamente o vip e mostrar o resultado corretamente
 console.log(ilha)
 //=====================================================================================================================================================================
 
 //Se a pessoa possui VIP ou não e desconto que recebe na taxa
-let vip = '';
+let vip = 'Sim';
 let desconto = 1;
 
 function sePossuiVipOuNao() {
     vip = document.getElementById('vipSelect').value;
-    if (vip === 'Sim') {
+    if (vip === 'Sim' && ilha !== 'Basic') {
         desconto = 0.5;
     } else {
         desconto = 1;
     }
+    ilhaPrestigioAtual();
     statusCrops();
 }
 document.getElementById('vipSelect').addEventListener('change', sePossuiVipOuNao);

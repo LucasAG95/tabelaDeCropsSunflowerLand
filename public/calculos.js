@@ -297,10 +297,7 @@ function buffsAdicionados() {
     statusCrops();
 };
 
-
-
-
-
+//==================================================================================================================================================================
 
 //função responsavel por verificar se skills/NFTs possuem algum bonus ativado por outra skill/NFT
 function ativarBonusDasNftsESkills() {
