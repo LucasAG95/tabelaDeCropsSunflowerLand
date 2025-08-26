@@ -12,7 +12,7 @@ body {
 }
 
 h1 {
-  font-size: 10px;
+  font-size: 20px;
   color: #0e0d0d;
   margin-bottom: 20px;
   text-align: center;
@@ -308,3 +308,4 @@ td input.quantidade-input {
   vertical-align: middle;
   margin-right: 6px;
 }
+

@@ -29,11 +29,13 @@ function salvarInformacoes() {
 
 //Estação
 let estacao = 'Spring';
-document.getElementById('estacaoSelect').addEventListener('change', () => { // vou ter que analisar oque faz ainda!
+function selecionandoEstacao() {
     estacao = document.getElementById('estacaoSelect').value;
+    titulosDosSelectsEPreenchimentos();
     buffsAdicionados();
     statusCrops();
-});
+};
+document.getElementById('estacaoSelect').addEventListener('change', selecionandoEstacao);
 
 //=====================================================================================================================================================================
 
@@ -45,7 +47,7 @@ function ilhaPrestigioAtual() { // Função central que lê o <select>, calcula 
     ilha = document.getElementById('ilhaSelect').value; //ela pega o <select id="ilhaSelect"> no HTML e guarda o valor escolhido dentro de ilha.
     if (ilha === 'Basic') {
         taxa = 'Não pode vender';
-    } else if (ilha === 'Spring') {
+    } else if (ilha === 'Petal') {
         taxa = 0.5;
     } else if (ilha === 'Desert') {
         taxa = 0.2
@@ -83,8 +85,11 @@ document.getElementById('vipSelect').addEventListener('change', sePossuiVipOuNao
 let eventoBonus = 'nenhum';
 let eventoSunshower = 1; //crops crescem 2x mais rapido
 let eventoBountifulHarvest = 0; //ganha +1 ao colher frutas e crops
-document.getElementById('evento-bonus').addEventListener('change', () => { 
+
+function eventoDeBonus() {
     eventoBonus = document.getElementById('evento-bonus').value;
+    
+
     if (eventoBonus === 'sunshower') {
         eventoSunshower = 0.5
         eventoBountifulHarvest = 0;
@@ -95,9 +100,11 @@ document.getElementById('evento-bonus').addEventListener('change', () => {
         eventoSunshower = 1;
         eventoBountifulHarvest = 0;
     }
+    titulosDosSelectsEPreenchimentos();
     buffsAdicionados();
     statusCrops();
-});
+}
+document.getElementById('evento-bonus').addEventListener('change', eventoDeBonus)
 
 //=====================================================================================================================================================================
 
@@ -116,3 +123,29 @@ function sementesPlantadas() {
 };
 
 //=====================================================================================================================================================================
+
+//Responsavel por dar valor a cada Gem dependendo do pack
+let precoPorGem = 0.9 / 100; //valor do primeiro pack dividido pelas gems
+function valoresDasGems() {
+    let packGemsSelecionado = document.getElementById('pack-gems').value;
+    let quantidadeGems = parseFloat(packGemsSelecionado.split('-')[0]); // Pega a primeira parte antes do '-'
+    let custoDoPack = parseFloat(packGemsSelecionado.split('-')[1]); // Pega tudo depois do '-'
+    precoPorGem = custoDoPack / quantidadeGems;
+    titulosDosSelectsEPreenchimentos();
+    statusCrops();
+}
+document.getElementById('pack-gems').addEventListener('change', valoresDasGems);
+
+//======================================================================================================================================================================
+
+//mostrar(modificar) 'titulos' das abas
+function titulosDosSelectsEPreenchimentos() {
+    document.getElementById('valor-do-flower').innerHTML = `<br>Valor do Flower: <img src="icones/flower.png" class="crop-img">$${precoDoFlower.toFixed(4)}`
+    document.getElementById('valor-por-gem').innerHTML = `Preço por Gem: <img src="icones/gem.png" class="crop-img">$${precoPorGem.toFixed(4)}`
+    document.getElementById('label-gems').innerHTML = `<img src="icones/gem.png" class="crop-img">Pack de Gems:`
+    document.getElementById('label-estacao').innerHTML = `<img src="icones/${estacao}.png" class="crop-img">Estação:`
+    document.getElementById('label-vip').innerHTML = `<img src="icones/vip.png" class="crop-img">Vip?`
+    document.getElementById('label-flower-em-coins').innerHTML = `<img src="icones/flower.png" class="crop-img">1 Flower = <img src="icones/coins.png" class="crop-img">? Coins`
+    document.getElementById('label-evento-bonus').innerHTML = `<img src="icones/${eventoBonus}.png" class="crop-img">Evento:` //titulo pra mostrar no local do label
+
+}

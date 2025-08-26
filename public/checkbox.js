@@ -173,7 +173,7 @@ window.onload = function () {
 
     // Wearables
     renderNFTs(wearablesCrops, 'wearables-container', './wearables');
-
+    
     configurarCheckbox();
     nftsDeTierQuePossuemBuffDoAntecessor();
     numeroDaFarm();

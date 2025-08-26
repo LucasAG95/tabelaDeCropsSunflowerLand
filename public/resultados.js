@@ -7,7 +7,7 @@ function statusCrops() {
     let lucroTotalFlower = 0; // soma do lucro em flower
 
     // tabela principal
-    let tabelaCrops = `
+    let tabelaCrops = `<p><p>
     <table class="tabela-crops">
         <thead>
         <tr>
@@ -33,8 +33,6 @@ function statusCrops() {
 
         //tempo para plantar as sementes inseridas, arrendondando para cima! 1 semente a mais ja equivale a plantar a msm quantidade de plots
         let tempoFinalDaCrop = crop.tempoFinal * Math.ceil(crop.seedsPlantadas / plots);
-
-        let ciclosDeColheita = Math.ceil(crop.seedsPlantadas / plots)
 
         //mostrar o gasto em sementes em coins e tambem convertidas em flower. Caso o campo de seeds esteja vazio mostra o valor original da compra de uma semente. 
         let custoDaSementeEmCoins = crop.seedsPlantadas == 0 ? crop.custoFinal : crop.custoFinal * crop.seedsPlantadas;
@@ -112,3 +110,4 @@ function statusCrops() {
     </div>
     `;
 }
+

@@ -150,8 +150,8 @@ function numeroDaFarm() {
             ilha = 'Desert';
             document.getElementById('ilhaSelect').value = 'Desert';
         } else if (ilhaQueEsta['Crimstone Rock']) {
-            ilha = 'Spring';
-            document.getElementById('ilhaSelect').value = 'Spring';
+            ilha = 'Petal';
+            document.getElementById('ilhaSelect').value = 'Petal';
         } else {
             ilha = 'Basic';
             document.getElementById('ilhaSelect').value = 'Basic';            
@@ -161,3 +161,24 @@ function numeroDaFarm() {
     };
     
 };
+
+//==============================================================================================================================================
+
+//api para puxar o valor do flower
+fetch(`/api/proxy?url=https://sfl.world/api/v1.1/exchange`)
+  .then(res => res.json())
+  .then(data => {  
+    valorDoFlowerEmDolar(data.sfl.usd);
+  })
+  .catch(err => {
+    console.error('Erro ao puxar a planilha:', err);
+  });
+
+let precoDoFlower;
+function valorDoFlowerEmDolar(valor) {
+    precoDoFlower = valor;
+    console.log(`$${precoDoFlower}`);
+    titulosDosSelectsEPreenchimentos(); // rever como ativar esse função dps, por enquanto puxara dps que rodar a api;
+    statusCrops();
+}
+
