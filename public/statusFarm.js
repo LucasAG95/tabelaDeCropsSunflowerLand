@@ -126,11 +126,16 @@ function sementesPlantadas() {
 
 //Responsavel por dar valor a cada Gem dependendo do pack
 let precoPorGem = 0.9 / 100; //valor do primeiro pack dividido pelas gems
+let precoDaGemEmFlower;
 function valoresDasGems() {
     let packGemsSelecionado = document.getElementById('pack-gems').value;
     let quantidadeGems = parseFloat(packGemsSelecionado.split('-')[0]); // Pega a primeira parte antes do '-'
     let custoDoPack = parseFloat(packGemsSelecionado.split('-')[1]); // Pega tudo depois do '-'
     precoPorGem = custoDoPack / quantidadeGems;
+    //conversao do valor de cada gem pra flower
+    precoDaGemEmFlower = precoPorGem / precoDoFlower;
+    console.log(precoDaGemEmFlower + `esse é o valor`);
+    //funções chamadas
     titulosDosSelectsEPreenchimentos();
     statusCrops();
 }
@@ -138,10 +143,12 @@ document.getElementById('pack-gems').addEventListener('change', valoresDasGems);
 
 //======================================================================================================================================================================
 
+
 //mostrar(modificar) 'titulos' das abas
 function titulosDosSelectsEPreenchimentos() {
     document.getElementById('valor-do-flower').innerHTML = `<br>Valor do Flower: <img src="icones/flower.png" class="crop-img">$${precoDoFlower.toFixed(4)}`
-    document.getElementById('valor-por-gem').innerHTML = `Preço por Gem: <img src="icones/gem.png" class="crop-img">$${precoPorGem.toFixed(4)}`
+    document.getElementById('valor-por-gem').innerHTML = `Preço por Gem: <img src="icones/gem.png" class="crop-img">$${precoPorGem.toFixed(4)} = <img src="icones/flower.png" class="crop-img">${precoDaGemEmFlower.toFixed(4)}<br>`
+    document.getElementById('valor-por-gem').innerHTML += `Seed Restock: <img src="icones/gem.png" class="crop-img">$${(precoPorGem * 15).toFixed(4)} = <img src="icones/flower.png" class="crop-img">${(precoDaGemEmFlower * 15).toFixed(4)}<br>`
     document.getElementById('label-gems').innerHTML = `<img src="icones/gem.png" class="crop-img">Pack de Gems:`
     document.getElementById('label-estacao').innerHTML = `<img src="icones/${estacao}.png" class="crop-img">Estação:`
     document.getElementById('label-vip').innerHTML = `<img src="icones/vip.png" class="crop-img">Vip?`

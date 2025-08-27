@@ -1,13 +1,14 @@
 //aba responsavel para mostrar os resultados na tela!
-
 function statusCrops() {
     mostrarNoHtml.innerHTML = '';
 
     let tempoTotal = 0; // soma do tempo das crops
     let lucroTotalFlower = 0; // soma do lucro em flower
+    let restockCropCombo = 0; // quantidade de vezes que vou dar restock
+    let mediaDeVezesOEstoqueRende;
 
     // tabela principal
-    let tabelaCrops = `<p><p>
+    let tabelaCrops = `
     <table class="tabela-crops">
         <thead>
         <tr>
@@ -27,6 +28,10 @@ function statusCrops() {
 
     crops.forEach(crop => {
         if(!crop.estacao.includes(estacao)) return;
+
+        //Tenho que ver como vou usar - usado para calcular quantas vezes pode plantar com a quantidade de sementes que plantou e o estoque vai render, utilizado no momento para calculo de desconto de flower gasto por gems no dia
+        mediaDeVezesOEstoqueRende = Math.floor(crop.estoqueFinal / crop.seedsPlantadas);
+        console.log(`${crop.name} = ${mediaDeVezesOEstoqueRende}`)
 
         //calculo para saber quantas crops as sementes plantadas vao me render
         let colheitaTotal= crop.quantidadePorPlot * crop.seedsPlantadas;
@@ -52,6 +57,11 @@ function statusCrops() {
             melhorPorCoinsOuFlower = '<img src="./icones/flower.png" class="crop-img">Flower';
         }
 
+        //mostrar quantos reestocks foi feito com esse combo:
+        if (Math.ceil(crop.seedsPlantadas / crop.estoqueFinal) > restockCropCombo) {
+            restockCropCombo = Math.ceil(crop.seedsPlantadas / crop.estoqueFinal)
+        }
+
         // para tabela de resultado total
         tempoTotal += tempoFinalDaCrop;
         lucroTotalFlower += lucroFlower;
@@ -71,11 +81,14 @@ function statusCrops() {
         </tr>
         `;
     });
-
     tabelaCrops += `</tbody></table>`;
 
+    //calcular o preço de restock das sementes
+    let precoRestockCropDolar = precoPorGem * (restockCropCombo * 15);
+    let precoRestockCropFlower = precoDaGemEmFlower * (restockCropCombo * 15);
+
     // cálculo de média de lucro diário
-    let mediaLucroDiario = (vinteQuatroHoras / tempoTotal) * lucroTotalFlower;
+    let mediaLucroDiario = (vinteQuatroHoras / tempoTotal) * lucroTotalFlower
 
     // tabela de resumo
     let tabelaResultadoFinal = `
@@ -91,12 +104,16 @@ function statusCrops() {
         <td><img src="icones/tempo.png" class="crop-img">${formatarTempoDaCropComDia(tempoTotal)}</td>
         </tr>
         <tr>
-        <td>Média de Lucro por Dia:</td>
-        <td><img src="icones/flower.png" class="crop-img">${mediaLucroDiario.toFixed(2)}</td>
+        <td>Total Gasto com Restock:</td>
+        <td>Restock: ${restockCropCombo} = <img src="icones/gem.png" class="crop-img">${restockCropCombo * 15}<br><img src="icones/flower.png" class="crop-img">${precoRestockCropFlower.toFixed(4)} ~ <img src="icones/usdc.png" class="crop-img">$${precoRestockCropDolar.toFixed(4)}</td>
         </tr>
         <tr>
-        <td>Lucro Total plantando o combo:</td>
-        <td><img src="icones/flower.png" class="crop-img">${lucroTotalFlower.toFixed(2)}</td>
+        <td>Lucro Total plantando o combo:<br>(Desconta Gems)</td>
+        <td><img src="icones/flower.png" class="crop-img">${(lucroTotalFlower - precoRestockCropFlower).toFixed(4)} ~ <img src="icones/usdc.png" class="crop-img">$${((lucroTotalFlower - precoRestockCropFlower) * precoDoFlower).toFixed(4)}</td>
+        </tr>
+        <tr>
+        <td>Média de Lucro por Dia:<br>(Não desconta Gems)</td>
+        <td><img src="icones/flower.png" class="crop-img">${mediaLucroDiario.toFixed(2)} ~ <img src="icones/usdc.png" class="crop-img">$${(mediaLucroDiario * precoDoFlower).toFixed(4)}</td>
         </tr>
     </tbody>
     </table>
