@@ -3,20 +3,18 @@
 ======================= */
 body {
   font-family: 'Comic Neue', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: 
-    linear-gradient(to bottom, rgba(8, 8, 8, 0.6), rgba(49, 15, 15, 0.6)), 
-    url("./background/sunflowerLand.png") no-repeat center center fixed;
-  background-size: cover; /* faz a imagem cobrir toda a tela */
+  background: #1e1e1e; /* preto claro estilo dark mode */
   padding: 30px;
-  color: #4e4e4e;
+  color: #e0e0e0; /* texto claro */
+  overflow-x: hidden;
 }
 
 h1 {
   font-size: 20px;
-  color: #0e0d0d;
+  color: #ffffff;
   margin-bottom: 20px;
   text-align: center;
-  text-shadow: 1px 1px 2px #fff3e0;
+  text-shadow: 1px 1px 2px #000000;
 }
 
 h2 {
@@ -34,15 +32,15 @@ h3 {
   color: #e7e7e7;
   margin-top: 1px;
   margin-bottom: 1px;
-  text-shadow: 0px 1px 10px #000000;
+  text-shadow: 0px 1px 4px #000000;
 }
 
 p {
   font-size: 15px;
-  color: #dad60e;
+  color: #f5f5f5;
   margin-top: 10px;
   margin-bottom: 10px;
-  text-shadow: 0px 1px 1px #0f0f0f;
+  text-shadow: 0px 1px 1px #000000;
 }
 
 /* ====================
@@ -55,12 +53,11 @@ p {
   align-items: flex-start;
 }
 
-/* Cada bloco mantém layout vertical */
 .skills-block, .collectibles-block, .wearables-block {
   display: flex;
   flex-direction: column;
-  flex: 1; /* distribui o espaço igualmente */
-  min-width: 250px; /* largura mínima para cada bloco */
+  flex: 1;
+  min-width: 250px;
 }
 
 /* ====================
@@ -87,7 +84,7 @@ p {
   height: 20px;
   object-fit: contain;
   border-radius: 12px;
-  background-color: #fff3e0;
+  background-color: #2c2c2c;
   padding: 6px;
   border: 2px solid transparent;
   transition: transform 0.2s, border 0.2s, box-shadow 0.2s;
@@ -109,7 +106,7 @@ input[type="checkbox"] {
 input[type="checkbox"]:checked + .nft-img,
 input[type="checkbox"]:checked + .skill-img {
   border: 2px solid #ffa726;
-  background-color: #ffe082;
+  background-color: #4a4035;
   box-shadow: 0 0 10px #ffb74d80;
   transform: scale(1.15);
 }
@@ -117,8 +114,8 @@ input[type="checkbox"]:checked + .skill-img {
 .tooltip {
   visibility: hidden;
   width: 200px;
-  background-color: #ffecb3;
-  color: #6d4c41;
+  background-color: #333333;
+  color: #f0e68c;
   text-align: left;
   padding: 8px;
   border-radius: 10px;
@@ -131,7 +128,7 @@ input[type="checkbox"]:checked + .skill-img {
   transition: opacity 0.3s, transform 0.3s;
   font-size: 13px;
   pointer-events: none;
-  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
 .nft-wrapper:hover .tooltip,
@@ -170,7 +167,8 @@ select, input[type="number"] {
   font-size: 15px;
   border-radius: 10px;
   border: 1px solid #ffd54f;
-  background-color: #fff8e1;
+  background-color: #2c2c2c;
+  color: #f5f5f5;
   cursor: pointer;
   transition: all 0.2s;
 }
@@ -205,9 +203,11 @@ button:hover {
   padding: 20px;
   border-radius: 14px;
   margin-top: 2px;
-  box-shadow: 0 4px 12px rgba(17, 16, 16, 0.2);
+  box-shadow: 0 4px 12px rgba(17, 16, 16, 0.4);
   font-size: 1px;
   font-weight: bold;
+  background-color: #2a2a2a;
+  color: #ffffff;
 }
 
 /* ====================
@@ -221,7 +221,7 @@ button:hover {
   font-size: 14px;
   border-radius: 10px;
   overflow: hidden;
-  border: 5px solid #000000; /* linha demarcando */
+  border: 2px solid #333;
 }
 
 .tabela-crops th, .tabela-crops td {
@@ -230,16 +230,16 @@ button:hover {
 }
 
 .tabela-crops th {
-  background-color: #584d4d;
-  color: #fffdfc;
+  background-color: #333333;
+  color: #ffffff;
 }
 
 .tabela-crops tr:nth-child(even) {
-  background-color: #f3d19a;
+  background-color: #2c2c2c;
 }
 
 .tabela-crops tr:nth-child(odd) {
-  background-color: #e6ddc3;
+  background-color: #242424;
 }
 
 .crop-img {
@@ -255,8 +255,9 @@ td input.quantidade-input {
   display: block;
   margin: 0 auto;
   border-radius: 8px;
-  border: 1px solid #1d1c1a;
-  background-color: #fff8e1;
+  border: 1px solid #555;
+  background-color: #1e1e1e;
+  color: #ffffff;
   padding: 10px;
   text-align: center;
 }
@@ -265,22 +266,22 @@ td input.quantidade-input {
    TABELA DE RESUMO FIXA
 ======================= */
 .tabela-crops.totais {
-  width: 500px; /* ajuste a largura fixa que quiser */
-  height: 100px; /* ajuste a altura fixa que quiser */
+  width: 500px;
+  height: 100px;
   border-collapse: separate;
   border-spacing: 0;
   margin-top: 2px;
   font-size: 14px;
   border-radius: 12px;
   overflow: hidden;
-  border: 3px solid #000000; /* borda da tabela */
-  background-color: #2a2a3d; /* fundo da tabela */
+  border: 3px solid #444;
+  background-color: #1e1e1e;
   color: #ffffff;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.6);
 }
 
 .tabela-crops.totais th {
-  background-color: #584d4d;
+  background-color: #333333;
   color: #fffdfc;
   font-size: 16px;
   padding: 8px 10px;
@@ -295,11 +296,11 @@ td input.quantidade-input {
 }
 
 .tabela-crops.totais tr:nth-child(even) {
-  background-color: #3b3b5a;
+  background-color: #2c2c2c;
 }
 
 .tabela-crops.totais tr:nth-child(odd) {
-  background-color: #4c4c72;
+  background-color: #242424;
 }
 
 .tabela-crops.totais img.crop-img {
@@ -308,4 +309,3 @@ td input.quantidade-input {
   vertical-align: middle;
   margin-right: 6px;
 }
-

@@ -286,6 +286,54 @@ function buffsAdicionados() {
 
         });
 
+        nftsDaTemporada.forEach(novasNfts => {
+            
+            //buffs que alteram a quantidade de crop por plot
+            if(novasNfts.possui === true && novasNfts.afeta.includes('quantidade') && novasNfts.sinal === 'x' &&  (novasNfts.estacao.includes(estacao) || novasNfts.estacao === 'todas') &&
+            (novasNfts.tipoDeCrop === 'todas' || novasNfts.tipoDeCrop.includes(crop.tier) || novasNfts.tipoDeCrop.includes(crop.name))) {
+                multiplicaBuff *= novasNfts.buff;
+            };
+
+            if(novasNfts.possui === true && novasNfts.afeta.includes('quantidade') && novasNfts.sinal === '+' &&  (novasNfts.estacao.includes(estacao) || novasNfts.estacao === 'todas') &&
+            (novasNfts.tipoDeCrop === 'todas' || novasNfts.tipoDeCrop.includes(crop.tier) || novasNfts.tipoDeCrop.includes(crop.name))) {
+                somaBuff += novasNfts.buff;
+            };
+
+            if(novasNfts.possui === true && novasNfts.afeta.includes('areaQtd') && novasNfts.sinal === '+' && (novasNfts.estacao.includes(estacao) || novasNfts.estacao === 'todas') &&
+            (novasNfts.tipoDeCrop === 'todas' || novasNfts.tipoDeCrop.includes(crop.tier) || novasNfts.tipoDeCrop.includes(crop.name))) {
+                somaAreaBuff += novasNfts.buff;
+            };
+
+            if(novasNfts.possui === true && novasNfts.afeta.includes('instantaneo') && novasNfts.sinal === 'x' && (novasNfts.estacao.includes(estacao) || novasNfts.estacao === 'todas') &&
+            (novasNfts.tipoDeCrop === 'todas' || novasNfts.tipoDeCrop.includes(crop.tier) || novasNfts.tipoDeCrop.includes(crop.name))) {
+                instaCrop *= novasNfts.buff;
+            };
+
+            //buffs que alteram o tempo da crop
+            if(novasNfts.possui === true && novasNfts.afeta.includes('tempo') && novasNfts.sinal === 'x' && (novasNfts.estacao.includes(estacao) || novasNfts.estacao === 'todas') &&
+            (novasNfts.tipoDeCrop === 'todas' || novasNfts.tipoDeCrop.includes(crop.tier) || novasNfts.tipoDeCrop.includes(crop.name))) {
+                tempoReduzido *= novasNfts.buff;
+            };
+
+            //buffs que alteram a quantidade de sementes do estoque
+            if(novasNfts.possui === true && novasNfts.afeta.includes('estoque') && novasNfts.sinal === 'x' && (novasNfts.estacao.includes(estacao) || novasNfts.estacao === 'todas') &&
+            (novasNfts.tipoDeCrop === 'todas' || novasNfts.tipoDeCrop.includes(crop.tier) || novasNfts.tipoDeCrop.includes(crop.name))) {
+                estoqueBuff *= novasNfts.buff;
+            };
+
+            //buffs que alteram compra e venda de Crops na loja de sementes
+            if(novasNfts.possui === true && novasNfts.afeta.includes('custoCoins') && novasNfts.sinal === 'x' && (novasNfts.estacao.includes(estacao) || novasNfts.estacao === 'todas') &&
+            (novasNfts.tipoDeCrop === 'todas' || novasNfts.tipoDeCrop.includes(crop.tier) || novasNfts.tipoDeCrop.includes(crop.name))) {
+                coinsCustoBuff *= novasNfts.buff;
+            };
+
+            if(novasNfts.possui === true && novasNfts.afeta.includes('vendaCoins') && novasNfts.sinal === 'x' && (novasNfts.estacao.includes(estacao) || novasNfts.estacao === 'todas') &&
+            (novasNfts.tipoDeCrop === 'todas' || novasNfts.tipoDeCrop.includes(crop.tier) || novasNfts.tipoDeCrop.includes(crop.name))) {
+                coinsVendaBuff *= novasNfts.buff;
+            };   
+
+        });
+
         //altera resultados dentro da lista de Crops
         crop.quantidadePorPlot = (multiplicaBuff + somaBuff + (somaAreaBuff / plots) - somaDebuff + (eventoBountifulHarvest * buffDeEventoBountifulHarvest)) * instaCrop;
         crop.tempoFinal = crop.tempo * tempoReduzido * (eventoSunshower / buffDeEventoSunshower);

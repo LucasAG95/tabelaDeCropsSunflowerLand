@@ -7,99 +7,20 @@
 </head>
 <body>
 
-  <div class="select-group">
+  <!-- 🔹 Número da Farm -->
+  <header class="header">
     <div class="input-numero-da-farm">
-      <label for="numeroFarm">Numero da Farm:</label><br>
+      <label for="numeroFarm">Número da Farm:</label>
       <input id="numeroFarm" type="number" placeholder="Ex: 3661">
-      <button id="procurarFarm" onclick="numeroDaFarm()">Pesquisar</button> 
+      <button id="procurarFarm" onclick="numeroDaFarm()">Pesquisar</button>
     </div>
-  </div>
+    <h3 id="valor-do-flower"></h3>
+  </header>
 
-  <h3 id="valor-do-flower"></h3>
-
-  <!-- Container pai para Skills, Collectibles e Wearables -->
-  <div class="items-row">
-
-    <!-- Bloco de Skills -->
-    <div class="skills-block">
-      <h2>Skills</h2>
-
-      <p>Skills - Legacy</p>
-      <div class="checkbox-bloco">
-        <div id="skills-legacy-container" class="skill-container"></div>
-      </div>
-      
-      <p>Skills Land Expansion</p>
-      <div class="checkbox-bloco">
-        <div id="skills-tier1-container" class="skill-container"></div>
-      </div>
-
-      <div class="checkbox-bloco">
-        <div id="skills-tier2-container" class="skill-container"></div>
-      </div>
-
-      <div class="checkbox-bloco">
-        <div id="skills-tier3-container" class="skill-container"></div>
-      </div>
-    </div>
-
-    <!-- Bloco de Collectibles -->
-    <div class="collectibles-block">
-      <h2>Collectibles</h2>
-      <div class="checkbox-bloco">
-        <div id="collectibles-container" class="nft-container"></div>
-      </div>
-    </div>
-
-    <!-- Bloco de Wearables -->
-    <div class="wearables-block">
-      <h2>Wearables</h2>
-      <div class="checkbox-bloco">
-        <div id="wearables-container" class="nft-container"></div>
-      </div>
-    </div>
-
-  </div> <!-- Fim items-row -->
-
-  <!-- Linha de selects e inputs -->
-  <div class="linha-selects">
-
+  <!-- 🔹 Linha de seleções principais -->
+  <section class="linha-selects">
     <div class="select-group">
-      <label for="ilhaSelect" id="label-ilha-que-esta">Ilha atual:</label>
-      <select id="ilhaSelect">
-        <option value="Basic">Basic</option>
-        <option value="Petal">Petal</option>
-        <option value="Desert">Desert</option>
-        <option value="Vulcano">Vulcano</option>
-      </select>
-    </div>
-
-    <div class="select-group">
-      <label for="vipSelect" id="label-vip"></label>
-      <select id="vipSelect">
-        <option value="Sim">Sim</option>
-        <option value="Não">Não</option>
-      </select>
-    </div>
-
-    <div class="select-group">
-      <div class="input-plots">
-        <label for="plotsPossuidos" id="label-plots">Quantidade de plots:</label><br>
-        <input id="plotsPossuidos" type="number" placeholder="Ex: 70"><br>
-      </div>
-    </div>
-    
-    <div class="select-group">
-      <div class="input-flower-em-coins">
-        <label for="flower-em-coins" id="label-flower-em-coins"></label><br>
-        <input id="flower-em-coins" type="number" placeholder="Ex: 320">
-      </div>
-    </div>
-
-    <button id="salvarInfos" onclick="salvarInformacoes()">Salvar</button>
-
-    <div class="select-group">
-      <label for="estacaoSelect" id="label-estacao"></label>
+      <label for="estacaoSelect">Estação atual:</label>
       <select id="estacaoSelect">
         <option value="Spring">Spring</option>
         <option value="Summer">Summer</option>
@@ -109,7 +30,7 @@
     </div>
 
     <div class="select-group">
-      <label for="evento-bonus" id="label-evento-bonus"></label>
+      <label for="evento-bonus">Evento bônus:</label>
       <select id="evento-bonus">
         <option value="nenhum">Nenhum</option>
         <option value="sunshower">Sunshower</option>
@@ -117,24 +38,87 @@
       </select>
     </div>
 
-  </div>
+    <div class="select-group">
+      <label for="ilhaSelect">Ilha atual:</label>
+      <select id="ilhaSelect">
+        <option value="Basic">Basic</option>
+        <option value="Petal">Petal</option>
+        <option value="Desert">Desert</option>
+        <option value="Vulcano">Vulcano</option>
+      </select>
+    </div>
 
-  <div class="select-group">
-    <br><label for="pack-gems" id="label-gems"></label>
-    <select id="pack-gems">
-      <option value="100-0.90">100 Gems - $0.90</option>
-      <option value="650-4.54">650 Gems - $4.54</option>
-      <option value="1350-9.09">1350 Gems - $9.09</option>
-      <option value="2800-18.19">2800 Gems - $18.19</option>
-      <option value="7400-45.49">7400 Gems - $45.49</option>
-      <option value="15500-90.99">15500 Gems - $90.99</option>
-      <option value="200000-909.99">200000 Gems - $909.99</option>
-    </select>
-    <h3 id="valor-por-gem"></h3>
-  </div>
+    <div class="select-group">
+      <label for="vipSelect">Possui VIP?</label>
+      <select id="vipSelect">
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- 🔹 Configurações de plots e flower -->
+  <section class="linha-selects">
+    <div class="select-group">
+      <label for="plotsPossuidos">Quantidade de plots:</label>
+      <input id="plotsPossuidos" type="number" placeholder="Ex: 70">
+    </div>
+
+    <div class="select-group">
+      <label for="flower-em-coins">Flower por coins:</label>
+      <input id="flower-em-coins" type="number" placeholder="Ex: 320">
+    </div>
+
+    <button id="salvarInfos" onclick="salvarInformacoes()">Salvar</button>
+  </section>
+
+  <!-- 🔹 Economia - Gems -->
+  <section class="linha-selects">
+    <div class="select-group">
+      <label for="pack-gems">Pacote de Gems:</label>
+      <select id="pack-gems">
+        <option value="100-0.90">100 Gems - $0.90</option>
+        <option value="650-4.54">650 Gems - $4.54</option>
+        <option value="1350-9.09">1350 Gems - $9.09</option>
+        <option value="2800-18.19">2800 Gems - $18.19</option>
+        <option value="7400-45.49">7400 Gems - $45.49</option>
+        <option value="15500-90.99">15500 Gems - $90.99</option>
+        <option value="200000-909.99">200000 Gems - $909.99</option>
+      </select>
+      <h3 id="valor-por-gem"></h3>
+    </div>
+  </section>
+
+  <!-- 🔹 Blocos de NFTs -->
+  <main class="items-row">
+    <div class="skills-block">
+      <h2>Skills</h2>
+      <p>Skills - Legacy</p>
+      <div id="skills-legacy-container" class="skill-container"></div>
+      
+      <p>Skills Land Expansion</p>
+      <div id="skills-tier1-container" class="skill-container"></div>
+      <div id="skills-tier2-container" class="skill-container"></div>
+      <div id="skills-tier3-container" class="skill-container"></div>
+    </div>
+
+    <div class="collectibles-block">
+      <h2>Collectibles</h2>
+      <div id="collectibles-container" class="nft-container"></div>
+    </div>
+
+    <div class="wearables-block">
+      <h2>Wearables</h2>
+      <div id="wearables-container" class="nft-container"></div>
+    </div>
+
+    <div class="collectibles-block">
+      <h2>NFTs da Temporada 11 (Atual)</h2>
+      <div id="new-collectibles-container" class="nft-container"></div>
+    </div>
+  </main>
 
   <div id="saida"></div>
-
 
   <script src="./recursos.js"></script>
   <script src="./skills.js"></script>
@@ -145,6 +129,5 @@
   <script src="./resultados.js"></script>
   <script src="./statusFarm.js"></script>
   <script src="./checkbox.js"></script>
-
 </body>
 </html>

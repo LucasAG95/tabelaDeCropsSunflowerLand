@@ -734,3 +734,39 @@ collectiblesCrops.forEach(collectibles => { //vai verificar e organizar por id d
     mapaDeCollectibles[collectibles.id] = collectibles; // adiciona cada NFT no objeto usando o id como chave
 });
 console.log(mapaDeCollectibles)
+
+let nftsDaTemporada = [
+    {
+        id: 'giantOnion',
+        name: 'Giant Onion',
+        descricao: '+3 Onions',
+        estacao: 'todas',
+        tipoDeCrop: 'Onion',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 3,
+        possui: false 
+    },
+    {
+        id: 'giantTurnip',
+        name: 'Giant Turnip',
+        descricao: '',
+        estacao: 'todas',
+        tipoDeCrop: '-50% no tempo de crescimento da Turnip',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.5,
+        possui: false
+    },
+    {
+        id: 'giantArtichoke',
+        name: 'Giant Artichoke',
+        descricao: '+2 Artichoke',
+        estacao: 'todas',
+        tipoDeCrop: 'Artichoke',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 2,
+        possui: false
+    }
+];

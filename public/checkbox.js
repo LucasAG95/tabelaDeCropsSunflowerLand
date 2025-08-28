@@ -90,12 +90,28 @@ function configurarCheckbox() {
                 statusCrops();
             });
         };
-    });    
+    });
+    
+    nftsDaTemporada.forEach(newCollectibles => {
+        let checkbox = document.getElementById(newCollectibles.id);
+
+        if(checkbox) {
+            newCollectibles.possui = checkbox.checked;
+
+            checkbox.addEventListener('change', function() {
+                newCollectibles.possui = checkbox.checked;
+                ativarBonusDasNftsESkills();
+                buffsAdicionados();
+                statusCrops();
+            });
+        };
+    }); 
 
 };
 
 //==================================================================================================================================================================
 
+//feito pelo gpt, nao sei ao certo oq faz!
 function renderSkills(lista, containerId, pastaImagens) {
     const container = document.getElementById(containerId);
 
@@ -169,6 +185,7 @@ window.onload = function () {
     renderSkills(skillsCrops.tier3, 'skills-tier3-container', './skills');
 
     // Collectibles
+    renderNFTs(nftsDaTemporada, 'new-collectibles-container', './collectibles');
     renderNFTs(collectiblesCrops, 'collectibles-container', './collectibles');
 
     // Wearables
