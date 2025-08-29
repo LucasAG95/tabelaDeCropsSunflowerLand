@@ -130,9 +130,6 @@ function renderSkills(lista, containerId, pastaImagens) {
         checkbox.type = 'checkbox';
         checkbox.id = skill.id;
 
-        //sempre que mudar status de skills, vai chamar skillsBloquedas e confirmar!
-        checkbox.addEventListener('change', skillsBloqueadas);
-
         const tooltip = document.createElement('div');
         tooltip.className = 'tooltip';
         tooltip.innerHTML = `<strong>${skill.name}</strong><br>${skill.descricao.portugues}`;

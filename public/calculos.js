@@ -405,18 +405,19 @@ function skillsBloqueadas() {
 
     todasSkillsDeCrops.forEach(skill => {
         let checkbox = document.getElementById(skill.id)
-        //usado para somar pontos do tier 1
+
+        // Tier 1 sempre pode ser contado
         if(skill.pontosNecessários === 1 && checkbox.checked) {
             pontosCropsTier1 += skill.pontosNecessários;
         };
 
-        //usado para somar pontos do tier 2
-        if(skill.pontosNecessários === 2 && checkbox.checked) {
+        // Tier 2 só conta se já tiver pontos suficientes no Tier 1
+        if(skill.pontosNecessários === 2 && checkbox.checked && pontosCropsTier1 >= 3) {
             pontosCropsTier2 += skill.pontosNecessários;
         };
 
-        //usado para somar pontos do tier 3
-        if(skill.pontosNecessários === 3 && checkbox.checked) {
+        // Tier 3 só conta se já tiver pontos suficientes no Tier 1 + 2
+        if(skill.pontosNecessários === 3 && checkbox.checked && (pontosCropsTier1 + pontosCropsTier2) >= 7) {
             pontosCropsTier3 += skill.pontosNecessários;
         };
 
