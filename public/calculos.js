@@ -397,7 +397,6 @@ function nftsDeTierQuePossuemBuffDoAntecessor() {
     statusCrops();
 };
 
-
 function skillsBloqueadas() {
     let pontosCropsTier1 = 0;
     let pontosCropsTier2 = 0;
@@ -439,6 +438,7 @@ function skillsBloqueadas() {
     console.log(totalUsadoEmCrops);
 
     textoParaDesbloquearSkill(3, 7, totalUsadoEmCrops);
+    buffsAdicionados();
 };
 
 
@@ -460,5 +460,5 @@ function textoParaDesbloquearSkill(pontosProNivel2, pontosProNivel3, totalPontos
     } else {
         document.getElementById('accordion-skill-crops-tier3').innerHTML = ``
     }
-    skillsBloqueadas();
+    
 }
