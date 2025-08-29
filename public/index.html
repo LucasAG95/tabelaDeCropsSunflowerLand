@@ -89,33 +89,71 @@
     </div>
   </section>
 
-  <!-- 🔹 Blocos de NFTs -->
+  <!-- 🔹 Blocos de NFTs com Accordion -->
   <main class="items-row">
-    <div class="skills-block">
+
+    <!-- ================== COLUNA SKILLS ================== -->
+    <section class="skills-block">
       <h2>Skills</h2>
-      <p>Skills - Legacy</p>
-      <div id="skills-legacy-container" class="skill-container"></div>
-      
-      <p>Skills Land Expansion</p>
-      <div id="skills-tier1-container" class="skill-container"></div>
-      <div id="skills-tier2-container" class="skill-container"></div>
-      <div id="skills-tier3-container" class="skill-container"></div>
-    </div>
 
-    <div class="collectibles-block">
+      <!-- Legacy -->
+      <div class="accordion">
+        <button class="accordion-btn">Legacy</button>
+        <div class="accordion-content">
+          <div id="skills-legacy-container" class="skill-container"></div>
+        </div>
+      </div>
+
+      <!-- Tiers 1–3 -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <img src="./icones/skillCrop.png" alt="Ícone Crops" class="icon-btn">
+          <span id="accordion-skill-crops">Crops</span> <!-- possivelmente mudar para class depois -->
+        </button>
+        <div class="accordion-content">
+          <div id="skills-tier1-container" class="skill-container"></div>
+          <div id="skills-tier2-container" class="skill-container"><p class="texto-skill-desbloquear" id="accordion-skill-crops-tier2"></p></div>
+          <div id="skills-tier3-container" class="skill-container"><p class="texto-skill-desbloquear" id="accordion-skill-crops-tier3"></p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== COLUNA COLLECTIBLES ================== -->
+    <section class="collectibles-block">
       <h2>Collectibles</h2>
-      <div id="collectibles-container" class="nft-container"></div>
-    </div>
 
-    <div class="wearables-block">
+      <div class="accordion">
+        <button class="accordion-btn">Collectibles - Crops</button>
+        <div class="accordion-content">
+          <div id="collectibles-container" class="nft-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== COLUNA WEARABLES ================== -->
+    <section class="wearables-block">
       <h2>Wearables</h2>
-      <div id="wearables-container" class="nft-container"></div>
-    </div>
 
-    <div class="collectibles-block">
-      <h2>NFTs da Temporada 11 (Atual)</h2>
-      <div id="new-collectibles-container" class="nft-container"></div>
-    </div>
+      <div class="accordion">
+        <button class="accordion-btn">Wearables - Crops</button>
+        <div class="accordion-content">
+          <div id="wearables-container" class="nft-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== COLUNA NFTS DA TEMPORADA ================== -->
+    <section class="season-block">
+      <h2>Temporada 11 - Better Together</h2>
+
+      <div class="accordion">
+        <button class="accordion-btn">Novos Collectibles</button>
+        <div class="accordion-content">
+          <div id="new-collectibles-container" class="nft-container"></div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <div id="saida"></div>
@@ -129,5 +167,22 @@
   <script src="./resultados.js"></script>
   <script src="./statusFarm.js"></script>
   <script src="./checkbox.js"></script>
+
+  <!-- Script do accordion -->
+  <script>
+    document.querySelectorAll(".accordion-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const content = button.nextElementSibling;
+        const parent = button.closest("section");
+
+        // fecha só os accordions dentro da mesma coluna
+        parent.querySelectorAll(".accordion-content").forEach(c => {
+          if (c !== content) c.classList.remove("open");
+        });
+
+        content.classList.toggle("open");
+      });
+    });
+  </script>
 </body>
 </html>

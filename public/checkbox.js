@@ -25,6 +25,7 @@ function configurarCheckbox() {
             checkbox.addEventListener('change', function() {
                 skill.possui = checkbox.checked;
                 ativarBonusDasNftsESkills();
+                skillsBloqueadas();
                 buffsAdicionados();
                 statusCrops();
             });
@@ -40,6 +41,7 @@ function configurarCheckbox() {
             checkbox.addEventListener('change', function() {
                 skill.possui = checkbox.checked;
                 ativarBonusDasNftsESkills();
+                skillsBloqueadas();
                 buffsAdicionados();
                 statusCrops();
             });
@@ -55,6 +57,7 @@ function configurarCheckbox() {
             checkbox.addEventListener('change', function() {
                 skill.possui = checkbox.checked;
                 ativarBonusDasNftsESkills();
+                skillsBloqueadas();
                 buffsAdicionados();
                 statusCrops();
             });
@@ -193,6 +196,7 @@ window.onload = function () {
     
     configurarCheckbox();
     nftsDeTierQuePossuemBuffDoAntecessor();
+    skillsBloqueadas();
     numeroDaFarm();
     statusCrops();
 };

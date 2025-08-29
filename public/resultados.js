@@ -107,8 +107,8 @@ function statusCrops() {
     // renderiza tudo
     mostrarNoHtml.innerHTML = `
         <div class="tabelas-em-ordem">
-            ${tabelaCrops}
             ${tabelaResultadoFinal}
+            ${tabelaCrops}
         </div>
     `;
 }

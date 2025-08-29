@@ -36,10 +36,10 @@ h3 {
 }
 
 p {
-  font-size: 15px;
-  color: #f5f5f5;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  font-size: 13px;
+  color: #ffa726;
+  margin-top: 0px;
+  margin-bottom: 0px;
   text-shadow: 0px 1px 1px #000000;
 }
 
@@ -53,7 +53,7 @@ p {
   align-items: flex-start;
 }
 
-.skills-block, .collectibles-block, .wearables-block {
+.skills-block, .collectibles-block, .wearables-block, .season-block {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -109,6 +109,26 @@ input[type="checkbox"]:checked + .skill-img {
   background-color: #4a4035;
   box-shadow: 0 0 10px #ffb74d80;
   transform: scale(1.15);
+}
+
+/* ====================
+   SKILLS BLOQUEADAS
+======================= */
+input[type="checkbox"]:disabled + .skill-img,
+input[type="checkbox"]:disabled + .nft-img {
+  filter: brightness(40%); /* deixa mais escuro */
+  opacity: 0.7;            /* leve transparência */
+  cursor: not-allowed;     /* cursor proibido 🚫 */
+  border: 2px solid #444;  /* borda discreta */
+  box-shadow: none;
+  transform: none !important;
+}
+
+input[type="checkbox"]:disabled + .skill-img:hover,
+input[type="checkbox"]:disabled + .nft-img:hover {
+  transform: none;
+  border-color: #444;
+  box-shadow: none;
 }
 
 .tooltip {
@@ -309,51 +329,100 @@ td input.quantidade-input {
   vertical-align: middle;
   margin-right: 6px;
 }
+
 .tabelas-em-ordem {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .resumo-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 16px;
-    flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  flex: 1;
 }
 
 .card {
-    background-color: #2c2c2c;
-    border-radius: 12px;
-    padding: 16px;
-    flex: 1 1 220px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    transition: transform 0.2s, box-shadow 0.2s;
+  background-color: #2c2c2c;
+  border-radius: 12px;
+  padding: 16px;
+  flex: 1 1 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 14px rgba(255,183,77,0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(255,183,77,0.4);
 }
 
 .card-title {
-    font-weight: bold;
-    color: #ffa726;
-    text-align: center;
-    margin-bottom: 8px;
+  font-weight: bold;
+  color: #ffa726;
+  text-align: center;
+  margin-bottom: 8px;
 }
 
 .card-value {
-    color: #ffffff;
-    font-size: 14px;
-    text-align: center;
+  color: #ffffff;
+  font-size: 14px;
+  text-align: center;
 }
 
 .card-value img.crop-img {
-    width: 20px;
-    height: 20px;
-    margin-right: 4px;
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
+}
+
+/* ====================
+   ACCORDION
+======================= */
+.accordion {
+  margin-bottom: 10px;
+}
+
+.accordion-btn {
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #2c2c2c;
+  color: #ffa726;
+  border: none;              
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+.accordion-btn:hover {
+  background-color: #333;
+  box-shadow: 0 4px 8px rgba(255,183,77,0.4);
+}
+
+.accordion-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  
+  background-color: #1e1e1e;   /* fundo escuro */
+  border: none;                /* sem linhas extras */
+  border-radius: 0 0 10px 10px;
+  
+  padding: 0;                  /* fechado = sem padding */
+}
+
+.accordion-content.open {
+  max-height: 1000px;          /* expande */
+  padding: 12px;               /* espaço interno quando aberto */
+}
+
+.texto-skill-desbloquear {
+  flex-basis: 100%; /* ocupa toda a largura */
+  white-space: normal; /* garante quebras de linha */
 }

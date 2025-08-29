@@ -31,7 +31,7 @@ function salvarInformacoes() {
 let estacao = 'Spring';
 function selecionandoEstacao() {
     estacao = document.getElementById('estacaoSelect').value;
-    titulosDosSelectsEPreenchimentos();
+    //titulosDosSelectsEPreenchimentos();
     buffsAdicionados();
     statusCrops();
 };
@@ -100,7 +100,7 @@ function eventoDeBonus() {
         eventoSunshower = 1;
         eventoBountifulHarvest = 0;
     }
-    titulosDosSelectsEPreenchimentos();
+    //titulosDosSelectsEPreenchimentos();
     buffsAdicionados();
     statusCrops();
 }
@@ -136,7 +136,7 @@ function valoresDasGems() {
     precoDaGemEmFlower = precoPorGem / precoDoFlower;
     console.log(precoDaGemEmFlower + `esse é o valor`);
     //funções chamadas
-    titulosDosSelectsEPreenchimentos();
+    //titulosDosSelectsEPreenchimentos();
     statusCrops();
 }
 document.getElementById('pack-gems').addEventListener('change', valoresDasGems);
@@ -145,7 +145,7 @@ document.getElementById('pack-gems').addEventListener('change', valoresDasGems);
 
 
 //mostrar(modificar) 'titulos' das abas
-function titulosDosSelectsEPreenchimentos() {
+/*function titulosDosSelectsEPreenchimentos() {
     document.getElementById('valor-do-flower').innerHTML = `<br>Valor do Flower: <img src="icones/flower.png" class="crop-img">$${precoDoFlower.toFixed(4)}`
     document.getElementById('valor-por-gem').innerHTML = `Preço por Gem: <img src="icones/gem.png" class="crop-img">$${precoPorGem.toFixed(4)} = <img src="icones/flower.png" class="crop-img">${precoDaGemEmFlower.toFixed(4)}<br>`
     document.getElementById('valor-por-gem').innerHTML += `Seed Restock: <img src="icones/gem.png" class="crop-img">$${(precoPorGem * 15).toFixed(4)} = <img src="icones/flower.png" class="crop-img">${(precoDaGemEmFlower * 15).toFixed(4)}<br>`
@@ -155,4 +155,4 @@ function titulosDosSelectsEPreenchimentos() {
     document.getElementById('label-flower-em-coins').innerHTML = `<img src="icones/flower.png" class="crop-img">1 Flower = <img src="icones/coins.png" class="crop-img">? Coins`
     document.getElementById('label-evento-bonus').innerHTML = `<img src="icones/${eventoBonus}.png" class="crop-img">Evento:` //titulo pra mostrar no local do label
 
-}
+}*/

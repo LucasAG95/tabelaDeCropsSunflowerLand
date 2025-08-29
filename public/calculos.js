@@ -396,3 +396,69 @@ function nftsDeTierQuePossuemBuffDoAntecessor() {
     buffsAdicionados();
     statusCrops();
 };
+
+
+function skillsBloqueadas() {
+    let pontosCropsTier1 = 0;
+    let pontosCropsTier2 = 0;
+    let pontosCropsTier3 = 0;
+    let totalUsadoEmCrops = 0;
+
+    todasSkillsDeCrops.forEach(skill => {
+        let checkbox = document.getElementById(skill.id)
+        //usado para somar pontos do tier 1
+        if(skill.pontosNecessários === 1 && checkbox.checked) {
+            pontosCropsTier1 += skill.pontosNecessários;
+        };
+
+        //usado para somar pontos do tier 2
+        if(skill.pontosNecessários === 2 && checkbox.checked) {
+            pontosCropsTier2 += skill.pontosNecessários;
+        };
+
+        //usado para somar pontos do tier 3
+        if(skill.pontosNecessários === 3 && checkbox.checked) {
+            pontosCropsTier3 += skill.pontosNecessários;
+        };
+
+        //Bloquear tier 2 e 3 das skills ate condições serem falsas
+        if (pontosCropsTier1 < 3 && skill.pontosNecessários === 2) {
+            checkbox.disabled = true;
+            checkbox.checked = false;
+            skill.possui = false;
+        } else if ((pontosCropsTier1 + pontosCropsTier2) < 7 && skill.pontosNecessários === 3) {
+            checkbox.disabled = true;
+            checkbox.checked = false;
+            skill.possui = false;
+        } else {
+            checkbox.disabled = false;
+        };
+        
+    });
+    totalUsadoEmCrops = pontosCropsTier1 + pontosCropsTier2 + pontosCropsTier3;
+    console.log(totalUsadoEmCrops);
+
+    textoParaDesbloquearSkill(3, 7, totalUsadoEmCrops);
+};
+
+
+//função que vai ser responsavel por mudar os textos que mostram a quantidade de pontos faltantes para desbloquear skill!
+function textoParaDesbloquearSkill(pontosProNivel2, pontosProNivel3, totalPontosGastos) {
+    //mostrar texto no accordion com o total de pontos gastos na arvore de crops
+    document.getElementById('accordion-skill-crops').innerHTML = `Crops: ${totalPontosGastos} Pontos usados`;
+
+    //mostrar pontos necessários para desbloquear o nivel 2
+    if (totalPontosGastos < pontosProNivel2) {
+        document.getElementById('accordion-skill-crops-tier2').innerHTML = `Nivel 2 - Pontos para desbloquear: ${pontosProNivel2 - totalPontosGastos}`;
+    } else {
+        document.getElementById('accordion-skill-crops-tier2').innerHTML = ``;
+    }
+
+    //mostrar pontos necessários para desbloquear o nivel 3
+    if (totalPontosGastos < pontosProNivel3) {
+        document.getElementById('accordion-skill-crops-tier3').innerHTML = `Nivel 3 - Pontos para desbloquear: ${pontosProNivel3 - totalPontosGastos}`;
+    } else {
+        document.getElementById('accordion-skill-crops-tier3').innerHTML = ``
+    }
+    skillsBloqueadas();
+}

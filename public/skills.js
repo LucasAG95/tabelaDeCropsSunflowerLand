@@ -258,3 +258,4 @@ todasSkillsDeCrops.forEach(skills => { //vai verificar e organizar por id das Sk
     mapaDeSkills[skills.id] = skills; // vai colocar no mapaDeSkills o nome por id de cada NFT e em ordem alfabetica pelo que vi, parace q transforma a lista em objetos 
 });
 console.log(mapaDeSkills);
+

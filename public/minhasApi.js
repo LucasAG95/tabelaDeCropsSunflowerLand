@@ -130,6 +130,7 @@ function numeroDaFarm() {
         });
         nftsDeTierQuePossuemBuffDoAntecessor();
         ativarBonusDasNftsESkills();
+        skillsBloqueadas();
         buffsAdicionados();
         statusCrops();
     };
@@ -179,7 +180,7 @@ function valorDoFlowerEmDolar(valor) {
     precoDoFlower = valor;
     console.log(`$${precoDoFlower}`);
     valoresDasGems(); //puxara a função que define o valores das gems pra conversão
-    titulosDosSelectsEPreenchimentos(); // rever como ativar esse função dps, por enquanto puxara dps que rodar a api;
+    //titulosDosSelectsEPreenchimentos(); // rever como ativar esse função dps, por enquanto puxara dps que rodar a api;
 }
 
 
