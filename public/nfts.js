@@ -532,7 +532,7 @@ let wearablesCrops = [
         tipoDeCrop: 'todas',
         afeta: 'instantaneo',
         sinal: 'x',
-        buff: 1.3,
+        buff: 1.4, //1.3 é a base, mas dps vai plantar de novo, esse 1.4 deve ser adicionado aos custos de sementes tbm
         possui: false
     },
     {
