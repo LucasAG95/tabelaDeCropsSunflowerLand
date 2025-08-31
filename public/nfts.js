@@ -526,11 +526,12 @@ let wearablesCrops = [
     },
     {
         id: 'devilOrAngelWings',
-        name: 'Devil or Angel Wings',
+        name: 'Devil Wings',
+        name2: 'Angel Wings',
         descricao: '30% de chance em colher crop instantaneamente',
         estacao: 'todas',
         tipoDeCrop: 'todas',
-        afeta: 'instantaneo',
+        afeta: 'instantaneo e custoCoins',
         sinal: 'x',
         buff: 1.4, //1.3 é a base, mas dps vai plantar de novo, esse 1.4 deve ser adicionado aos custos de sementes tbm
         possui: false
