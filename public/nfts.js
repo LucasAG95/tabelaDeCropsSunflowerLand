@@ -751,9 +751,9 @@ let nftsDaTemporada = [
     {
         id: 'giantTurnip',
         name: 'Giant Turnip',
-        descricao: '',
+        descricao: '-50% no tempo de crescimento da Turnip',
         estacao: 'todas',
-        tipoDeCrop: '-50% no tempo de crescimento da Turnip',
+        tipoDeCrop: 'Turnip',
         afeta: 'tempo',
         sinal: 'x',
         buff: 0.5,

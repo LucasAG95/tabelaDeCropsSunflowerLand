@@ -139,11 +139,8 @@ input[type="checkbox"]:disabled + .nft-img:hover {
   text-align: left;
   padding: 8px;
   border-radius: 10px;
-  position: absolute;
-  z-index: 1;
-  bottom: 110%;
-  left: 150%;
-  transform: translateX(-50%);
+  position: fixed;       /* ⚡ usa fixed para escapar de overflow de containers */
+  z-index: 9999;         /* ⚡ valor alto para sobrepor tudo */
   opacity: 0;
   transition: opacity 0.3s, transform 0.3s;
   font-size: 13px;
@@ -151,12 +148,14 @@ input[type="checkbox"]:disabled + .nft-img:hover {
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.5);
 }
 
+/* Ajuste de posição relativo ao mouse via JS */
 .nft-wrapper:hover .tooltip,
 .skill-wrapper:hover .tooltip {
   visibility: visible;
   opacity: 1;
-  transform: translateX(-50%) translateY(-4px);
+  transform: translateY(-4px);
 }
+
 
 /* ====================
    SELECTS E INPUTS
