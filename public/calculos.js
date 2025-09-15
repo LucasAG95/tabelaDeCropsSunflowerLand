@@ -346,6 +346,121 @@ function buffsAdicionados() {
 };
 
 //==================================================================================================================================================================
+function buffsAdicionadosMinerais() {
+
+}
+
+//==================================================================================================================================================================
+
+function calculoMineraisEFerramentas() {
+
+    //definir preço do machado e madeira
+    mapaDeFerramentas['axe'].custoTotalEmCoins = mapaDeFerramentas['axe'].coins;
+    mapaDeMinerals['wood'].mediaCustoEmCoins = mapaDeFerramentas['axe'].custoTotalEmCoins / mapaDeMinerals['wood'].mediaPorNode;
+
+    //definir preço da picareta e pedra
+    mapaDeFerramentas['pickaxe'].custoTotalEmCoins = mapaDeFerramentas['pickaxe'].coins +
+    (mapaDeMinerals['wood'].mediaCustoEmCoins * mapaDeFerramentas['pickaxe'].wood);
+
+    mapaDeMinerals['stone'].mediaCustoEmCoins = mapaDeFerramentas['pickaxe'].custoTotalEmCoins / mapaDeMinerals['stone'].mediaPorNode;
+
+    //definir preço da picareta de pedra e ferro
+    mapaDeFerramentas['stonePickaxe'].custoTotalEmCoins = mapaDeFerramentas['stonePickaxe'].coins + 
+    (mapaDeMinerals['wood'].mediaCustoEmCoins * mapaDeFerramentas['stonePickaxe'].wood) + 
+    (mapaDeMinerals['stone'].mediaCustoEmCoins * mapaDeFerramentas['stonePickaxe'].stone);
+
+    mapaDeMinerals['iron'].mediaCustoEmCoins = mapaDeFerramentas['stonePickaxe'].custoTotalEmCoins / mapaDeMinerals['iron'].mediaPorNode;
+
+    //definir preço da picareta de ferro e ouro
+    mapaDeFerramentas['ironPickaxe'].custoTotalEmCoins = mapaDeFerramentas['ironPickaxe'].coins + 
+    (mapaDeMinerals['wood'].mediaCustoEmCoins * mapaDeFerramentas['ironPickaxe'].wood) + 
+    (mapaDeMinerals['iron'].mediaCustoEmCoins * mapaDeFerramentas['ironPickaxe'].iron);
+
+    mapaDeMinerals['gold'].mediaCustoEmCoins = mapaDeFerramentas['ironPickaxe'].custoTotalEmCoins / mapaDeMinerals['gold'].mediaPorNode;
+
+    //definir preço da picareta de ouro e crimstone
+    mapaDeFerramentas['goldPickaxe'].custoTotalEmCoins = mapaDeFerramentas['goldPickaxe'].coins + 
+    (mapaDeMinerals['wood'].mediaCustoEmCoins * mapaDeFerramentas['goldPickaxe'].wood) + 
+    (mapaDeMinerals['gold'].mediaCustoEmCoins * mapaDeFerramentas['goldPickaxe'].gold);
+
+    mapaDeMinerals['crimstone'].mediaCustoEmCoins = mapaDeFerramentas['goldPickaxe'].custoTotalEmCoins / mapaDeMinerals['crimstone'].mediaPorNode;
+
+    //definir preço da Oil Drill e oil
+    mapaDeFerramentas['oilDrill'].custoTotalEmCoins = mapaDeFerramentas['oilDrill'].coins + 
+    (mapaDeMinerals['wood'].mediaCustoEmCoins * mapaDeFerramentas['oilDrill'].wood) + 
+    (mapaDeMinerals['iron'].mediaCustoEmCoins * mapaDeFerramentas['oilDrill'].iron) +
+    ((mapaMarketRecursos['leather'].valor * flowerEmCoins) * mapaDeFerramentas['oilDrill'].leather); // valor da api
+
+    mapaDeMinerals['oil'].mediaCustoEmCoins = mapaDeFerramentas['oilDrill'].custoTotalEmCoins / mapaDeMinerals['oil'].mediaPorNode;
+
+    //definir preço médio para pescar
+    mapaDeFerramentas['rod'].custoTotalEmCoins = mapaDeFerramentas['rod'].coins +
+    (mapaDeMinerals['wood'].mediaCustoEmCoins * mapaDeFerramentas['rod'].wood) +
+    (mapaDeMinerals['stone'].mediaCustoEmCoins * mapaDeFerramentas['rod'].stone);
+
+    mapaDeMinerals['peixe'].mediaCustoEmCoins = mapaDeFerramentas['rod'].custoTotalEmCoins / mapaDeMinerals['peixe'].mediaPorNode;
+
+    //definir preço médio para cavar com Sand Shovel
+    mapaDeFerramentas['sandShovel'].custoTotalEmCoins = mapaDeFerramentas['sandShovel'].coins +
+    (mapaDeMinerals['wood'].mediaCustoEmCoins * mapaDeFerramentas['sandShovel'].wood) +
+    (mapaDeMinerals['stone'].mediaCustoEmCoins * mapaDeFerramentas['sandShovel'].stone);
+
+    mapaDeMinerals['escavacao'].mediaCustoEmCoins = mapaDeFerramentas['sandShovel'].custoTotalEmCoins / mapaDeMinerals['escavacao'].mediaPorNode;
+
+    //definir preço médio para cavar com Sand Drill
+    mapaDeFerramentas['sandDrill'].custoTotalEmCoins = mapaDeFerramentas['sandDrill'].coins +
+    (mapaDeMinerals['wood'].mediaCustoEmCoins * mapaDeFerramentas['sandDrill'].wood) +
+    (mapaDeMinerals['crimstone'].mediaCustoEmCoins * mapaDeFerramentas['sandDrill'].crimstone) +
+    (mapaDeMinerals['oil'].mediaCustoEmCoins * mapaDeFerramentas['sandDrill'].oil) +
+    ((mapaMarketRecursos['leather'].valor * flowerEmCoins) * mapaDeFerramentas['sandDrill'].leather);
+
+    mapaDeMinerals['escavacao2'].mediaCustoEmCoins = mapaDeFerramentas['sandDrill'].custoTotalEmCoins / mapaDeMinerals['escavacao2'].mediaPorNode;
+
+    //==========================================================================================================================================================
+
+    //vai somar o quanto gastei do recurso para criar as ferramentas
+    let coinsGastas = 0;
+    let woodGastas = 0;
+    let stoneGastas = 0;
+    let ironGastos = 0;
+    let goldGastos = 0;
+    let crimstoneGastas = 0;
+    let oilGastos = 0;
+    let leatherGastos = 0;
+
+    ferramentas.forEach(ferramenta => {
+        if(ferramenta.coins)
+            coinsGastas += (mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.coins);
+        if(ferramenta.wood)
+            woodGastas += (mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.wood);
+        if(ferramenta.stone)
+            stoneGastas += (mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.stone);
+        if(ferramenta.iron)
+            ironGastos += (mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.iron);
+        if(ferramenta.gold)
+            goldGastos += (mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.gold);
+        if(ferramenta.crimstone)
+            crimstoneGastas += (mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.crimstone);
+        if(ferramenta.oil)
+            oilGastos += (mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.oil);
+        if(ferramenta.leather)
+            leatherGastos += (mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.leather);
+    });
+    
+    mapaDeMinerals['wood'].gastoComFerramentas      = woodGastas;
+    mapaDeMinerals['stone'].gastoComFerramentas     = stoneGastas;
+    mapaDeMinerals['iron'].gastoComFerramentas      = ironGastos;
+    mapaDeMinerals['gold'].gastoComFerramentas      = goldGastos;
+    mapaDeMinerals['crimstone'].gastoComFerramentas = crimstoneGastas;
+    //mapaDeMinerals['oil'].gastoComFerramentas       = oilGastos;
+    //mapaDeMinerals['leather'].gastoComFerramentas   = leatherGastos;
+
+    console.log(`vou gastar: ${coinsGastas} Coins + ${woodGastas} Woods + ${stoneGastas} Stones + ${ironGastos} Irons + ${goldGastos} Golds + ${crimstoneGastas} Crim + ${oilGastos} Oils +  ${leatherGastos} Leather`)
+
+    statusMinerais();
+};
+
+//==================================================================================================================================================================
 
 //função responsavel por verificar se skills/NFTs possuem algum bonus ativado por outra skill/NFT
 function ativarBonusDasNftsESkills() {
@@ -396,70 +511,3 @@ function nftsDeTierQuePossuemBuffDoAntecessor() {
     buffsAdicionados();
     statusCrops();
 };
-
-function skillsBloqueadas() {
-    let pontosCropsTier1 = 0;
-    let pontosCropsTier2 = 0;
-    let pontosCropsTier3 = 0;
-    let totalUsadoEmCrops = 0;
-
-    todasSkillsDeCrops.forEach(skill => {
-        let checkbox = document.getElementById(skill.id)
-
-        // Tier 1 sempre pode ser contado
-        if(skill.pontosNecessários === 1 && checkbox.checked) {
-            pontosCropsTier1 += skill.pontosNecessários;
-        };
-
-        // Tier 2 só conta se já tiver pontos suficientes no Tier 1
-        if(skill.pontosNecessários === 2 && checkbox.checked && pontosCropsTier1 >= 3) {
-            pontosCropsTier2 += skill.pontosNecessários;
-        };
-
-        // Tier 3 só conta se já tiver pontos suficientes no Tier 1 + 2
-        if(skill.pontosNecessários === 3 && checkbox.checked && (pontosCropsTier1 + pontosCropsTier2) >= 7) {
-            pontosCropsTier3 += skill.pontosNecessários;
-        };
-
-        //Bloquear tier 2 e 3 das skills ate condições serem falsas
-        if (pontosCropsTier1 < 3 && skill.pontosNecessários === 2) {
-            checkbox.disabled = true;
-            checkbox.checked = false;
-            skill.possui = false;
-        } else if ((pontosCropsTier1 + pontosCropsTier2) < 7 && skill.pontosNecessários === 3) {
-            checkbox.disabled = true;
-            checkbox.checked = false;
-            skill.possui = false;
-        } else {
-            checkbox.disabled = false;
-        };
-        
-    });
-    totalUsadoEmCrops = pontosCropsTier1 + pontosCropsTier2 + pontosCropsTier3;
-    console.log(totalUsadoEmCrops);
-
-    textoParaDesbloquearSkill(3, 7, totalUsadoEmCrops);
-    buffsAdicionados();
-};
-
-
-//função que vai ser responsavel por mudar os textos que mostram a quantidade de pontos faltantes para desbloquear skill!
-function textoParaDesbloquearSkill(pontosProNivel2, pontosProNivel3, totalPontosGastos) {
-    //mostrar texto no accordion com o total de pontos gastos na arvore de crops
-    document.getElementById('accordion-skill-crops').innerHTML = `Crops: ${totalPontosGastos} Pontos usados`;
-
-    //mostrar pontos necessários para desbloquear o nivel 2
-    if (totalPontosGastos < pontosProNivel2) {
-        document.getElementById('accordion-skill-crops-tier2').innerHTML = `Nivel 2 - Pontos para desbloquear: ${pontosProNivel2 - totalPontosGastos}`;
-    } else {
-        document.getElementById('accordion-skill-crops-tier2').innerHTML = ``;
-    }
-
-    //mostrar pontos necessários para desbloquear o nivel 3
-    if (totalPontosGastos < pontosProNivel3) {
-        document.getElementById('accordion-skill-crops-tier3').innerHTML = `Nivel 3 - Pontos para desbloquear: ${pontosProNivel3 - totalPontosGastos}`;
-    } else {
-        document.getElementById('accordion-skill-crops-tier3').innerHTML = ``
-    }
-    
-}

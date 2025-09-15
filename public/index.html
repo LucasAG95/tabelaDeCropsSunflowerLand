@@ -6,18 +6,201 @@
   <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-
-  <!-- 🔹 Número da Farm -->
+  
+  <!-- 🔹 Cabeçalho com campo para informar o número da farm -->
   <header class="header">
     <div class="input-numero-da-farm">
       <label for="numeroFarm">Número da Farm:</label>
       <input id="numeroFarm" type="number" placeholder="Ex: 3661">
-      <button id="procurarFarm" onclick="numeroDaFarm()">Pesquisar</button>
+      <button id="procurarFarm" onclick="numeroDaFarm()">Pesquisar</button> 
     </div>
-    <h3 id="valor-do-flower"></h3>
   </header>
+  
+  <!-- Exibe o valor atual do FLOWER -->
+  <h3 id="valor-do-flower"></h3>
 
-  <!-- 🔹 Linha de seleções principais -->
+  <!-- 🔹 Seção para selecionar pacote de Gems e calcular preço por unidade -->
+  <section class="linha-selects">
+    <div class="select-group"> 
+      <label for="pack-gems">Pacote de Gems:</label>
+      <select id="pack-gems">
+        <option value="100-0.90">100 Gems - $0.90</option>
+        <option value="650-4.54">650 Gems - $4.54</option>
+        <option value="1350-9.09">1350 Gems - $9.09</option>
+        <option value="2800-18.19">2800 Gems - $18.19</option>
+        <option value="7400-45.49">7400 Gems - $45.49</option>
+        <option value="15500-90.99">15500 Gems - $90.99</option>
+        <option value="200000-909.99">200000 Gems - $909.99</option>
+      </select>
+      <!-- Mostra o valor por Gem após cálculo -->
+      <h3 id="valor-por-gem"></h3>
+    </div>
+  </section>
+
+  <!-- 🔹 Seleções principais de informações da farm -->
+  <section class="linha-selects">
+    <!-- Seleção de ilha -->
+    <div class="select-group">
+      <label for="ilhaSelect">Ilha atual:</label>
+      <select id="ilhaSelect">
+        <option value="Basic">Basic</option>
+        <option value="Petal">Petal</option>
+        <option value="Desert">Desert</option>
+        <option value="Vulcano">Vulcano</option>
+      </select>
+    </div>
+
+    <!-- Seleção de VIP -->
+    <div class="select-group">
+      <label for="vipSelect">Possui VIP?</label>
+      <select id="vipSelect">
+        <option value="Sim">Sim</option>
+        <option value="Não">Não</option>
+      </select>
+    </div>
+
+    <!-- Campo para informar cotação do Flower em Coins -->
+    <div class="select-group">
+      <label for="flower-em-coins">Flower por coins:</label>
+      <input id="flower-em-coins" type="number" placeholder="Ex: 320">
+    </div>
+
+    <!-- Botão para salvar essas informações -->
+    <button id="salvarInfos" onclick="salvarInformacoes()">Salvar</button>
+  </section>
+
+  <!-- 🔹 Colunas principais com Accordions (Skills, Collectibles, Wearables, Season) -->
+  <main class="items-row">
+
+    <!-- ================== COLUNA SKILLS ================== -->
+    <section class="skills-block">
+      <h2 id="total-pontos-gastos-em-skills">Skills</h2>
+
+      <!-- Skills Legacy -->
+      <div class="accordion">
+        <button class="accordion-btn">Legacy</button>
+        <div class="accordion-content">
+          <div id="skills-legacy-container" class="skill-container"></div>
+        </div>
+      </div>
+
+      <!-- Skills de Crops (Tier 1, 2 e 3) -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <img src="./icones/skillCrop.png" alt="Ícone Crops" class="icon-btn">
+          <span id="accordion-skill-crops">Crops</span>
+        </button>
+        <div class="accordion-content">
+          <div id="skills-crop-tier1-container" class="skill-container"></div>
+          <div id="skills-crop-tier2-container" class="skill-container">
+            <p class="texto-skill-desbloquear" id="accordion-skill-crops-tier2"></p>
+          </div>
+          <div id="skills-crop-tier3-container" class="skill-container">
+            <p class="texto-skill-desbloquear" id="accordion-skill-crops-tier3"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills de Trees (Tier 1, 2 e 3) -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <img src="./icones/skillTree.png" alt="Ícone Tree" class="icon-btn">
+          <span id="accordion-skill-tree">Trees</span>
+        </button>
+        <div class="accordion-content">
+          <div id="skills-tree-tier1-container" class="skill-container"></div>
+          <div id="skills-tree-tier2-container" class="skill-container">
+            <p class="texto-skill-desbloquear" id="accordion-skill-tree-tier2"></p>
+          </div>
+          <div id="skills-tree-tier3-container" class="skill-container">
+            <p class="texto-skill-desbloquear" id="accordion-skill-tree-tier3"></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Skills de Minerals (Tier 1, 2 e 3) -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <img src="./icones/skillMineral.png" alt="Ícone Mineral" class="icon-btn">
+          <span id="accordion-skill-mineral">Minerals</span>
+        </button>
+        <div class="accordion-content">
+          <div id="skills-mineral-tier1-container" class="skill-container"></div>
+          <div id="skills-mineral-tier2-container" class="skill-container">
+            <p class="texto-skill-desbloquear" id="accordion-skill-mineral-tier2"></p>
+          </div>
+          <div id="skills-mineral-tier3-container" class="skill-container">
+            <p class="texto-skill-desbloquear" id="accordion-skill-mineral-tier3"></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== COLUNA COLLECTIBLES ================== -->
+    <section class="collectibles-block">
+      <h2 id="total-valor-em-collectibles">Collectibles</h2>
+
+      <!-- Collectibles de Crops -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <span id="accordion-collectibles-crops"></span>
+        </button>
+        <div class="accordion-content">
+          <div id="collectibles-container-crops" class="nft-container"></div>
+        </div>
+      </div>
+
+      <!-- Collectibles de Minerals -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <span id="accordion-collectibles-minerals"></span>
+        </button>
+        <div class="accordion-content">
+          <div id="collectibles-container-minerals" class="nft-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== COLUNA WEARABLES ================== -->
+    <section class="wearables-block">
+      <h2 id="total-valor-em-wearables">Wearables</h2>
+
+      <!-- Wearables de Crops -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <span id="accordion-wearables-crops">Crops:</span>
+        </button>
+        <div class="accordion-content">
+          <div id="wearables-container-crops" class="nft-container"></div>
+        </div>
+      </div>
+
+      <!-- Wearables de Minerals -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <span id="accordion-wearables-minerals"></span>
+        </button>
+        <div class="accordion-content">
+          <div id="wearables-container-minerals" class="nft-container"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================== COLUNA NFTS DA TEMPORADA ================== -->
+    <section class="season-block">
+      <h2>Temporada 11 - Better Together</h2>
+
+      <!-- Novos Collectibles da temporada -->
+      <div class="accordion">
+        <button class="accordion-btn">Novos Collectibles</button>
+        <div class="accordion-content">
+          <div id="new-collectibles-container" class="nft-container"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- 🔹 Seleção de estação, evento bônus e quantidade de plots -->
   <section class="linha-selects">
     <div class="select-group">
       <label for="estacaoSelect">Estação atual:</label>
@@ -39,143 +222,75 @@
     </div>
 
     <div class="select-group">
-      <label for="ilhaSelect">Ilha atual:</label>
-      <select id="ilhaSelect">
-        <option value="Basic">Basic</option>
-        <option value="Petal">Petal</option>
-        <option value="Desert">Desert</option>
-        <option value="Vulcano">Vulcano</option>
-      </select>
-    </div>
-
-    <div class="select-group">
-      <label for="vipSelect">Possui VIP?</label>
-      <select id="vipSelect">
-        <option value="Sim">Sim</option>
-        <option value="Não">Não</option>
-      </select>
-    </div>
-  </section>
-
-  <!-- 🔹 Configurações de plots e flower -->
-  <section class="linha-selects">
-    <div class="select-group">
       <label for="plotsPossuidos">Quantidade de plots:</label>
       <input id="plotsPossuidos" type="number" placeholder="Ex: 70">
     </div>
 
-    <div class="select-group">
-      <label for="flower-em-coins">Flower por coins:</label>
-      <input id="flower-em-coins" type="number" placeholder="Ex: 320">
-    </div>
-
     <button id="salvarInfos" onclick="salvarInformacoes()">Salvar</button>
   </section>
-
-  <!-- 🔹 Economia - Gems -->
-  <section class="linha-selects">
-    <div class="select-group">
-      <label for="pack-gems">Pacote de Gems:</label>
-      <select id="pack-gems">
-        <option value="100-0.90">100 Gems - $0.90</option>
-        <option value="650-4.54">650 Gems - $4.54</option>
-        <option value="1350-9.09">1350 Gems - $9.09</option>
-        <option value="2800-18.19">2800 Gems - $18.19</option>
-        <option value="7400-45.49">7400 Gems - $45.49</option>
-        <option value="15500-90.99">15500 Gems - $90.99</option>
-        <option value="200000-909.99">200000 Gems - $909.99</option>
-      </select>
-      <h3 id="valor-por-gem"></h3>
-    </div>
-  </section>
-
-  <!-- 🔹 Blocos de NFTs com Accordion -->
-  <main class="items-row">
-
-    <!-- ================== COLUNA SKILLS ================== -->
-    <section class="skills-block">
-      <h2>Skills</h2>
-
-      <!-- Legacy -->
-      <div class="accordion">
-        <button class="accordion-btn">Legacy</button>
-        <div class="accordion-content">
-          <div id="skills-legacy-container" class="skill-container"></div>
-        </div>
-      </div>
-
-      <!-- Tiers 1–3 -->
-      <div class="accordion">
-        <button class="accordion-btn">
-          <img src="./icones/skillCrop.png" alt="Ícone Crops" class="icon-btn">
-          <span id="accordion-skill-crops">Crops</span> <!-- possivelmente mudar para class depois -->
-        </button>
-        <div class="accordion-content">
-          <div id="skills-tier1-container" class="skill-container"></div>
-          <div id="skills-tier2-container" class="skill-container"><p class="texto-skill-desbloquear" id="accordion-skill-crops-tier2"></p></div>
-          <div id="skills-tier3-container" class="skill-container"><p class="texto-skill-desbloquear" id="accordion-skill-crops-tier3"></p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================== COLUNA COLLECTIBLES ================== -->
-    <section class="collectibles-block">
-      <h2>Collectibles</h2>
-
-      <div class="accordion">
-        <button class="accordion-btn">Collectibles - Crops</button>
-        <div class="accordion-content">
-          <div id="collectibles-container" class="nft-container"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================== COLUNA WEARABLES ================== -->
-    <section class="wearables-block">
-      <h2>Wearables</h2>
-
-      <div class="accordion">
-        <button class="accordion-btn">Wearables - Crops</button>
-        <div class="accordion-content">
-          <div id="wearables-container" class="nft-container"></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ================== COLUNA NFTS DA TEMPORADA ================== -->
-    <section class="season-block">
-      <h2>Temporada 11 - Better Together</h2>
-
-      <div class="accordion">
-        <button class="accordion-btn">Novos Collectibles</button>
-        <div class="accordion-content">
-          <div id="new-collectibles-container" class="nft-container"></div>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
+  
+  <!-- Área de saída para resultados de cálculos de crops -->
   <div id="saida"></div>
 
+  <!-- 🔹 Configurações de nodes (árvores, pedras, minerais, óleo) -->
+  <section class="linha-selects">
+    <div class="select-group">
+      <label for="treesPossuidas">Trees:</label>
+      <input id="treesPossuidas" type="number" placeholder="Ex: 15">
+    </div>
+
+    <div class="select-group">
+      <label for="stonesPossuidas">Stones:</label>
+      <input id="stonesPossuidas" type="number" placeholder="Ex: 15">
+    </div>
+
+    <div class="select-group">
+      <label for="ironsPossuidos">Irons:</label>
+      <input id="ironsPossuidos" type="number" placeholder="Ex: 10">
+    </div>
+
+    <div class="select-group">
+      <label for="goldsPossuidos">Golds:</label>
+      <input id="goldsPossuidos" type="number" placeholder="Ex: 5">
+    </div>
+
+    <div class="select-group">
+      <label for="crimstonesPossuidas">Crimstones:</label>
+      <input id="crimstonesPossuidas" type="number" placeholder="Ex: 5">
+    </div>
+
+    <div class="select-group">
+      <label for="oilPossuidos">Poços de Oil:</label>
+      <input id="oilPossuidos" type="number" placeholder="Ex: 3">
+    </div>
+
+    <button id="salvarNodes" onclick="salvarNodesPossuidos()">Salvar</button>
+  </section>
+
+  <!-- Área de saída para resultados de minerais -->
+  <div id="saidaMinerais"></div>
+
+  <!-- 🔹 Scripts da aplicação -->
   <script src="./recursos.js"></script>
   <script src="./skills.js"></script>
   <script src="./nfts.js"></script>
   <script src="./minhasApi.js"></script>
   <script src="./formatarTempo.js"></script>
   <script src="./calculos.js"></script>
+  <script src="./desbloquearSkills.js"></script>
+  <script src="./pontosSkillsEValorDasNfts.js"></script>
   <script src="./resultados.js"></script>
   <script src="./statusFarm.js"></script>
   <script src="./checkbox.js"></script>
 
-  <!-- Script do accordion -->
+  <!-- 🔹 Script para funcionamento dos Accordions -->
   <script>
     document.querySelectorAll(".accordion-btn").forEach(button => {
       button.addEventListener("click", () => {
         const content = button.nextElementSibling;
         const parent = button.closest("section");
 
-        // fecha só os accordions dentro da mesma coluna
+        // Fecha outros accordions na mesma coluna antes de abrir o clicado
         parent.querySelectorAll(".accordion-content").forEach(c => {
           if (c !== content) c.classList.remove("open");
         });

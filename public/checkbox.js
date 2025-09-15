@@ -1,7 +1,7 @@
 //aba responsavel pelas checkboxs
 
 function configurarCheckbox() {
-    skillsCrops.tierLegacy.forEach(skill => {
+    todasSkillsLegacy.forEach(skill => {
         let checkbox = document.getElementById(skill.id);
 
         if(checkbox) {
@@ -16,7 +16,7 @@ function configurarCheckbox() {
         };
     });
 
-    skillsCrops.tier1.forEach(skill => {
+    todasSkillsComTier.forEach(skill => {
         let checkbox = document.getElementById(skill.id);
 
         if(checkbox) {
@@ -25,44 +25,34 @@ function configurarCheckbox() {
             checkbox.addEventListener('change', function() {
                 skill.possui = checkbox.checked;
                 ativarBonusDasNftsESkills();
-                skillsBloqueadas();
+                skillsCropsBloqueadas();
+                skillsTreesBloqueadas();
+                skillsMineralsBloqueadas();
+                valorTotalEmNftsETotalPontosEmSkills();
                 buffsAdicionados();
                 statusCrops();
             });
         };
     });
 
-    skillsCrops.tier2.forEach(skill => {
-        let checkbox = document.getElementById(skill.id);
+    //==============================================================================================================================================
+
+    //NFTs e Wearables
+    nftsDaTemporada.forEach(newCollectibles => {
+        let checkbox = document.getElementById(newCollectibles.id);
 
         if(checkbox) {
-            skill.possui = checkbox.checked;
+            newCollectibles.possui = checkbox.checked;
 
             checkbox.addEventListener('change', function() {
-                skill.possui = checkbox.checked;
+                newCollectibles.possui = checkbox.checked;
+                valorTotalEmNftsETotalPontosEmSkills();
                 ativarBonusDasNftsESkills();
-                skillsBloqueadas();
                 buffsAdicionados();
                 statusCrops();
             });
         };
-    });
-
-    skillsCrops.tier3.forEach(skill => {
-        let checkbox = document.getElementById(skill.id);
-
-        if(checkbox) {
-            skill.possui = checkbox.checked;
-
-            checkbox.addEventListener('change', function() {
-                skill.possui = checkbox.checked;
-                ativarBonusDasNftsESkills();
-                skillsBloqueadas();
-                buffsAdicionados();
-                statusCrops();
-            });
-        };
-    });
+    }); 
 
     collectiblesCrops.forEach(collectibles => {
         let checkbox = document.getElementById(collectibles.id);
@@ -72,13 +62,14 @@ function configurarCheckbox() {
 
             checkbox.addEventListener('change', function() {
                 collectibles.possui = checkbox.checked;
+                valorTotalEmNftsETotalPontosEmSkills();
                 nftsDeTierQuePossuemBuffDoAntecessor();
                 ativarBonusDasNftsESkills();
                 buffsAdicionados();
                 statusCrops();
             });
         };
-    });    
+    });
 
     wearablesCrops.forEach(wearables => {
         let checkbox = document.getElementById(wearables.id);
@@ -88,6 +79,7 @@ function configurarCheckbox() {
 
             checkbox.addEventListener('change', function() {
                 wearables.possui = checkbox.checked;
+                valorTotalEmNftsETotalPontosEmSkills();
                 ativarBonusDasNftsESkills();
                 buffsAdicionados();
                 statusCrops();
@@ -95,17 +87,30 @@ function configurarCheckbox() {
         };
     });
     
-    nftsDaTemporada.forEach(newCollectibles => {
-        let checkbox = document.getElementById(newCollectibles.id);
+    collectiblesMinerals.forEach(collectibles => {
+        let checkbox = document.getElementById(collectibles.id);
 
         if(checkbox) {
-            newCollectibles.possui = checkbox.checked;
+            collectibles.possui = checkbox.checked;
 
             checkbox.addEventListener('change', function() {
-                newCollectibles.possui = checkbox.checked;
-                ativarBonusDasNftsESkills();
-                buffsAdicionados();
-                statusCrops();
+                collectibles.possui = checkbox.checked;
+                valorTotalEmNftsETotalPontosEmSkills();
+                statusMinerais();
+            });
+        };
+    }); 
+
+    wearablesMinerals.forEach(wearables => {
+        let checkbox = document.getElementById(wearables.id);
+
+        if(checkbox) {
+            wearables.possui = checkbox.checked;
+
+            checkbox.addEventListener('change', function() {
+                wearables.possui = checkbox.checked;
+                valorTotalEmNftsETotalPontosEmSkills();
+                statusMinerais();
             });
         };
     }); 
@@ -132,7 +137,7 @@ function renderSkills(lista, containerId, pastaImagens) {
 
         const tooltip = document.createElement('div');
         tooltip.className = 'tooltip';
-        tooltip.innerHTML = `<strong>${skill.name}</strong><br>${skill.descricao.portugues}`;
+        tooltip.innerHTML = `<strong>${skill.name}</strong><br>${skill.descricao.portugues || skill.descricao}`;
 
         const img = document.createElement('img');
         img.src = `${pastaImagens}/${skill.id}.png`; // usa o caminho passado
@@ -161,9 +166,11 @@ function renderNFTs(lista, containerId, pastaImagens) {
         checkbox.type = 'checkbox';
         checkbox.id = nft.id;
 
+        let precoDolar = nft.valor * precoDoFlower //apenas para converter o valor da NFT em dolar, talvez mudar de lugar dps
+
         const tooltip = document.createElement('div');
         tooltip.className = 'tooltip';
-        tooltip.innerHTML = `<strong>${nft.name || nft.nome}</strong><br>${nft.descricao.portugues || nft.descricao}`;
+        tooltip.innerHTML = `<strong>${nft.name}</strong><br>${nft.descricao.portugues || nft.descricao}<br><br>Venda: <img src="./icones/flower.png" class="crop-img">${nft.valor} ~ $${precoDolar.toFixed(2)}`;
 
         const img = document.createElement('img');
         img.src = `${pastaImagens}/${nft.id}.png`; // usa o caminho passado
@@ -181,24 +188,51 @@ function renderNFTs(lista, containerId, pastaImagens) {
 //==================================================================================================================================================================
 
 window.onload = function () {
-    // Skills
-    renderSkills(skillsCrops.tierLegacy, 'skills-legacy-container', './skills');
-    renderSkills(skillsCrops.tier1, 'skills-tier1-container', './skills');
-    renderSkills(skillsCrops.tier2, 'skills-tier2-container', './skills');
-    renderSkills(skillsCrops.tier3, 'skills-tier3-container', './skills');
+
+    // Skills Legacy
+    renderSkills(todasSkillsLegacy, 'skills-legacy-container', './skills');
+    // Skills Crops
+    renderSkills(skillsCrops.tier1, 'skills-crop-tier1-container', './skills');
+    renderSkills(skillsCrops.tier2, 'skills-crop-tier2-container', './skills');
+    renderSkills(skillsCrops.tier3, 'skills-crop-tier3-container', './skills');
+    //Skills Trees
+    renderSkills(skillsTrees.tier1, 'skills-tree-tier1-container', './skills');
+    renderSkills(skillsTrees.tier2, 'skills-tree-tier2-container', './skills');
+    renderSkills(skillsTrees.tier3, 'skills-tree-tier3-container', './skills');
+    //Skills Minerals
+    renderSkills(skillsMinerals.tier1, 'skills-mineral-tier1-container', './skills');
+    renderSkills(skillsMinerals.tier2, 'skills-mineral-tier2-container', './skills');
+    renderSkills(skillsMinerals.tier3, 'skills-mineral-tier3-container', './skills');
 
     // Collectibles
     renderNFTs(nftsDaTemporada, 'new-collectibles-container', './collectibles');
-    renderNFTs(collectiblesCrops, 'collectibles-container', './collectibles');
+    renderNFTs(collectiblesCrops, 'collectibles-container-crops', './collectibles');
+    renderNFTs(collectiblesMinerals, 'collectibles-container-minerals', './collectibles');
 
     // Wearables
-    renderNFTs(wearablesCrops, 'wearables-container', './wearables');
+    renderNFTs(wearablesCrops, 'wearables-container-crops', './wearables');
+    renderNFTs(wearablesMinerals, 'wearables-container-minerals', './wearables');
     
     configurarCheckbox();
     nftsDeTierQuePossuemBuffDoAntecessor();
-    skillsBloqueadas();
+    skillsCropsBloqueadas();
+    skillsTreesBloqueadas();
+    skillsMineralsBloqueadas();
+    valorTotalEmNftsETotalPontosEmSkills();
     numeroDaFarm();
     statusCrops();
+    statusMinerais();
+
+
+    // ⚡ Aqui: faz o tooltip seguir o mouse
+    document.querySelectorAll('.nft-wrapper, .skill-wrapper').forEach(wrapper => {
+        const tooltip = wrapper.querySelector('.tooltip');
+        wrapper.addEventListener('mousemove', e => {
+            tooltip.style.top = e.clientY + 10 + 'px';
+            tooltip.style.left = e.clientX + 10 + 'px';
+        });
+    });
+
 };
 
 //==================================================================================================================================================================

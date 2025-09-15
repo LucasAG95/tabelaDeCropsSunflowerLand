@@ -9,20 +9,119 @@ fetch(`/api/proxy?url=https://sfl.world/api/v1/prices`)
     console.error('Erro ao puxar a planilha:', err);
   });
 
-//essa função irá inserir o valor de venda por flower das crops em vendaFlower
+//essa função irá inserir o valor de venda por flower das crops e minerais em vendaFlower
 function atualizarValoresDeVendaPorFlower(apiValores) {
+
+    marketRecursos.forEach(recurso => {
+        if(apiValores[recurso.name]) {
+            recurso.valor = apiValores[recurso.name];
+            console.log(`O recurso ${recurso.name} está custando ${recurso.valor} flowers!`)
+        };
+    });
+    calculoMineraisEFerramentas();
+
     crops.forEach(crop => {
         if (apiValores[crop.name]) {
-        crop.vendaFlower = apiValores[crop.name];
-        console.log(`Crop: ${crop.name} Valor: ${crop.vendaFlower}`);
-        statusCrops();
-        };  
+            crop.vendaFlower = apiValores[crop.name];
+            console.log(`Crop: ${crop.name} Valor: ${crop.vendaFlower}`);
+        };
     });
-  
+    statusCrops();
+
+    minerals.forEach(mineral => {
+        if (apiValores[mineral.name]) {
+            mineral.valorMarket = apiValores[mineral.name];
+        }
+    });
+    statusMinerais();
 };
 
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//==========================================================================================================================================================================
+
+//api para puxar valores do flower das NFTs e Wearebles
+fetch(`/api/proxy?url=https://sfl.world/api/v1/nfts`)
+  .then(res => res.json())
+  .then(data => {  
+    atualizarValoresDasNfts(data.collectibles, data.wearables) //vai mandar para a funcção digitada o que ela puxou da api de preços do sfl.world, primeiro data(nome da variavel), o outro data é um objeto que tem p2p como outro objeto dentro, que por sua vez tem outros resultados dentro
+    console.log(data.wearables)
+  })
+  .catch(err => {
+    console.error('Erro ao puxar a planilha:', err);
+  });
+
+//essa função irá inserir o valor de venda por flower das crops em vendaFlower
+function atualizarValoresDasNfts(apiCollectibles, apiWearables) {
+    // cria o mapa de collectibles pelo id(numero)
+    let mapaPrecoCollectibles = {};
+    apiCollectibles.forEach(idCollectibles => { 
+        mapaPrecoCollectibles[idCollectibles.id] = idCollectibles; 
+    });
+
+    collectiblesCrops.forEach(collectibles => {
+        if (mapaPrecoCollectibles[collectibles.idNumber]) {
+            collectibles.valor = mapaPrecoCollectibles[collectibles.idNumber].lastSalePrice;
+        }
+    });
+
+    collectiblesMinerals.forEach(collectibles => {
+        if (mapaPrecoCollectibles[collectibles.idNumber]) {
+            collectibles.valor = mapaPrecoCollectibles[collectibles.idNumber].lastSalePrice;
+        }
+    });   
+
+    // cria o mapa de wearables pelo id(numero)
+    let mapaPrecoWearables = {};
+    apiWearables.forEach(idWearables => {
+        mapaPrecoWearables[idWearables.id] = idWearables;
+    });
+
+    wearablesCrops.forEach(wearables => {
+        if (mapaPrecoWearables[wearables.idNumber]) {
+            wearables.valor = mapaPrecoWearables[wearables.idNumber].lastSalePrice;
+        }
+    });
+
+    wearablesMinerals.forEach(wearables => {
+        if (mapaPrecoWearables[wearables.idNumber]) {
+            wearables.valor = mapaPrecoWearables[wearables.idNumber].lastSalePrice;
+        }
+    });
+
+    valorTotalEmNftsETotalPontosEmSkills();
+
+    // ⚡ Atualiza o conteúdo dos tooltips (sem re-renderizar os NFTs)
+    document.querySelectorAll('.nft-wrapper').forEach(wrapper => {
+        const checkbox = wrapper.querySelector('input');
+        if (!checkbox) return;
+
+        const nft = [...collectiblesCrops, ...wearablesCrops, ...collectiblesMinerals, ...wearablesMinerals].find(item => item.id === checkbox.id);
+        if (!nft) return;
+
+        let valorFlower = precoDoFlower
+        let precoDolar = nft.valor * valorFlower;
+        const tooltip = wrapper.querySelector('.tooltip');
+        if (tooltip) {
+            tooltip.innerHTML = `
+                <strong>${nft.name}</strong><br>
+                ${nft.descricao.portugues || nft.descricao}<br><br>
+                Venda: <img src="./icones/flower.png" class="crop-img">
+                ${nft.valor} ~ $${precoDolar.toFixed(2)}
+            `;
+        }
+    });
+
+    // ⚡ Mantém o efeito de seguir o mouse
+    document.querySelectorAll('.nft-wrapper, .skill-wrapper').forEach(wrapper => {
+        const tooltip = wrapper.querySelector('.tooltip');
+        wrapper.addEventListener('mousemove', e => {
+            tooltip.style.top = e.clientY + 10 + 'px';
+            tooltip.style.left = e.clientX + 10 + 'px';
+        });
+    });
+    
+}
+
+//==========================================================================================================================================================================
 
 //função responsavel por pesquisar a farm e preencher as informações das funções dentro dela (numeroDaFarm é o id do botão pra essa função)
 function numeroDaFarm() {
@@ -49,7 +148,14 @@ function numeroDaFarm() {
 
             //infos para preencher plots/nodes que possue na farm
             const cropPlotsQuePossui = data.farm.inventory['Crop Plot'];
-            preencherInformacoesDaFarm(cropPlotsQuePossui)
+            const treeQuePossui = data.farm.inventory['Tree'];
+            const stoneQuePossui = data.farm.inventory['Stone Rock'];
+            const ironQuePossui = data.farm.inventory['Iron Rock'];
+            const goldQuePossui = data.farm.inventory['Gold Rock'];
+            const crimstoneQuePossui = data.farm.inventory['Crimstone Rock'];
+            const oilQuePossui = data.farm.inventory['Oil Reserve'];
+
+            preencherInformacoesDaFarm(cropPlotsQuePossui, treeQuePossui, stoneQuePossui, ironQuePossui, goldQuePossui, crimstoneQuePossui, oilQuePossui);
 
             //infos para preencher o prestigio de Farm em que esta
             const ilhaQueEsta = data.farm.inventory;
@@ -63,7 +169,8 @@ function numeroDaFarm() {
     //função responsavel por conferir as NFTs/Skills que tenho e marca-las!
     function marcarNftsESkillsQuePossui(skillsLegacyQuePossui, skillQuePossui, collectiblesQuePossui, wearablesQuePossui) {
         
-        skillsCrops.tierLegacy.forEach(legacy => {
+        //Todas skills legacy que possuir vai ser marcada
+        todasSkillsLegacy.forEach(legacy => {
             let checkbox = document.getElementById(legacy.id);
             if (skillsLegacyQuePossui[legacy.name]) {
                 checkbox.checked = true;
@@ -74,39 +181,19 @@ function numeroDaFarm() {
             };      
         });
 
-        skillsCrops.tier1.forEach(tier1 => {
-            let checkbox = document.getElementById(tier1.id);
-            if (skillQuePossui[tier1.name]) {
+        //vai marcar todas skills que você possuir na arvore de skills!
+        todasSkillsComTier.forEach(skill => {
+            let checkbox = document.getElementById(skill.id);
+            if (skillQuePossui[skill.name]) {
                 checkbox.checked = true;
-                tier1.possui = true;
+                skill.possui = true;
             } else {
                 checkbox.checked = false;
-                tier1.possui = false;
+                skill.possui = false;
             };    
         });
 
-        skillsCrops.tier2.forEach(tier2 => {
-            let checkbox = document.getElementById(tier2.id);
-            if (skillQuePossui[tier2.name]) {
-                checkbox.checked = true;
-                tier2.possui = true;
-            } else {
-                checkbox.checked = false;
-                tier2.possui = false;
-            };
-        });
-
-        skillsCrops.tier3.forEach(tier3 => {
-            let checkbox = document.getElementById(tier3.id);
-            if (skillQuePossui[tier3.name]) {
-                checkbox.checked = true;
-                tier3.possui = true;
-            } else {
-                checkbox.checked = false;
-                tier3.possui = false;
-            };
-        });
-
+        //Crops (depois juntar)
         collectiblesCrops.forEach(collectibles => {
             let checkbox = document.getElementById(collectibles.id);
             if (collectiblesQuePossui[collectibles.name]) {
@@ -128,18 +215,65 @@ function numeroDaFarm() {
                 wearables.possui = false;
             };
         });
+
+        //Minerais
+        collectiblesMinerals.forEach(collectibles => {
+            let checkbox = document.getElementById(collectibles.id);
+            if (collectiblesQuePossui[collectibles.name]) {
+                checkbox.checked = true;
+                collectibles.possui = true;
+            } else {
+                checkbox.checked = false;
+                collectibles.possui = false;
+            };
+        });
+
+        wearablesMinerals.forEach(wearables => {
+            let checkbox = document.getElementById(wearables.id);
+            if (wearablesQuePossui[wearables.name] || wearablesQuePossui[wearables.name1] || wearablesQuePossui[wearables.name2] || wearablesQuePossui[wearables.name3] || wearablesQuePossui[wearables.name4]) {
+                checkbox.checked = true;
+                wearables.possui = true;
+            } else {
+                checkbox.checked = false;
+                wearables.possui = false;
+            };
+        });
+
+        valorTotalEmNftsETotalPontosEmSkills();
         nftsDeTierQuePossuemBuffDoAntecessor();
         ativarBonusDasNftsESkills();
-        skillsBloqueadas();
+        skillsCropsBloqueadas();
+        skillsTreesBloqueadas();
+        skillsMineralsBloqueadas();
         buffsAdicionados();
         statusCrops();
     };
     
     //função responsavel por preencher quantos plots/nodes a farm possui!
-    function preencherInformacoesDaFarm(cropPlotsQuePossui) {
+    function preencherInformacoesDaFarm(cropPlotsQuePossui, treeQuePossui, stoneQuePossui, ironQuePossui, goldQuePossui, crimstoneQuePossui, oilQuePossui) {
         plots = cropPlotsQuePossui;
         document.getElementById('plotsPossuidos').value = cropPlotsQuePossui;
+
+        mapaDeMinerals['wood'].qtdNodes = treeQuePossui;
+        document.getElementById('treesPossuidas').value = treeQuePossui;
+
+        mapaDeMinerals['stone'].qtdNodes = stoneQuePossui;
+        document.getElementById('stonesPossuidas').value = stoneQuePossui;
+
+        mapaDeMinerals['iron'].qtdNodes = ironQuePossui;
+        document.getElementById('ironsPossuidos').value = ironQuePossui;
+
+        mapaDeMinerals['gold'].qtdNodes = goldQuePossui;
+        document.getElementById('goldsPossuidos').value = goldQuePossui;
+
+        mapaDeMinerals['crimstone'].qtdNodes = crimstoneQuePossui;
+        document.getElementById('crimstonesPossuidas').value = crimstoneQuePossui;
+
+        mapaDeMinerals['oil'].qtdNodes = oilQuePossui;
+        document.getElementById('oilPossuidos').value = oilQuePossui;
+
         salvarInformacoes();
+        salvarNodesPossuidos();
     };
 
     //função responsavel por selecionar a ilha prestigio em que esta!
@@ -181,6 +315,6 @@ function valorDoFlowerEmDolar(valor) {
     console.log(`$${precoDoFlower}`);
     valoresDasGems(); //puxara a função que define o valores das gems pra conversão
     titulosDosSelectsEPreenchimentos(); // rever como ativar esse função dps, por enquanto puxara dps que rodar a api;
-}
-
+    valorTotalEmNftsETotalPontosEmSkills(); //só para forçar o push de calculo das NFTs
+};
 

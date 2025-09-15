@@ -1,11 +1,11 @@
 //Duração do dia - 24h
 let vinteQuatroHoras = parseFloat(86_400_000);
 
-//valor de 1 flower em coins
-let flowerEmCoins = 320;
-document.getElementById('flower-em-coins').value = 320;
-
 //=====================================================================================================================================================================
+
+//valor de 1 flower em coins
+let flowerEmCoins = 1000;
+document.getElementById('flower-em-coins').value = 1000;
 
 //reposnavel por inserir informações da farm, como plots e nodes que possui!
 let plots = parseInt(9);
@@ -19,11 +19,30 @@ function salvarInformacoes() {
         document.getElementById('plotsPossuidos').value = plots;
     };
 
+    //mostrar o valor inserido do flower em coins ao salvar
     flowerEmCoins = document.getElementById('flower-em-coins').value;
     console.log(flowerEmCoins)
+
+    //chama as funções para atualizar
+    calculoMineraisEFerramentas();
     buffsAdicionados();
     statusCrops();
+    statusMinerais();
 };
+
+//função para salvar os nodes que possui
+function salvarNodesPossuidos() {
+    mapaDeMinerals['wood'].qtdNodes = document.getElementById('treesPossuidas').value || 1;
+    mapaDeMinerals['stone'].qtdNodes = document.getElementById('stonesPossuidas').value || 1;
+    mapaDeMinerals['iron'].qtdNodes = document.getElementById('ironsPossuidos').value || 1;
+    mapaDeMinerals['gold'].qtdNodes = document.getElementById('goldsPossuidos').value || 1;
+    mapaDeMinerals['crimstone'].qtdNodes = document.getElementById('crimstonesPossuidas').value || 1;
+    mapaDeMinerals['oil'].qtdNodes = document.getElementById('oilPossuidos').value || 1;
+    
+    calculoMineraisEFerramentas();
+    statusMinerais();
+}
+
 
 //=====================================================================================================================================================================
 
@@ -122,6 +141,21 @@ function sementesPlantadas() {
     statusCrops();
 };
 
+function nodesQuebrados() {
+    document.querySelectorAll('.quantidade-input').forEach(input => { //Procura todos os inputs no HTML que têm a classe quantidade-input.
+        let nome = input.dataset.name; //Lê o atributo data-name do input.
+        let valor = input.value;
+        let mineral = minerals.find(mineral => mineral.id === nome) //Procura no array crops um item com o mesmo nome que o data-name do input.
+        if (mineral) {
+            mineral.vezesQueVaiQuebrar = valor;
+        };
+
+    });
+    statusMinerais();
+};
+
+
+
 //=====================================================================================================================================================================
 
 //Responsavel por dar valor a cada Gem dependendo do pack
@@ -150,3 +184,4 @@ function titulosDosSelectsEPreenchimentos() {
     document.getElementById('valor-por-gem').innerHTML = `Preço por Gem: <img src="icones/gem.png" class="crop-img">$${precoPorGem.toFixed(4)} = <img src="icones/flower.png" class="crop-img">${precoDaGemEmFlower.toFixed(4)}<br>`
     document.getElementById('valor-por-gem').innerHTML += `Seed Restock: <img src="icones/gem.png" class="crop-img">$${(precoPorGem * 15).toFixed(4)} = <img src="icones/flower.png" class="crop-img">${(precoDaGemEmFlower * 15).toFixed(4)}<br>`
 }
+
