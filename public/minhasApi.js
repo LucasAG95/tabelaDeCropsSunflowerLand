@@ -18,7 +18,7 @@ function atualizarValoresDeVendaPorFlower(apiValores) {
             console.log(`O recurso ${recurso.name} está custando ${recurso.valor} flowers!`)
         };
     });
-    calculoMineraisEFerramentas();
+    buffsAdicionadosMinerais();
 
     crops.forEach(crop => {
         if (apiValores[crop.name]) {
@@ -26,14 +26,14 @@ function atualizarValoresDeVendaPorFlower(apiValores) {
             console.log(`Crop: ${crop.name} Valor: ${crop.vendaFlower}`);
         };
     });
-    statusCrops();
+    buffsAdicionadosCrops();
 
     minerals.forEach(mineral => {
         if (apiValores[mineral.name]) {
             mineral.valorMarket = apiValores[mineral.name];
         }
     });
-    statusMinerais();
+    buffsAdicionadosMinerais();
 };
 
 //==========================================================================================================================================================================
@@ -53,8 +53,8 @@ fetch(`/api/proxy?url=https://sfl.world/api/v1/nfts`)
 function atualizarValoresDasNfts(apiCollectibles, apiWearables) {
     // cria o mapa de collectibles pelo id(numero)
     let mapaPrecoCollectibles = {};
-    apiCollectibles.forEach(idCollectibles => { 
-        mapaPrecoCollectibles[idCollectibles.id] = idCollectibles; 
+    apiCollectibles.forEach(idCollectibles => {
+        mapaPrecoCollectibles[idCollectibles.id] = idCollectibles;
     });
 
     collectiblesCrops.forEach(collectibles => {
@@ -144,6 +144,7 @@ function numeroDaFarm() {
             const skillQuePossui = data.farm.bumpkin.skills;
             const collectiblesQuePossui = data.farm.inventory;
             const wearablesQuePossui = data.farm.wardrobe;
+            
             marcarNftsESkillsQuePossui(skillsLegacyQuePossui, skillQuePossui, collectiblesQuePossui, wearablesQuePossui);
 
             //infos para preencher plots/nodes que possue na farm
@@ -192,6 +193,31 @@ function numeroDaFarm() {
                 skill.possui = false;
             };    
         });
+
+        //Novidades da Temporada
+        novosCollectibles.forEach(collectibles => {
+            let checkbox = document.getElementById(collectibles.id);
+            if (collectiblesQuePossui[collectibles.name]) {
+                checkbox.checked = true;
+                collectibles.possui = true;
+            } else {
+                checkbox.checked = false;
+                collectibles.possui = false;
+            };
+        });
+
+        novosWearables.forEach(wearables => {
+            let checkbox = document.getElementById(wearables.id);
+            if (wearablesQuePossui[wearables.name]) {
+                checkbox.checked = true;
+                wearables.possui = true;
+            } else {
+                checkbox.checked = false;
+                wearables.possui = false;
+            };
+        });
+
+        
 
         //Crops (depois juntar)
         collectiblesCrops.forEach(collectibles => {
@@ -245,8 +271,10 @@ function numeroDaFarm() {
         skillsCropsBloqueadas();
         skillsTreesBloqueadas();
         skillsMineralsBloqueadas();
-        buffsAdicionados();
-        statusCrops();
+        skillsMachineryBloqueadas();
+        buffsAdicionadosCrops();
+        buffsAdicionadosMinerais();
+        
     };
     
     //função responsavel por preencher quantos plots/nodes a farm possui!

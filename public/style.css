@@ -80,8 +80,8 @@ p {
 }
 
 .nft-img, .skill-img {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   object-fit: contain;
   border-radius: 12px;
   background-color: #2c2c2c;

@@ -24,10 +24,8 @@ function salvarInformacoes() {
     console.log(flowerEmCoins)
 
     //chama as funções para atualizar
-    calculoMineraisEFerramentas();
-    buffsAdicionados();
-    statusCrops();
-    statusMinerais();
+    buffsAdicionadosMinerais();
+    buffsAdicionadosCrops();
 };
 
 //função para salvar os nodes que possui
@@ -39,9 +37,8 @@ function salvarNodesPossuidos() {
     mapaDeMinerals['crimstone'].qtdNodes = document.getElementById('crimstonesPossuidas').value || 1;
     mapaDeMinerals['oil'].qtdNodes = document.getElementById('oilPossuidos').value || 1;
     
-    calculoMineraisEFerramentas();
-    statusMinerais();
-}
+    buffsAdicionadosMinerais();
+};
 
 
 //=====================================================================================================================================================================
@@ -51,8 +48,7 @@ let estacao = 'Spring';
 function selecionandoEstacao() {
     estacao = document.getElementById('estacaoSelect').value;
     //titulosDosSelectsEPreenchimentos();
-    buffsAdicionados();
-    statusCrops();
+    buffsAdicionadosCrops();
 };
 document.getElementById('estacaoSelect').addEventListener('change', selecionandoEstacao);
 
@@ -73,7 +69,8 @@ function ilhaPrestigioAtual() { // Função central que lê o <select>, calcula 
     } else if (ilha === 'Vulcano') {
         taxa = 0.15
     };
-    statusCrops();
+    buffsAdicionadosCrops();
+    buffsAdicionadosMinerais();
 };
 //registra um ouvinte de evento no <select id="ilhaSelect">.
 //toda vez que o usuário mudar a ilha manualmente, a função atualizarTaxa() será chamada.
@@ -94,7 +91,6 @@ function sePossuiVipOuNao() {
         desconto = 1;
     }
     ilhaPrestigioAtual();
-    statusCrops();
 }
 document.getElementById('vipSelect').addEventListener('change', sePossuiVipOuNao);
 
@@ -120,8 +116,7 @@ function eventoDeBonus() {
         eventoBountifulHarvest = 0;
     }
     //titulosDosSelectsEPreenchimentos();
-    buffsAdicionados();
-    statusCrops();
+    buffsAdicionadosCrops();
 }
 document.getElementById('evento-bonus').addEventListener('change', eventoDeBonus)
 
@@ -138,7 +133,7 @@ function sementesPlantadas() {
         };
 
     });
-    statusCrops();
+    buffsAdicionadosCrops();
 };
 
 function nodesQuebrados() {
@@ -151,7 +146,7 @@ function nodesQuebrados() {
         };
 
     });
-    statusMinerais();
+    buffsAdicionadosMinerais();
 };
 
 
@@ -171,7 +166,8 @@ function valoresDasGems() {
     console.log(precoDaGemEmFlower + `esse é o valor`);
     //funções chamadas
     titulosDosSelectsEPreenchimentos();
-    statusCrops();
+    buffsAdicionadosCrops();
+    buffsAdicionadosMinerais();
 }
 document.getElementById('pack-gems').addEventListener('change', valoresDasGems);
 

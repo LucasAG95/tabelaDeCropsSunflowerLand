@@ -3,11 +3,8 @@ let skillsCrops = {
         {
             id: 'greenThumb',
             name: 'Green Thumb',
-            descricao: {
-                ingles: '+5% more coins when selling crops (Seed Shop)',
-                portugues: '+5% de coins ao vender colheitas (Loja de Sementes)'
-            },
-            tipoDeCrop: 'todas',
+            descricao: '+5% de coins ao vender colheitas (Loja de Sementes)',
+            tipoDeRecurso: 'todas',
             afeta: 'vendaCoins',
             sinal: 'x',
             buff: 1.05,
@@ -16,10 +13,7 @@ let skillsCrops = {
         {
             id: 'seedSpecialist',
             name: 'Seed Specialist',
-            descricao: {
-                ingles: '-10% on crop growth time',
-                portugues: '-10% no tempo das Crops'
-            },
+            descricao: '-10% no tempo das Crops',
             tipoDeCrop: 'todas',
             afeta: 'tempo',
             sinal: 'x',
@@ -29,10 +23,7 @@ let skillsCrops = {
         {
             id: 'coder',
             name: 'Coder',
-            descricao: {
-                ingles: '+20% on crop harvest',
-                portugues: '+20% na colheita de Crops'
-            },
+            descricao: '+20% na colheita de Crops',
             tipoDeCrop: 'todas',
             afeta: 'quantidade',
             sinal: 'x',
@@ -44,10 +35,7 @@ let skillsCrops = {
         {
             id: 'greenThumb2',
             name: 'Green Thumb',
-            descricao: {
-                ingles: '-5% in the time of Crops',
-                portugues: '-5% no tempo das Crops'
-            },
+            descricao: '-5% no tempo das Crops',
             tipoDeCrop: 'todas',
             afeta: 'tempo',
             sinal: 'x',
@@ -58,10 +46,7 @@ let skillsCrops = {
         {
             id: 'youngFarmer',
             name: 'Young Farmer',
-            descricao: {
-                ingles: '+0.1 Basic Crop Yield',
-                portugues: '+0.1 Basic Crop Yield'
-            },
+            descricao: '+0.1 Basic Crop Yield',
             tipoDeCrop: 'basic',
             afeta: 'quantidade',
             sinal: '+',
@@ -72,10 +57,7 @@ let skillsCrops = {
         {
             id: 'experiencedFarmer',
             name: 'Experienced Farmer',
-            descricao: {
-                ingles: '+0.1 Medium Crop Yield',
-                portugues: '+0.1 Medium Crop Yield'
-            },
+            descricao: '+0.1 Medium Crop Yield',
             tipoDeCrop: 'medium',
             afeta: 'quantidade',
             sinal: '+',
@@ -86,10 +68,7 @@ let skillsCrops = {
         {
             id: 'oldFarmer',
             name: 'Old Farmer',
-            descricao: {
-                ingles: '+0.1 Advanced Crop Yield',
-                portugues: '+0.1 Advanced Crop Yield'
-            },
+            descricao: '+0.1 Advanced Crop Yield',
             tipoDeCrop: 'advanced',
             afeta: 'quantidade',
             sinal: '+',
@@ -100,10 +79,7 @@ let skillsCrops = {
         {
             id: 'bettysFriend',
             name: 'Betty\'s Friend',
-            descricao: {
-                ingles: 'Delivery of "Betty" Coin increased by 30%',
-                portugues: 'Delivery da \'Betty\' Coin aumentou 30%'
-            },
+            descricao: 'Delivery da \'Betty\' Coin aumentou 30%',
             tipoDeCrop: 'todas',
             afeta: 'delivery',
             sinal: 'x',
@@ -114,10 +90,7 @@ let skillsCrops = {
         {
             id: 'chonkyScarecrow',
             name: 'Chonky Scarecrow',
-            descricao: {
-                ingles: 'Increases Basic Scarecrow\'s area of effect (AOE) to a 7x7 area; Additional -10% basic crop growth time',
-                portugues: 'Aumenta a área de efeito (AOE) do Basic Scarecrow\'s para uma área de 7x7; Adicionalmente, reduz em 10% o tempo de crescimento das crops basicas.'
-            },
+            descricao: 'Aumenta a área de efeito (AOE) do Basic Scarecrow\'s para uma área de 7x7; Adicionalmente, reduz em 10% o tempo de crescimento das crops basicas.',
             tipoDeCrop: 'NFT', //rever dps
             afeta: 'tempo',
             sinal: '+',
@@ -131,10 +104,7 @@ let skillsCrops = {
         {
             id: 'strongRoots',
             name: 'Strong Roots',
-            descricao: {
-                ingles: '10% reduction in the time of Advanced Crops',
-                portugues: '10% de redução no tempo das Advanced Crops'
-            },
+            descricao: '10% de redução no tempo das Advanced Crops',
             tipoDeCrop: 'advanced',
             afeta: 'tempo',
             sinal: 'x',
@@ -145,10 +115,7 @@ let skillsCrops = {
         {
             id: 'coinSwindler',
             name: 'Coin Swindler',
-            descricao: {
-                ingles: '+10% coins when selling crops (Seed Shop)',
-                portugues: '+10% de coins ao vender colheitas (Loja de Sementes)'
-            },
+            descricao: '+10% de coins ao vender colheitas (Loja de Sementes)',
             tipoDeCrop: 'todas',
             afeta: 'vendaCoins',
             sinal: 'x',
@@ -159,10 +126,7 @@ let skillsCrops = {
         {
             id: 'goldenSunflower',
             name: 'Golden Sunflower',
-            descricao: {
-                ingles: '1/700 chance of getting +0.35 gold when manually harvesting sunflowers',
-                portugues: '1/700 de obter +0,35 gold ao colher sunflowers manualmente'
-            },
+            descricao: '1/700 de obter +0,35 gold ao colher sunflowers manualmente',
             tipoDeCrop: 'Sunflower',
             afeta: 'gold',
             sinal: '+',
@@ -173,10 +137,7 @@ let skillsCrops = {
         {
             id: 'horrorMike',
             name: 'Horror Mike',
-            descricao: {
-                ingles: 'Scary Mike AOE increases the size to 7x7 and +0.1 Crops (Medium Crops)',
-                portugues: 'Scary Mike aumenta a AOE para 7x7 e concede +0,1 nas colheitas (Medium Crops)'
-            },
+            descricao: 'Scary Mike aumenta a AOE para 7x7 e concede +0,1 nas colheitas (Medium Crops)',
             tipoDeCrop: 'NFT',
             afeta: 'quantidade',
             sinal: '+',
@@ -187,10 +148,7 @@ let skillsCrops = {
         {
             id: 'lauriesGains',
             name: 'Laurie\'s Gains',
-            descricao: {
-                ingles: 'Laurie Crow AOE increases the size to 7x7 and +0.1 Crops (Advanced Crops)',
-                portugues: 'Laurie Crow aumenta a AOE para 7x7 e concede +0,1 nas colheitas (Advanced Crops)'
-            },
+            descricao: 'Laurie Crow aumenta a AOE para 7x7 e concede +0,1 nas colheitas (Advanced Crops)',
             tipoDeCrop: 'NFT',
             afeta: 'quantidade',
             sinal: '+',
@@ -203,10 +161,7 @@ let skillsCrops = {
         {
             id: 'instantGrowth',
             name: 'Instant Growth',
-            descricao: {
-                ingles: 'Ability to make all Crops ready for harvest (1/72h)',
-                portugues: 'Capacidade de deixar todas Crops prontas para serem colhidas (1/72h)'
-            },
+            descricao: 'Capacidade de deixar todas Crops prontas para serem colhidas (1/72h)',
             tipoDeCrop: 'todas',
             afeta: 'desativado',
             sinal: '+',
@@ -217,10 +172,7 @@ let skillsCrops = {
         {
             id: 'acreFarm',
             name: 'Acre Farm',
-            descricao: {
-                ingles: '+1 Advanced crop yeild, -0.5 Basic and Medium crop yield',
-                portugues: '+1 Advanced crop yeild, -0.5 Basic and Medium crop yield'
-            },
+            descricao: '+1 Advanced crop yeild, -0.5 Basic and Medium crop yield',
             tipoDeCrop: 'advanced',
             afeta: 'quantidade',
             sinal: '+',
@@ -233,10 +185,7 @@ let skillsCrops = {
         {
             id: 'hectareFarm',
             name: 'Hectare Farm',
-            descricao: {
-                ingles: '+1 Basic and Medium crop yield, -0.5 Advanced crop yield',
-                portugues: '+1 Basic and Medium crop yield, -0.5 Advanced crop yield'
-            },
+            descricao: '+1 Basic and Medium crop yield, -0.5 Advanced crop yield',
             tipoDeCrop: 'basic medium',
             afeta: 'quantidade',
             sinal: '+',
@@ -253,11 +202,13 @@ let todasSkillsDeCrops = [].concat(skillsCrops.tierLegacy, skillsCrops.tier1, sk
 console.log(todasSkillsDeCrops);
 
 // Ele vai servir como um "atalho" para encontrar qualquer Skill pelo seu id
-let mapaDeSkills = {};
-todasSkillsDeCrops.forEach(skills => { //vai verificar e organizar por id das Skills no mapaDeSkills, foi oque entendi
-    mapaDeSkills[skills.id] = skills; // vai colocar no mapaDeSkills o nome por id de cada NFT e em ordem alfabetica pelo que vi, parace q transforma a lista em objetos 
+let mapaDeSkillsCrops = {};
+todasSkillsDeCrops.forEach(skills => { 
+    mapaDeSkillsCrops[skills.id] = skills;
 });
-console.log(mapaDeSkills);
+console.log(mapaDeSkillsCrops);
+
+//=============================================================================================================================================================================
 
 let skillsTrees = {
     tierLegacy: [
@@ -275,8 +226,8 @@ let skillsTrees = {
             id: 'logger',
             name: 'Logger',
             descricao: 'Gasta meio machado por arvore',
-            tipoDeRecurso: 'wood fruit',
-            afeta: 'qtdFerramentaUsada',
+            tipoDeRecurso: 'axe',
+            afeta: 'quantidade',
             sinal: 'x',
             buff: 0.5,
             possui: false
@@ -309,8 +260,8 @@ let skillsTrees = {
             id: 'moreAxes',
             name: 'More Axes',
             descricao: '+50 no estoque de machados',
-            tipoDeRecurso: 'estoque',
-            afeta: 'quantidade',
+            tipoDeRecurso: 'axe',
+            afeta: 'estoque',
             sinal: '+',
             pontosNecessários: 1,
             buff: 50,
@@ -368,8 +319,8 @@ let skillsTrees = {
             id: 'treeTurnaround',
             name: 'Tree Turnaround',
             descricao: '15% de chance para que as árvores cresçam instantaneamente.',
-            tipoDeRecurso: 'wood',
-            afeta: 'quantidade qtdFerramentaUsada',
+            tipoDeRecurso: 'wood axe',
+            afeta: 'instantaneo',
             sinal: 'x',
             pontosNecessários: 3,
             buff: 1.15,
@@ -389,6 +340,8 @@ let skillsTrees = {
     ]
 };
 let todasSkillsDeTrees = [].concat(skillsTrees.tierLegacy, skillsTrees.tier1, skillsTrees.tier2, skillsTrees.tier3);
+
+//=============================================================================================================================================================================
 
 let skillsMinerals = {
     tierLegacy: [
@@ -486,7 +439,7 @@ let skillsMinerals = {
             id: 'frugalMiner',
             name: 'Frugal Miner',
             descricao: '-20% de custo em coin da picareta.',
-            tipoDeRecurso: 'picaretas',
+            tipoDeRecurso: ['pickaxe', 'stonePickaxe', 'ironPickaxe', 'goldPickaxe'],
             afeta: 'custoCoins',
             sinal: 'x',
             pontosNecessários: 2,
@@ -510,7 +463,7 @@ let skillsMinerals = {
             id: 'fireKissed',
             name: 'Fire Kissed',
             descricao: '+1 no rendimento de Crimstone no 5º dia consecutivo.',
-            tipoDeRecurso: 'crimstone',
+            tipoDeRecurso: ['crimstone'],
             afeta: 'quantidade',
             sinal: '+',
             pontosNecessários: 2,
@@ -558,8 +511,8 @@ let skillsMinerals = {
             id: 'morePicks',
             name: 'More Picks',
             descricao: 'Estoque aumentado: +70 Pickaxe, +20 Stone Pickaxe, +7 Iron Pickaxe.',
-            tipoDeRecurso: 'estoque',
-            afeta: 'quantidade',
+            tipoDeRecurso: ['pickaxe', 'stonePickaxe', 'ironPickaxe'],
+            afeta: 'estoque',
             sinal: '+',
             pontosNecessários: 3,
             buff: {
@@ -573,7 +526,7 @@ let skillsMinerals = {
             id: 'firesideAlchemist',
             name: 'Fireside Alchemist',
             descricao: '-15% no tempo de recuperação de Crimstone.',
-            tipoDeRecurso: 'crimstone',
+            tipoDeRecurso: ['crimstone'],
             afeta: 'tempo',
             sinal: 'x',
             pontosNecessários: 3,
@@ -595,10 +548,186 @@ let skillsMinerals = {
 };
 let todasSkillsDeMinerals = [].concat(skillsMinerals.tierLegacy, skillsMinerals.tier1, skillsMinerals.tier2, skillsMinerals.tier3);
 
+//=============================================================================================================================================================================
 
+let skillsMachinery = {
+    tier1: [
+        {
+            id: 'cropExtensionModuleI',
+            name: 'Crop Extension Module I',
+            descricao: 'Permitir que sementes de Rhubarb e Zucchini sejam usadas na CM.',
+            tipoDeRecurso: ['Rhubarb', 'Zucchini'],
+            afeta: 'permissao',
+            sinal: '',
+            pontosNecessários: 1,
+            buff: '',
+            possui: false,
+        },
+        {
+            id: 'cropProcessorUnit',
+            name: 'Crop Processor Unit',
+            descricao: '-5% no tempo de crescimento da CM, +10% no consumo de Oil.',
+            tipoDeRecurso: 'CM',
+            afeta: ['tempo', 'consumo'],
+            sinal: 'x',
+            pontosNecessários: 1,
+            buff:{
+                tempo: 0.95,
+                consumo: 1.1
+            },
+            possui: false,
+        },
+        {
+            id: 'oilGadget',
+            name: 'Oil Gadget',
+            descricao: '-10% no consumo de Oil.',
+            tipoDeRecurso: 'CM',
+            afeta: 'consumo',
+            sinal: 'x',
+            pontosNecessários: 1,
+            buff: 0.9,
+            possui: false,
+        },
+        {
+            id: 'oilExtraction',
+            name: 'Oil Extraction',
+            descricao: '+1 Oil ao coletar das reservas.',
+            tipoDeRecurso: 'oil',
+            afeta: 'quantidade',
+            sinal: '+',
+            pontosNecessários: 1,
+            buff: 1,
+            possui: false,
+        },
+        {
+            id: 'leakProofTank',
+            name: 'Leak-Proof Tank',
+            descricao: 'Triplica a capacidade do tanque de Oil da Crop Machine',
+            tipoDeRecurso: 'CM',
+            afeta: '',
+            sinal: 'x',
+            pontosNecessários: 1,
+            buff: '',
+            possui: false,
+        }
+    ],
+    tier2: [
+        {
+            id: 'cropExtensionModuleII',
+            name: 'Crop Extension Module II',
+            descricao: 'Permitir que sementes de Cenoura e Repolho sejam usadas na CM.',
+            tipoDeRecurso: ['Carrot', 'Cabbage'],
+            afeta: 'permissao',
+            sinal: '',
+            pontosNecessários: 2,
+            buff: '',
+            possui: false,
+        },
+        {
+            id: 'cropExtensionModuleIII',
+            name: 'Crop Extension Module III',
+            descricao: 'Permitir que sementes de Yam e Brocolli sejam usadas na CM.',
+            tipoDeRecurso: ['Yam', 'Brocolli'],
+            afeta: 'permissao',
+            sinal: '',
+            pontosNecessários: 2,
+            buff: '',
+            possui: false,
+        },
+        {
+            id: 'rapidRig',
+            name: 'Rapid Rig',
+            descricao: '-20% no tempo de crescimento da CM, +40% no consumo de Oil.',
+            tipoDeRecurso: 'CM',
+            afeta: ['tempo', 'consumo'],
+            sinal: 'x',
+            pontosNecessários: 2,
+            buff: {
+                tempo: 0.8,
+                consumo: 1.4
+            },
+            possui: false,
+        },
+        {
+            id: 'oilBeBack',
+            name: 'Oil Be Back',
+            descricao: '-20% no tempo de reabastecimento do Oil.',
+            tipoDeRecurso: 'oil',
+            afeta: 'tempo',
+            sinal: 'x',
+            pontosNecessários: 2,
+            buff: 0.8,
+            possui: false,
+        },
+        {
+            id: 'oilRig',
+            name: 'Oil Rig',
+            descricao: 'A broca de petróleo requer 20 lãs em vez de couro para ser fabricada',
+            tipoDeRecurso: 'oilDrill',
+            afeta: 'trocaDeRecurso',
+            sinal: '',
+            pontosNecessários: 2,
+            buff: '',
+            possui: false,
+        }
+    ],
+    tier3: [
+        {
+            id: 'fieldExpansionModule',
+            name: 'Field Expansion Module',
+            descricao: '+5 pacotes adicionados à máquina.',
+            tipoDeRecurso: 'CM',
+            afeta: 'pacotes',
+            sinal: '+',
+            pontosNecessários: 3,
+            buff: 5,
+            possui: false,
+        },
+        {
+            id: 'fieldExtensionModule',
+            name: 'Field Extension Module',
+            descricao: '+5 plots adicionados à máquina.',
+            tipoDeRecurso: 'CM',
+            afeta: 'plots',
+            sinal: '+',
+            pontosNecessários: 3,
+            buff: 5,
+            possui: false,
+        },
+        {
+            id: 'efficiencyExtensionModule',
+            name: 'Efficiency Extension Module',
+            descricao: '-30% no consumo de Oil.',
+            tipoDeRecurso: 'CM',
+            afeta: 'consumo',
+            sinal: 'x',
+            pontosNecessários: 3,
+            buff: 0.7,
+            possui: false,
+        },
+        {
+            id: 'greaseLightning',
+            name: 'Grease Lightning',
+            descricao: 'Fazer poços de Oil vazios se reabastecerem instantaneamente (1/96h).',
+            tipoDeRecurso: 'oil',
+            afeta: '',
+            sinal: '',
+            pontosNecessários: 3,
+            buff: '',
+            possui: false,
+        },
+    ]
+};
 
+let todasSkillsMachinery = [].concat(skillsMachinery.tier1, skillsMachinery.tier2, skillsMachinery.tier3);
 
-//==========================================================================================================================================================================
+let mapaDeSkillsMachinery = {};
+todasSkillsMachinery.forEach(skills => { 
+    mapaDeSkillsMachinery[skills.id] = skills;
+});
+console.log(mapaDeSkillsMachinery);
+//=============================================================================================================================================================================
+
 //Juntas toda arvore de skill para que ao criar as checkbox seja mais rapido e menor o codigo!
 let todasSkillsLegacy = [].concat(skillsCrops.tierLegacy, skillsTrees.tierLegacy ,skillsMinerals.tierLegacy);
-let todasSkillsComTier = [].concat(skillsCrops.tier1, skillsCrops.tier2, skillsCrops.tier3, skillsTrees.tier1, skillsTrees.tier2, skillsTrees.tier3, skillsMinerals.tier1, skillsMinerals.tier2, skillsMinerals.tier3);
+let todasSkillsComTier = [].concat(skillsCrops.tier1, skillsCrops.tier2, skillsCrops.tier3, skillsTrees.tier1, skillsTrees.tier2, skillsTrees.tier3, skillsMinerals.tier1, skillsMinerals.tier2, skillsMinerals.tier3, skillsMachinery.tier1, skillsMachinery.tier2, skillsMachinery.tier3);

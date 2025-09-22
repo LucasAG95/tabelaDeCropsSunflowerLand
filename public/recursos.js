@@ -31,15 +31,15 @@ const crops = [
 //============================================================================================================================================================================
 
 const minerals = [
-    { id: 'wood',       name: 'Wood',      qtdNodes: 1, nameNode: 'tree',          tempoPadrao: 7_200_000,  tempoComBuff: 7_200_000,  mediaPorNode: 1.2,         mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
-    { id: 'stone',      name: 'Stone',     qtdNodes: 1, nameNode: 'stoneNode',     tempoPadrao: 14_400_000, tempoComBuff: 14_400_000, mediaPorNode: 1.2,         mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
-    { id: 'iron',       name: 'Iron',      qtdNodes: 1, nameNode: 'ironNode',      tempoPadrao: 28_800_000, tempoComBuff: 28_800_000, mediaPorNode: 1.2,         mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
-    { id: 'gold',       name: 'Gold',      qtdNodes: 1, nameNode: 'goldNode',      tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNode: 1.2,         mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
-    { id: 'crimstone',  name: 'Crimstone', qtdNodes: 1, nameNode: 'crimstoneNode', tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNode: 1.4,         mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
-    { id: 'oil',        name: 'Oil',       qtdNodes: 1, nameNode: 'oilNode',       tempoPadrao: 72_000_000, tempoComBuff: 72_000_000, mediaPorNode: 16.66666667, mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '🛇', gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
-    { id: 'peixe',      name: 'Peixe',     qtdNodes: 1, nameNode: '',              tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '🛇', gastoComFerramentas: '', vezesQueVaiQuebrar: ''},    
-    { id: 'escavacao',  name: 'Escavação', qtdNodes: 1, nameNode: '',              tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '🛇', gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
-    { id: 'escavacao2', name: 'Escavação', qtdNodes: 1, nameNode: '',              tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNode: 4,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '🛇', gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
+    { id: 'wood',       name: 'Wood',      qtdNodes: 1, tempoPadrao: 7_200_000,  tempoComBuff: 7_200_000,  mediaPorNodePadrao: 1,           mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
+    { id: 'stone',      name: 'Stone',     qtdNodes: 1, tempoPadrao: 14_400_000, tempoComBuff: 14_400_000, mediaPorNodePadrao: 1,           mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
+    { id: 'iron',       name: 'Iron',      qtdNodes: 1, tempoPadrao: 28_800_000, tempoComBuff: 28_800_000, mediaPorNodePadrao: 1,           mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
+    { id: 'gold',       name: 'Gold',      qtdNodes: 1, tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNodePadrao: 1,           mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
+    { id: 'crimstone',  name: 'Crimstone', qtdNodes: 1, tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNodePadrao: 1.4,         mediaPorNode: 1.4,         mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
+    { id: 'oil',        name: 'Oil',       qtdNodes: 1, tempoPadrao: 72_000_000, tempoComBuff: 72_000_000, mediaPorNodePadrao: 16.66666667, mediaPorNode: 16.66666667, mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '🛇', gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
+    { id: 'peixe',      name: 'Peixe',     qtdNodes: 1, tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNodePadrao: 1,           mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '🛇', gastoComFerramentas: '', vezesQueVaiQuebrar: ''},    
+    { id: 'escavacao',  name: 'Escavação', qtdNodes: 1, tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNodePadrao: 1,           mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '🛇', gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
+    { id: 'escavacao2', name: 'Escavação', qtdNodes: 1, tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNodePadrao: 4,           mediaPorNode: 4,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '🛇', gastoComFerramentas: '', vezesQueVaiQuebrar: ''},
 ];
 
 let mapaDeMinerals = {}; // cria objeto vazio para guardar NFTs por id
@@ -48,15 +48,16 @@ minerals.forEach(mineral => { //vai verificar e organizar por id das NFTs no map
 });
 
 const ferramentas = [
-    { id: 'axe',          name: 'Axe',           recursoAdquirido: 'wood',       custoTotalEmCoins: '', quantidade: 1, estoquePadrao: 200, estoqueComBuff: 200, coins: 20},
-    { id: 'pickaxe',      name: 'Pickaxe',       recursoAdquirido: 'stone',      custoTotalEmCoins: '', quantidade: 1, estoquePadrao: 60,  estoqueComBuff: 60,  coins: 20,  wood: 3},
-    { id: 'stonePickaxe', name: 'Stone Pickaxe', recursoAdquirido: 'iron',       custoTotalEmCoins: '', quantidade: 1, estoquePadrao: 20,  estoqueComBuff: 20,  coins: 20,  wood: 3,  stone: 5},
-    { id: 'ironPickaxe',  name: 'Iron Pickaxe',  recursoAdquirido: 'gold',       custoTotalEmCoins: '', quantidade: 1, estoquePadrao: 5,   estoqueComBuff: 5,   coins: 80,  wood: 3,  iron: 5},
-    { id: 'goldPickaxe',  name: 'Gold Pickaxe',  recursoAdquirido: 'crimstone',  custoTotalEmCoins: '', quantidade: 1, estoquePadrao: 5,   estoqueComBuff: 5,   coins: 100, wood: 3,  gold: 3},
-    { id: 'oilDrill',     name: 'Oil Drill',     recursoAdquirido: 'oil',        custoTotalEmCoins: '', quantidade: 1, estoquePadrao: 5,   estoqueComBuff: 5,   coins: 100, wood: 20, iron: 9, leather: 10, wool: 20},
-    { id: 'rod',          name: 'Rod',           recursoAdquirido: 'peixe',      custoTotalEmCoins: '', quantidade: 1, estoquePadrao: 50,  estoqueComBuff: 50,  coins: 20,  wood: 3,  stone: 1},
-    { id: 'sandShovel',   name: 'Sand Shovel',   recursoAdquirido: 'escavacao',  custoTotalEmCoins: '', quantidade: 1, estoquePadrao: 50,  estoqueComBuff: 50,  coins: 20,  wood: 2 , stone: 1},
-    { id: 'sandDrill',    name: 'Sand Drill',    recursoAdquirido: 'escavacao2', custoTotalEmCoins: '', quantidade: 1, estoquePadrao: 10,  estoqueComBuff: 10,  coins: 40,  wood: 3,  crimstone: 1, oil: 1, leather: 1},
+    { id: 'axe',          name: 'Axe',           recursoAdquirido: 'wood',       custoTotalEmCoins: '', tier: 'machado',  quantidade: 1, estoquePadrao: 200, estoqueComBuff: 200, coinsPadrao: 20,  coins: 20},
+    { id: 'pickaxe',      name: 'Pickaxe',       recursoAdquirido: 'stone',      custoTotalEmCoins: '', tier: 'picareta', quantidade: 1, estoquePadrao: 60,  estoqueComBuff: 60,  coinsPadrao: 20,  coins: 20,  wood: 3},
+    { id: 'stonePickaxe', name: 'Stone Pickaxe', recursoAdquirido: 'iron',       custoTotalEmCoins: '', tier: 'picareta', quantidade: 1, estoquePadrao: 20,  estoqueComBuff: 20,  coinsPadrao: 20,  coins: 20,  wood: 3,  stone: 5},
+    { id: 'ironPickaxe',  name: 'Iron Pickaxe',  recursoAdquirido: 'gold',       custoTotalEmCoins: '', tier: 'picareta', quantidade: 1, estoquePadrao: 5,   estoqueComBuff: 5,   coinsPadrao: 80,  coins: 80,  wood: 3,  iron: 5},
+    { id: 'goldPickaxe',  name: 'Gold Pickaxe',  recursoAdquirido: 'crimstone',  custoTotalEmCoins: '', tier: 'picareta', quantidade: 1, estoquePadrao: 5,   estoqueComBuff: 5,   coinsPadrao: 100, coins: 100, wood: 3,  gold: 3},
+    { id: 'oilDrill',     name: 'Oil Drill',     recursoAdquirido: 'oil',        custoTotalEmCoins: '', tier: 'drill',    quantidade: 1, estoquePadrao: 5,   estoqueComBuff: 5,   coinsPadrao: 100, coins: 100, wood: 20, iron: 9, leather: 10, wool: 20},
+    
+    { id: 'rod',          name: 'Rod',           recursoAdquirido: 'peixe',      custoTotalEmCoins: '', tier: 'vara',     quantidade: 1, estoquePadrao: 50,  estoqueComBuff: 50,  coinsPadrao: 20,  coins: 20,  wood: 3,  stone: 1},
+    { id: 'sandShovel',   name: 'Sand Shovel',   recursoAdquirido: 'escavacao',  custoTotalEmCoins: '', tier: 'pa',       quantidade: 1, estoquePadrao: 50,  estoqueComBuff: 50,  coinsPadrao: 20,  coins: 20,  wood: 2 , stone: 1},
+    { id: 'sandDrill',    name: 'Sand Drill',    recursoAdquirido: 'escavacao2', custoTotalEmCoins: '', tier: 'drill',    quantidade: 1, estoquePadrao: 10,  estoqueComBuff: 10,  coinsPadrao: 40,  coins: 40,  wood: 3,  crimstone: 1, oil: 1, leather: 1},
 ];
 
 let mapaDeFerramentas = {}; // cria objeto vazio para guardar NFTs por id

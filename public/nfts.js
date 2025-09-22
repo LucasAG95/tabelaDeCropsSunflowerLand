@@ -1,6 +1,7 @@
-let nftsDaTemporada = [
+let novosCollectibles = [
     {
         id: 'giantOnion',
+        idNumber: '',
         name: 'Giant Onion',
         descricao: '+3 Onions',
         estacao: 'todas',
@@ -12,6 +13,7 @@ let nftsDaTemporada = [
     },
     {
         id: 'giantTurnip',
+        idNumber: '',
         name: 'Giant Turnip',
         descricao: '-50% no tempo de crescimento da Turnip',
         estacao: 'todas',
@@ -23,6 +25,7 @@ let nftsDaTemporada = [
     },
     {
         id: 'giantArtichoke',
+        idNumber: '',
         name: 'Giant Artichoke',
         descricao: '+2 Artichoke',
         estacao: 'todas',
@@ -30,6 +33,120 @@ let nftsDaTemporada = [
         afeta: 'quantidade',
         sinal: '+',
         buff: 2,
+        possui: false
+    },
+    {
+        id: 'fruitTuneBox',
+        idNumber: '',
+        name: 'Fruit Tune Box',
+        descricao: '+20% na velocidade de crescimento das frutas',
+        estacao: 'todas',
+        tipoDeCrop: 'todas',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.8,
+        possui: false
+    },
+    {
+        id: 'groovyGramophone',
+        idNumber: '',
+        name: 'Groovy Gramophone',
+        descricao: '+100% de Velocidade de Crescimento na Crop Machine',
+        tipoDeRecurso: 'CM',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.5,
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'janitorChicken',
+        idNumber: '',
+        name: 'Janitor Chicken',
+        descricao: 'As galinhas dormem 5% menos',
+        tipoDeRecurso: 'chicken',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.95,
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'babyCow',
+        idNumber: '',
+        name: 'Baby Cow',
+        descricao: 'Vacas ganham +10 de XP com afeto',
+        tipoDeRecurso: 'cow',
+        afeta: 'ferramentaAnimal',
+        sinal: '+',
+        buff: 10,
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'reelmastersChair',
+        idNumber: '',
+        name: 'Reelmaster\'s Chair',
+        descricao: '+5 Tentativas de Pesca',
+        tipoDeRecurso: 'quantidade',
+        afeta: 'pesca',
+        sinal: '+',
+        buff: 5,
+        valor: '',
+        possui: false
+    }
+];
+
+let novosWearables = [
+    {
+        id: 'lavaSwimwear',
+        idNumber: '',
+        name: 'Lava Swimwear',
+        descricao: '-50% Lava Pit resources',
+        tipoDeRecurso: 'lavaPit',
+        afeta: 'quantidade',
+        sinal: 'x',
+        buff: 0.5,
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'oilGallon',
+        idNumber: '',
+        name: 'Oil Gallon',
+        descricao: '+5 Oil',
+        tipoDeRecurso: 'oil',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 5,
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'pickaxeShark',
+        idNumber: '',
+        name: 'Pickaxe Shark',
+        descricao: '-15% no Tempo de Recuperação de Ouro e 10% de chance de Ouro Instantâneo',
+        tipoDeRecurso: 'gold',
+        afeta: ['tempo', 'ironPickaxe'],
+        sinal: 'x',
+        buff: {
+            tempo: 0.85,
+            ironPickaxe: 1.1
+        },
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'architectRuler',
+        idNumber: '',
+        name: 'Architect Ruler',
+        descricao: 'Crafting Box 25% mais rápida',
+        tipoDeRecurso: 'tempo',
+        afeta: 'construcao',
+        sinal: 'x',
+        buff: 0.75,
+        valor: '',
         possui: false
     }
 ];
@@ -894,11 +1011,11 @@ let wearablesCrops = [
 ];
 
 // Ele vai servir como um "atalho" para encontrar qualquer NFT pelo seu id
-let mapaDeCollectibles = {}; // cria objeto vazio para guardar NFTs por id
+let mapaDeCollectiblesCrops = {}; // cria objeto vazio para guardar NFTs por id
 collectiblesCrops.forEach(collectibles => { //vai verificar e organizar por id das NFTs no mapaDeCollectibles, foi oque entendi
-    mapaDeCollectibles[collectibles.id] = collectibles; // adiciona cada NFT no objeto usando o id como chave
+    mapaDeCollectiblesCrops[collectibles.id] = collectibles; // adiciona cada NFT no objeto usando o id como chave
 });
-console.log(mapaDeCollectibles)
+console.log(mapaDeCollectiblesCrops)
 
 //======================================================================================================================================================================
 
@@ -944,8 +1061,8 @@ let collectiblesMinerals = [
         idNumber: 417,
         name: 'Foreman Beaver',
         descricao: '+20% Wood, -50% no tempo das arvores, corte sem machado',
-        tipoDeRecurso: 'wood',
-        afeta: 'qtdFerramentaUsada',
+        tipoDeRecurso: 'axe',
+        afeta: 'quantidade',
         sinal: 'x',
         buff: 0,
         valor: '',
@@ -1005,7 +1122,7 @@ let collectiblesMinerals = [
         name: 'Emerald Turtle',
         descricao: '+0.5 stone, iron ou gold - Efeito em 8 nodes',
         tipoDeRecurso: 'stone iron gold',
-        afeta: 'quantidade',
+        afeta: '',
         sinal: '+',
         buff: '', //terei que ver como colocar pra funcionar
         valor: '',
@@ -1041,9 +1158,9 @@ let collectiblesMinerals = [
         name: 'Tin Turtle',
         descricao: '+0.1 Stone - Efeito em 8 nodes',
         tipoDeRecurso: 'stone',
-        afeta: 'quantidade',
+        afeta: 'areaQtd',
         sinal: '+',
-        buff: 0.8, //rever dps
+        buff: 0.8,
         valor: '',
         possui: false
     },
@@ -1064,8 +1181,8 @@ let collectiblesMinerals = [
         idNumber: 2259,
         name: 'Quarry',
         descricao: 'Minere pedra gratuitamente',
-        tipoDeRecurso: 'stone',
-        afeta: 'qtdFerramentaUsada',
+        tipoDeRecurso: ['pickaxe'],
+        afeta: 'quantidade',
         sinal: 'x',
         buff: 0,
         valor: '',
@@ -1136,7 +1253,7 @@ let collectiblesMinerals = [
         idNumber: 1537,
         name: 'Crimson Carp',
         descricao: '+0.05 Crimstone',
-        tipoDeRecurso: 'crimstone',
+        tipoDeRecurso: ['crimstone'],
         afeta: 'quantidade',
         sinal: '+',
         buff: 0.05,
@@ -1148,7 +1265,7 @@ let collectiblesMinerals = [
         idNumber: 494,
         name: 'Crim Peckster',
         descricao: '+0.1 Crimstone',
-        tipoDeRecurso: 'crimstone',
+        tipoDeRecurso: ['crimstone'],
         afeta: 'quantidade',
         sinal: '+',
         buff: 0.1,
@@ -1193,6 +1310,13 @@ let collectiblesMinerals = [
     }
 ];
 
+// Ele vai servir como um "atalho" para encontrar qualquer NFT pelo seu id
+let mapaDeCollectiblesMinerals = {}; // cria objeto vazio para guardar NFTs por id
+collectiblesMinerals.forEach(collectibles => { //vai verificar e organizar por id das NFTs no mapaDeCollectibles, foi oque entendi
+    mapaDeCollectiblesMinerals[collectibles.id] = collectibles; // adiciona cada NFT no objeto usando o id como chave
+});
+console.log(mapaDeCollectiblesMinerals);
+
 wearablesMinerals = [
     {
         id: 'factionShield',
@@ -1215,7 +1339,7 @@ wearablesMinerals = [
         idNumber: 282,
         name: 'Crimstone Armor',
         descricao: '+0.1 Crimstone',
-        tipoDeRecurso: 'crimstone',
+        tipoDeRecurso: ['crimstone'],
         afeta: 'quantidade',
         sinal: '+',
         buff: 0.1,
@@ -1227,7 +1351,7 @@ wearablesMinerals = [
         idNumber: 285,
         name: 'Crimstone Amulet',
         descricao: '-20% no tempo da Crimstone',
-        tipoDeRecurso: 'crimstone',
+        tipoDeRecurso: ['crimstone'],
         afeta: 'tempo',
         sinal: 'x',
         buff: 0.8,
@@ -1239,7 +1363,7 @@ wearablesMinerals = [
         idNumber: 284,
         name: 'Crimstone Hammer',
         descricao: '+2 Crimstone no 5º dia',
-        tipoDeRecurso: 'crimstone',
+        tipoDeRecurso: ['crimstone'],
         afeta: 'quantidade',
         sinal: '+',
         buff: 0.4,
@@ -1251,9 +1375,9 @@ wearablesMinerals = [
         idNumber: 370,
         name: 'Infernal Drill',
         descricao: 'Pegue Oil sem precisar de Oil Drill',
-        tipoDeRecurso: 'oil',
-        afeta: 'qtdFerramentaUsada',
-        sinal: '+',
+        tipoDeRecurso: 'oilDrill',
+        afeta: 'quantidade',
+        sinal: 'x',
         buff: 0,
         valor: '',
         possui: false 
@@ -1306,4 +1430,4 @@ wearablesMinerals = [
         valor: '',
         possui: false 
     },
-]
+];

@@ -42,7 +42,6 @@ function skillsCropsBloqueadas() {
     console.log(totalDePontosGastos);
 
     textoParaDesbloquearSkill(3, 7, totalDePontosGastos, aroveDeAbilidades, tituloDoAcordion);
-    buffsAdicionados();
 };
 
 function skillsTreesBloqueadas() {
@@ -136,6 +135,53 @@ function skillsMineralsBloqueadas() {
 
     textoParaDesbloquearSkill(3, 7, totalDePontosGastos, aroveDeAbilidades, tituloDoAcordion);
 };
+
+function skillsMachineryBloqueadas() {
+    let aroveDeAbilidades = 'machinery';
+    let tituloDoAcordion = 'Machinery';
+    let pontosTier1 = 0;
+    let pontosTier2 = 0;
+    let pontosTier3 = 0;
+    let totalDePontosGastos = 0;
+
+    todasSkillsMachinery.forEach(skill => {
+        let checkbox = document.getElementById(skill.id)
+
+        // Tier 1 sempre pode ser contado
+        if(skill.pontosNecessários === 1 && checkbox.checked) {
+            pontosTier1 += skill.pontosNecessários;
+        };
+
+        // Tier 2 só conta se já tiver pontos suficientes no Tier 1
+        if(skill.pontosNecessários === 2 && checkbox.checked && pontosTier1 >= 3) {
+            pontosTier2 += skill.pontosNecessários;
+        };
+
+        // Tier 3 só conta se já tiver pontos suficientes no Tier 1 + 2
+        if(skill.pontosNecessários === 3 && checkbox.checked && (pontosTier1 + pontosTier2) >= 7) {
+            pontosTier3 += skill.pontosNecessários;
+        };
+
+        //Bloquear tier 2 e 3 das skills ate condições serem falsas
+        if (pontosTier1 < 3 && skill.pontosNecessários === 2) {
+            checkbox.disabled = true;
+            checkbox.checked = false;
+            skill.possui = false;
+        } else if ((pontosTier1 + pontosTier2) < 7 && skill.pontosNecessários === 3) {
+            checkbox.disabled = true;
+            checkbox.checked = false;
+            skill.possui = false;
+        } else {
+            checkbox.disabled = false;
+        };
+        
+    });
+    totalDePontosGastos = pontosTier1 + pontosTier2 + pontosTier3;
+    console.log(totalDePontosGastos);
+
+    textoParaDesbloquearSkill(3, 7, totalDePontosGastos, aroveDeAbilidades, tituloDoAcordion);
+};
+
 
 //função que vai ser responsavel por mudar os textos que mostram a quantidade de pontos faltantes para desbloquear skill!
 function textoParaDesbloquearSkill(pontosProNivel2, pontosProNivel3, totalPontosGastos, aroveDeAbilidades, tituloDoAcordion) {

@@ -115,7 +115,7 @@ function statusCrops() {
 
 //================================================================================================================================================================
 
-function statusMinerais() {
+function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGastos, crimstoneGastas, oilGastos, leatherGastos, woolGastas) {
 
     let tabelaMinerios = `
     <table class="tabela-minerais">
@@ -159,6 +159,8 @@ function statusMinerais() {
         let ferramentasUsadas = ferramenta.quantidade * vezesQuePretendeMinerar;
         let gastoComFerramentas = ferramentasUsadas * ferramenta.custoTotalEmCoins;
         let gastoConvertidoEmFlower = (1 / flowerEmCoins) * gastoComFerramentas;
+
+        let lucroFlower = mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar == 0 || ilha === 'Basic' ? 0 : ((valorMarketRecursos * oqueSobraOuFalta) * (1 - (taxa * desconto)));
         
         let comprarOuMinerar;
         if (valorMarketRecursos > custoPorUnidadeRecursoEmFlower) {
@@ -181,7 +183,7 @@ function statusMinerais() {
             <td><img src="./icones/flower.png" class="crop-img">${custoPorUnidadeRecursoEmFlower.toFixed(4)}</td>
             <td><img src="./icones/flower.png" class="crop-img">${valorMarketRecursos .toFixed(4)}</td>
             <td><img src="./minerais/${imagemRecurso}.png" class="crop-img">${oqueSobraOuFalta.toFixed(2)}</td>
-            <td><img src="./icones/flower.png" class="crop-img">${(oqueSobraOuFalta * valorMarketRecursos).toFixed(4)}</td>
+            <td><img src="./icones/flower.png" class="crop-img">${(lucroFlower).toFixed(4)}</td>
             <td>${comprarOuMinerar}</td>
         </tr>
         `;
@@ -189,9 +191,46 @@ function statusMinerais() {
     });
     tabelaMinerios += `</tbody></table>`;
 
+    let tabelaResultadoFinal = `
+        <div class="resumo-cards">
+            <div class="card">
+                <div class="card-title"><h3>Total Recursos Gastos</h3></div>
+                <div class="card-value">
+                    <img src="./icones/coins.png" class="crop-img">${coinsGastas.toFixed(2)} - <img src="./minerais/wood.png" class="crop-img">${woodGastas} - <img src="./minerais/stone.png" class="crop-img">${stoneGastas}
+                    <img src="./minerais/iron.png" class="crop-img">${ironGastos} - <img src="./minerais/gold.png" class="crop-img">${goldGastos}<br>
+                    <img src="./minerais/crimstone.png" class="crop-img">${crimstoneGastas} - <img src="./minerais/oil.png" class="crop-img">${oilGastos} - <img src="./animais/leather.png" class="crop-img">${leatherGastos} - <img src="./animais/wool.png" class="crop-img">${woolGastas}<br>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title"><h3>Restock</h3></div>
+                <div class="card-value">
+                    Quantidade:  = <img src="icones/gem.png" class="crop-img"><br>
+                    <img src="icones/flower.png" class="crop-img"> ~ 
+                    <img src="icones/usdc.png" class="crop-img">$
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title"><h3>Lucro Total do Combo Plantado<br>(Gems Descontadas)</h3></div>
+                <div class="card-value">
+                    <img src="icones/flower.png" class="crop-img"> ~ 
+                    <img src="icones/usdc.png" class="crop-img">$
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-title"><h3>Média de Lucro Diário<br>(Não desconta Gems)</h3></div>
+                <div class="card-value">
+                    <img src="icones/flower.png" class="crop-img">~ 
+                    <img src="icones/usdc.png" class="crop-img">$
+                </div>
+            </div>
+        </div>
+        `;
+
+
 
     mostrarResultadoMinerals.innerHTML = `
         <div class="tabelas-em-ordem">
+            ${tabelaResultadoFinal}
             ${tabelaMinerios}
         </div>
     `;
