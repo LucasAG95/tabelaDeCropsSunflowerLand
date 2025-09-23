@@ -127,12 +127,14 @@ let novosWearables = [
         idNumber: '',
         name: 'Pickaxe Shark',
         descricao: '-15% no Tempo de Recuperação de Ouro e 10% de chance de Ouro Instantâneo',
-        tipoDeRecurso: 'gold',
-        afeta: ['tempo', 'ironPickaxe'],
+        tipoDeRecurso: ['gold', 'ironPickaxe'],
+        afeta: ['tempo', 'instantaneo'],
         sinal: 'x',
         buff: {
             tempo: 0.85,
-            ironPickaxe: 1.1
+            ironPickaxe: 1.1,
+            gold: 1.1
+            
         },
         valor: '',
         possui: false

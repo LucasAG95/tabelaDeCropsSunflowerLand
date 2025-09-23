@@ -65,11 +65,10 @@ function calcularBuffs(recurso, listasDeBuffs) {
             if (nftOuSkill.afeta.includes('quantidade') && nftOuSkill.sinal === '+') somaQtd += nftOuSkill.buff;
             if (nftOuSkill.afeta.includes('areaQtd') && nftOuSkill.sinal === '+') somaQtdArea += nftOuSkill.buff; 
             
-            if (nftOuSkill.afeta.includes('instantaneo') && nftOuSkill.sinal === 'x') multiplicaInstaRecurso *= nftOuSkill.buff;
-            if (nftOuSkill.afeta.includes('tempo') && nftOuSkill.sinal === 'x') mudancaNoTempo *= nftOuSkill.buff;
+            if (nftOuSkill.afeta.includes('instantaneo') && nftOuSkill.sinal === 'x') multiplicaInstaRecurso *= nftOuSkill.buff[recurso.id] || nftOuSkill.buff;
+            if (nftOuSkill.afeta.includes('tempo') && nftOuSkill.sinal === 'x') mudancaNoTempo *= nftOuSkill.buff['tempo'] ||nftOuSkill.buff;
             if (nftOuSkill.afeta.includes('estoque') && nftOuSkill.sinal === 'x') multiplicaEstoque *= nftOuSkill.buff;
             if (nftOuSkill.afeta.includes('estoque') && nftOuSkill.sinal === '+') somaEstoque += nftOuSkill.buff[recurso.id] || nftOuSkill.buff;
-            
 
             if (nftOuSkill.afeta.includes('custoCoins') && nftOuSkill.sinal === 'x') reduzirGastoComCoins *= nftOuSkill.buff;
             if (nftOuSkill.afeta.includes('vendaCoins') && nftOuSkill.sinal === 'x') multiplicaVendaPorCoins *= nftOuSkill.buff;
@@ -138,6 +137,8 @@ function buffsAdicionadosMinerais() {
             skillsMachinery.tier1, 
             skillsMachinery.tier2, 
             skillsMachinery.tier3,
+            novosCollectibles,
+            novosWearables,
             collectiblesMinerals, 
             wearablesMinerals]);
         
@@ -156,7 +157,9 @@ function buffsAdicionadosMinerais() {
             skillsMinerals.tierLegacy, 
             skillsMinerals.tier1, 
             skillsMinerals.tier2, 
-            skillsMinerals.tier3, 
+            skillsMinerals.tier3,
+            novosCollectibles,
+            novosWearables,
             collectiblesMinerals, 
             wearablesMinerals]);
 
@@ -173,12 +176,14 @@ function valoresMineriosEFerramentasEGastos() {
     //definir preço do machado e madeira
     mapaDeFerramentas['axe'].custoTotalEmCoins = mapaDeFerramentas['axe'].coins;
     mapaDeMinerals['wood'].mediaCustoEmCoins = (mapaDeFerramentas['axe'].custoTotalEmCoins * mapaDeFerramentas['axe'].quantidade) / mapaDeMinerals['wood'].mediaPorNode;
+    mapaDeMinerals['wood'].custoEmFlower = mapaDeMinerals['wood'].mediaCustoEmCoins * (1 / flowerEmCoins);
 
     //definir preço da picareta e pedra
     mapaDeFerramentas['pickaxe'].custoTotalEmCoins = mapaDeFerramentas['pickaxe'].coins +
     (mapaDeMinerals['wood'].mediaCustoEmCoins * mapaDeFerramentas['pickaxe'].wood);
 
     mapaDeMinerals['stone'].mediaCustoEmCoins = (mapaDeFerramentas['pickaxe'].custoTotalEmCoins * mapaDeFerramentas['pickaxe'].quantidade) / mapaDeMinerals['stone'].mediaPorNode;
+    mapaDeMinerals['stone'].custoEmFlower = mapaDeMinerals['stone'].mediaCustoEmCoins * (1 / flowerEmCoins);
 
     //definir preço da picareta de pedra e ferro
     mapaDeFerramentas['stonePickaxe'].custoTotalEmCoins = mapaDeFerramentas['stonePickaxe'].coins + 
@@ -186,6 +191,7 @@ function valoresMineriosEFerramentasEGastos() {
     (mapaDeMinerals['stone'].mediaCustoEmCoins * mapaDeFerramentas['stonePickaxe'].stone);
 
     mapaDeMinerals['iron'].mediaCustoEmCoins = (mapaDeFerramentas['stonePickaxe'].custoTotalEmCoins * mapaDeFerramentas['stonePickaxe'].quantidade) / mapaDeMinerals['iron'].mediaPorNode;
+    mapaDeMinerals['iron'].custoEmFlower = mapaDeMinerals['iron'].mediaCustoEmCoins * (1 / flowerEmCoins);
 
     //definir preço da picareta de ferro e ouro
     mapaDeFerramentas['ironPickaxe'].custoTotalEmCoins = mapaDeFerramentas['ironPickaxe'].coins + 
@@ -193,6 +199,8 @@ function valoresMineriosEFerramentasEGastos() {
     (mapaDeMinerals['iron'].mediaCustoEmCoins * mapaDeFerramentas['ironPickaxe'].iron);
 
     mapaDeMinerals['gold'].mediaCustoEmCoins = (mapaDeFerramentas['ironPickaxe'].custoTotalEmCoins * mapaDeFerramentas['ironPickaxe'].quantidade) / mapaDeMinerals['gold'].mediaPorNode;
+    mapaDeMinerals['gold'].custoEmFlower = mapaDeMinerals['gold'].mediaCustoEmCoins * (1 / flowerEmCoins);
+
 
     //definir preço da picareta de ouro e crimstone
     mapaDeFerramentas['goldPickaxe'].custoTotalEmCoins = mapaDeFerramentas['goldPickaxe'].coins + 
@@ -200,6 +208,7 @@ function valoresMineriosEFerramentasEGastos() {
     (mapaDeMinerals['gold'].mediaCustoEmCoins * mapaDeFerramentas['goldPickaxe'].gold);
 
     mapaDeMinerals['crimstone'].mediaCustoEmCoins = (mapaDeFerramentas['goldPickaxe'].custoTotalEmCoins * mapaDeFerramentas['goldPickaxe'].quantidade) / mapaDeMinerals['crimstone'].mediaPorNode;
+    mapaDeMinerals['crimstone'].custoEmFlower = mapaDeMinerals['crimstone'].mediaCustoEmCoins * (1 / flowerEmCoins);
 
     //definir preço da Oil Drill e oil
     if (mapaDeSkillsMachinery['oilRig'].possui) {
@@ -214,6 +223,7 @@ function valoresMineriosEFerramentasEGastos() {
         ((mapaMarketRecursos['leather'].valor * flowerEmCoins) * mapaDeFerramentas['oilDrill'].leather);
     }
     mapaDeMinerals['oil'].mediaCustoEmCoins = (mapaDeFerramentas['oilDrill'].custoTotalEmCoins * mapaDeFerramentas['oilDrill'].quantidade) / mapaDeMinerals['oil'].mediaPorNode;
+    mapaDeMinerals['oil'].custoEmFlower = mapaDeMinerals['oil'].mediaCustoEmCoins * (1 / flowerEmCoins);
 
     //definir preço médio para pescar
     mapaDeFerramentas['rod'].custoTotalEmCoins = mapaDeFerramentas['rod'].coins +
@@ -221,6 +231,7 @@ function valoresMineriosEFerramentasEGastos() {
     (mapaDeMinerals['stone'].mediaCustoEmCoins * mapaDeFerramentas['rod'].stone);
 
     mapaDeMinerals['peixe'].mediaCustoEmCoins = (mapaDeFerramentas['rod'].custoTotalEmCoins * mapaDeFerramentas['rod'].quantidade) / mapaDeMinerals['peixe'].mediaPorNode;
+    mapaDeMinerals['peixe'].custoEmFlower = mapaDeMinerals['peixe'].mediaCustoEmCoins * (1 / flowerEmCoins);
 
     //definir preço médio para cavar com Sand Shovel
     mapaDeFerramentas['sandShovel'].custoTotalEmCoins = mapaDeFerramentas['sandShovel'].coins +
@@ -228,6 +239,7 @@ function valoresMineriosEFerramentasEGastos() {
     (mapaDeMinerals['stone'].mediaCustoEmCoins * mapaDeFerramentas['sandShovel'].stone);
 
     mapaDeMinerals['escavacao'].mediaCustoEmCoins = (mapaDeFerramentas['sandShovel'].custoTotalEmCoins * mapaDeFerramentas['sandShovel'].quantidade) / mapaDeMinerals['escavacao'].mediaPorNode;
+    mapaDeMinerals['escavacao'].custoEmFlower = mapaDeMinerals['escavacao'].mediaCustoEmCoins * (1 / flowerEmCoins);
 
     //definir preço médio para cavar com Sand Drill
     mapaDeFerramentas['sandDrill'].custoTotalEmCoins = mapaDeFerramentas['sandDrill'].coins +
@@ -237,6 +249,7 @@ function valoresMineriosEFerramentasEGastos() {
     ((mapaMarketRecursos['leather'].valor * flowerEmCoins) * mapaDeFerramentas['sandDrill'].leather);
 
     mapaDeMinerals['escavacao2'].mediaCustoEmCoins = (mapaDeFerramentas['sandDrill'].custoTotalEmCoins * mapaDeFerramentas['sandDrill'].quantidade) / mapaDeMinerals['escavacao2'].mediaPorNode;
+    mapaDeMinerals['escavacao2'].custoEmFlower = mapaDeMinerals['escavacao2'].mediaCustoEmCoins * (1 / flowerEmCoins);
 
     //==========================================================================================================================================================
 
@@ -286,9 +299,20 @@ function valoresMineriosEFerramentasEGastos() {
     mapaDeMinerals['oil'].gastoComFerramentas       = oilGastos;
     //mapaDeMinerals['leather'].gastoComFerramentas   = leatherGastos;
 
-    console.log(`vou gastar: ${coinsGastas} Coins + ${woodGastas} Woods + ${stoneGastas} Stones + ${ironGastos} Irons + ${goldGastos} Golds + ${crimstoneGastas} Crim + ${oilGastos} Oils +  ${leatherGastos} Leather`)
+    let gastosConvertidoEmFlower = (coinsGastas / flowerEmCoins) +
+        (woodGastas * mapaDeMinerals['wood'].custoEmFlower) +
+        (stoneGastas * mapaDeMinerals['stone'].custoEmFlower) +
+        (ironGastos * mapaDeMinerals['iron'].custoEmFlower) +
+        (goldGastos * mapaDeMinerals['gold'].custoEmFlower) +
+        (crimstoneGastas * mapaDeMinerals['crimstone'].custoEmFlower) +
+        (oilGastos * mapaDeMinerals['oil'].custoEmFlower) +
+        (leatherGastos * mapaMarketRecursos['leather'].valor) +
+        (woolGastas * mapaMarketRecursos['wool'].valor);
 
-    statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGastos, crimstoneGastas, oilGastos, leatherGastos, woolGastas);
+
+    console.log(`vou gastar: ${coinsGastas} Coins + ${woodGastas} Woods + ${stoneGastas} Stones + ${ironGastos} Irons + ${goldGastos} Golds + ${crimstoneGastas} Crim + ${oilGastos} Oils +  ${leatherGastos} Leather`)
+    
+    statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGastos, crimstoneGastas, oilGastos, leatherGastos, woolGastas, gastosConvertidoEmFlower);
 }
 
 //==================================================================================================================================================================

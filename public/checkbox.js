@@ -38,7 +38,7 @@ function configurarCheckbox() {
 
     //==============================================================================================================================================
 
-    //NFTs e Wearables
+    //NFTs novos
     novosCollectibles.forEach(newCollectibles => {
         let checkbox = document.getElementById(newCollectibles.id);
 
@@ -55,6 +55,23 @@ function configurarCheckbox() {
         };
     }); 
 
+    novosWearables.forEach(newCollectibles => {
+        let checkbox = document.getElementById(newCollectibles.id);
+
+        if(checkbox) {
+            newCollectibles.possui = checkbox.checked;
+
+            checkbox.addEventListener('change', function() {
+                newCollectibles.possui = checkbox.checked;
+                valorTotalEmNftsETotalPontosEmSkills();
+                ativarBonusDasNftsESkills();
+                buffsAdicionadosCrops();
+                buffsAdicionadosMinerais();
+            });
+        };
+    });
+
+    //NFTs Crops
     collectiblesCrops.forEach(collectibles => {
         let checkbox = document.getElementById(collectibles.id);
 

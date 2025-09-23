@@ -43,6 +43,7 @@ function statusCrops() {
             melhorPorCoinsOuFlower = '<img src="./icones/flower.png" class="crop-img">Flower';
         }
 
+        //Total de reestock feitos com as crops
         if(Math.ceil(crop.seedsPlantadas / crop.estoqueFinal) > restockCropCombo){
             restockCropCombo = Math.ceil(crop.seedsPlantadas / crop.estoqueFinal);
         }
@@ -67,7 +68,7 @@ function statusCrops() {
 
     tabelaCrops += `</tbody></table>`;
 
-    // cálculo do resumo
+    //cálculo do resumo
     let precoRestockCropDolar = precoPorGem * (restockCropCombo * 15);
     let precoRestockCropFlower = precoDaGemEmFlower * (restockCropCombo * 15);
     let mediaLucroDiario = (vinteQuatroHoras / tempoTotal) * lucroTotalFlower;
@@ -115,7 +116,10 @@ function statusCrops() {
 
 //================================================================================================================================================================
 
-function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGastos, crimstoneGastas, oilGastos, leatherGastos, woolGastas) {
+function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGastos, crimstoneGastas, oilGastos, leatherGastos, woolGastas, gastosConvertidoEmFlower) {
+
+    let reestockFerramentas = 0;
+    let lucroTotalFlower = 0;
 
     let tabelaMinerios = `
     <table class="tabela-minerais">
@@ -148,7 +152,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         let tempoRessurgimentoRecurso = mapaDeMinerals[ferramenta.recursoAdquirido].tempoComBuff;
         let vezesQuePretendeMinerar = mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar;
         let valorMarketRecursos = Number(mapaDeMinerals[ferramenta.recursoAdquirido].valorMarket);
-        let custoPorUnidadeRecursoEmFlower = (mapaDeMinerals[ferramenta.recursoAdquirido].mediaCustoEmCoins) * (1 / flowerEmCoins);
+        let custoPorUnidadeRecursoEmFlower = Number(mapaDeMinerals[ferramenta.recursoAdquirido].custoEmFlower);
         let totalDeRecursosFarmados = mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * mapaDeMinerals[ferramenta.recursoAdquirido].mediaPorNode;
         let totalRecursoGastoComFerramenta = mapaDeMinerals[ferramenta.recursoAdquirido].gastoComFerramentas;
         let oqueSobraOuFalta = totalDeRecursosFarmados - totalRecursoGastoComFerramenta;
@@ -161,7 +165,8 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         let gastoConvertidoEmFlower = (1 / flowerEmCoins) * gastoComFerramentas;
 
         let lucroFlower = mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar == 0 || ilha === 'Basic' ? 0 : ((valorMarketRecursos * oqueSobraOuFalta) * (1 - (taxa * desconto)));
-        
+        lucroTotalFlower += lucroFlower;
+
         let comprarOuMinerar;
         if (valorMarketRecursos > custoPorUnidadeRecursoEmFlower) {
             comprarOuMinerar = 'Minerar';
@@ -171,6 +176,11 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
             comprarOuMinerar = '-'
         };
 
+        //Total de reestock feitos com as ferramentas
+        if(Math.ceil(ferramentasUsadas / ferramenta.estoqueComBuff) > reestockFerramentas){
+            reestockFerramentas = Math.ceil(ferramentasUsadas / ferramenta.estoqueComBuff);
+        }
+
         tabelaMinerios += `
         <tr>
             <td><img src="./minerais/${ferramenta.id}.png" class="crop-img">${ferramenta.name} <br> <img src="./icones/reestock.png" class="crop-img">${ferramenta.estoqueComBuff}</td>
@@ -178,7 +188,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
             <td>${nomeRecurso} <br> <img src="./minerais/${imagemRecurso}.png" class="crop-img">${mediaPorNodeDoRecurso.toFixed(2)}</td>
             <td><input type="number" placeholder="" data-name="${mapaDeMinerals[ferramenta.recursoAdquirido].id}" class="quantidade-input" value="${mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar}"></td>
             <td><img src="./icones/tempo.png" class="crop-img">${formatarTempoDaCrop(tempoTotalDoMinerio)}</td>
-            <td><img src="./minerais/${ferramenta.id}.png" class="crop-img">${ferramentasUsadas}<br><img src="./icones/flower.png" class="crop-img">${gastoConvertidoEmFlower.toFixed(4)}</td>
+            <td><img src="./minerais/${ferramenta.id}.png" class="crop-img">${ferramentasUsadas.toFixed(2)}<br><img src="./icones/flower.png" class="crop-img">${gastoConvertidoEmFlower.toFixed(4)}</td>
             <td><img src="./minerais/${imagemRecurso}.png" class="crop-img">${totalDeRecursosFarmados.toFixed(2)}</td>
             <td><img src="./icones/flower.png" class="crop-img">${custoPorUnidadeRecursoEmFlower.toFixed(4)}</td>
             <td><img src="./icones/flower.png" class="crop-img">${valorMarketRecursos .toFixed(4)}</td>
@@ -191,36 +201,37 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
     });
     tabelaMinerios += `</tbody></table>`;
 
-    let tabelaResultadoFinal = `
+    lucroTotalFlower -= (coinsGastas / flowerEmCoins) +
+        (leatherGastos * mapaMarketRecursos['leather'].valor) +
+        (woolGastas * mapaMarketRecursos['wool'].valor);
+
+    let precoRestockFerramentasDolar = precoPorGem * (reestockFerramentas * 10);
+    let precoRestockFerramentasFlower = precoDaGemEmFlower * (reestockFerramentas * 10);
+
+    let tabelaResultadoFinalMinerios = `
         <div class="resumo-cards">
             <div class="card">
                 <div class="card-title"><h3>Total Recursos Gastos</h3></div>
                 <div class="card-value">
-                    <img src="./icones/coins.png" class="crop-img">${coinsGastas.toFixed(2)} - <img src="./minerais/wood.png" class="crop-img">${woodGastas} - <img src="./minerais/stone.png" class="crop-img">${stoneGastas}
-                    <img src="./minerais/iron.png" class="crop-img">${ironGastos} - <img src="./minerais/gold.png" class="crop-img">${goldGastos}<br>
-                    <img src="./minerais/crimstone.png" class="crop-img">${crimstoneGastas} - <img src="./minerais/oil.png" class="crop-img">${oilGastos} - <img src="./animais/leather.png" class="crop-img">${leatherGastos} - <img src="./animais/wool.png" class="crop-img">${woolGastas}<br>
+                    <img src="./icones/coins.png" class="crop-img">${coinsGastas.toFixed(2)} | <img src="./minerais/wood.png" class="crop-img">${woodGastas} | <img src="./minerais/stone.png" class="crop-img">${stoneGastas} |
+                    <img src="./minerais/iron.png" class="crop-img">${ironGastos} | <img src="./minerais/gold.png" class="crop-img">${goldGastos}<br>
+                    <img src="./minerais/crimstone.png" class="crop-img">${crimstoneGastas} | <img src="./minerais/oil.png" class="crop-img">${oilGastos} | <img src="./animais/leather.png" class="crop-img">${leatherGastos} | <img src="./animais/wool.png" class="crop-img">${woolGastas}<br>
+                    <br>Total convertido: <img src="./icones/flower.png" class="crop-img">${gastosConvertidoEmFlower.toFixed(2)}   
                 </div>
             </div>
             <div class="card">
-                <div class="card-title"><h3>Restock</h3></div>
+                <div class="card-title"><h3>Gasto com Restock</h3></div>
                 <div class="card-value">
-                    Quantidade:  = <img src="icones/gem.png" class="crop-img"><br>
-                    <img src="icones/flower.png" class="crop-img"> ~ 
-                    <img src="icones/usdc.png" class="crop-img">$
+                    Quantidade: ${reestockFerramentas} = <img src="icones/gem.png" class="crop-img">${reestockFerramentas * 10}<br>
+                    <img src="icones/flower.png" class="crop-img">${precoRestockFerramentasFlower.toFixed(4)} ~
+                    <img src="icones/usdc.png" class="crop-img">$${precoRestockFerramentasDolar.toFixed(4)}
                 </div>
             </div>
             <div class="card">
-                <div class="card-title"><h3>Lucro Total do Combo Plantado<br>(Gems Descontadas)</h3></div>
+                <div class="card-title"><h3>Lucro Total <br>(Gems Descontadas)</h3></div>
                 <div class="card-value">
-                    <img src="icones/flower.png" class="crop-img"> ~ 
-                    <img src="icones/usdc.png" class="crop-img">$
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-title"><h3>Média de Lucro Diário<br>(Não desconta Gems)</h3></div>
-                <div class="card-value">
-                    <img src="icones/flower.png" class="crop-img">~ 
-                    <img src="icones/usdc.png" class="crop-img">$
+                    <img src="icones/flower.png" class="crop-img"> ${(lucroTotalFlower - precoRestockFerramentasFlower).toFixed(4)} ~ 
+                    <img src="icones/usdc.png" class="crop-img">$${((lucroTotalFlower - precoRestockFerramentasFlower) * precoDoFlower).toFixed(4)}
                 </div>
             </div>
         </div>
@@ -230,7 +241,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
 
     mostrarResultadoMinerals.innerHTML = `
         <div class="tabelas-em-ordem">
-            ${tabelaResultadoFinal}
+            ${tabelaResultadoFinalMinerios}
             ${tabelaMinerios}
         </div>
     `;
