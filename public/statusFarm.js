@@ -31,10 +31,23 @@ function salvarInformacoes() {
 //função para salvar os nodes que possui
 function salvarNodesPossuidos() {
     mapaDeMinerals['wood'].qtdNodes = document.getElementById('treesPossuidas').value || 1;
+    mapaDeMinerals['wood'].qtdNodesT2 = document.getElementById('treesTier2').value || 0;
+    mapaDeMinerals['wood'].qtdNodesT3 = document.getElementById('treesTier3').value || 0;
+
     mapaDeMinerals['stone'].qtdNodes = document.getElementById('stonesPossuidas').value || 1;
+    mapaDeMinerals['stone'].qtdNodesT2 = document.getElementById('stonesTier2').value || 0;
+    mapaDeMinerals['stone'].qtdNodesT3 = document.getElementById('stonesTier3').value || 0;
+
     mapaDeMinerals['iron'].qtdNodes = document.getElementById('ironsPossuidos').value || 1;
+    mapaDeMinerals['iron'].qtdNodesT2 = document.getElementById('ironsTier2').value || 0;
+    mapaDeMinerals['iron'].qtdNodesT3 = document.getElementById('ironsTier3').value || 0;
+
     mapaDeMinerals['gold'].qtdNodes = document.getElementById('goldsPossuidos').value || 1;
+    mapaDeMinerals['gold'].qtdNodesT2 = document.getElementById('goldsTier2').value || 0;
+    mapaDeMinerals['gold'].qtdNodesT3 = document.getElementById('goldsTier3').value || 0;
+
     mapaDeMinerals['crimstone'].qtdNodes = document.getElementById('crimstonesPossuidas').value || 1;
+
     mapaDeMinerals['oil'].qtdNodes = document.getElementById('oilPossuidos').value || 1;
     
     buffsAdicionadosMinerais();

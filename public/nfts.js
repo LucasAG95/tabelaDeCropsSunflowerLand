@@ -41,7 +41,7 @@ let novosCollectibles = [
         name: 'Fruit Tune Box',
         descricao: '+20% na velocidade de crescimento das frutas',
         estacao: 'todas',
-        tipoDeCrop: 'todas',
+        tipoDeCrop: 'frutas',
         afeta: 'tempo',
         sinal: 'x',
         buff: 0.8,

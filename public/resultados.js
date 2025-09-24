@@ -185,7 +185,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         <tr>
             <td><img src="./minerais/${ferramenta.id}.png" class="crop-img">${ferramenta.name} <br> <img src="./icones/reestock.png" class="crop-img">${ferramenta.estoqueComBuff}</td>
             <td><img src="./icones/tempo.png" class="crop-img">${formatarTempoDaCrop(tempoRessurgimentoRecurso)}</td>
-            <td>${nomeRecurso} <br> <img src="./minerais/${imagemRecurso}.png" class="crop-img">${mediaPorNodeDoRecurso.toFixed(2)}</td>
+            <td>${nomeRecurso} <br> <img src="./minerais/${imagemRecurso}.png" class="crop-img">${mediaPorNodeDoRecurso.toFixed(3)}</td>
             <td><input type="number" placeholder="" data-name="${mapaDeMinerals[ferramenta.recursoAdquirido].id}" class="quantidade-input" value="${mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar}"></td>
             <td><img src="./icones/tempo.png" class="crop-img">${formatarTempoDaCrop(tempoTotalDoMinerio)}</td>
             <td><img src="./minerais/${ferramenta.id}.png" class="crop-img">${ferramentasUsadas.toFixed(2)}<br><img src="./icones/flower.png" class="crop-img">${gastoConvertidoEmFlower.toFixed(4)}</td>

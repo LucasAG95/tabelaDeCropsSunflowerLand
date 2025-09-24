@@ -149,14 +149,34 @@ function numeroDaFarm() {
 
             //infos para preencher plots/nodes que possue na farm
             const cropPlotsQuePossui = data.farm.inventory['Crop Plot'];
+
             const treeQuePossui = data.farm.inventory['Tree'];
+            const treeT2QuePossui = data.farm.inventory['Ancient Tree'];
+            const treeT3QuePossui = data.farm.inventory['Sacred Tree'];
+
             const stoneQuePossui = data.farm.inventory['Stone Rock'];
+            const stoneT2QuePossui = data.farm.inventory['Fused Stone Rock'];
+            const stoneT3QuePossui = data.farm.inventory['Reinforced Stone Rock'];
+
             const ironQuePossui = data.farm.inventory['Iron Rock'];
+            const ironT2QuePossui = data.farm.inventory['Refined Iron Rock'];
+            const ironT3QuePossui = data.farm.inventory['Tempered Iron Rock'];
+
             const goldQuePossui = data.farm.inventory['Gold Rock'];
+            const goldT2QuePossui = data.farm.inventory['Pure Gold Rock'];
+            const goldT3QuePossui = data.farm.inventory['Prime Gold Rock'];
+
             const crimstoneQuePossui = data.farm.inventory['Crimstone Rock'];
+
             const oilQuePossui = data.farm.inventory['Oil Reserve'];
 
-            preencherInformacoesDaFarm(cropPlotsQuePossui, treeQuePossui, stoneQuePossui, ironQuePossui, goldQuePossui, crimstoneQuePossui, oilQuePossui);
+            preencherInformacoesDaFarm(cropPlotsQuePossui, 
+                treeQuePossui, treeT2QuePossui, treeT3QuePossui,
+                stoneQuePossui, stoneT2QuePossui, stoneT3QuePossui,
+                ironQuePossui, ironT2QuePossui, ironT3QuePossui,
+                goldQuePossui, goldT2QuePossui, goldT3QuePossui,
+                crimstoneQuePossui, 
+                oilQuePossui);
 
             //infos para preencher o prestigio de Farm em que esta
             const ilhaQueEsta = data.farm.inventory;
@@ -278,25 +298,63 @@ function numeroDaFarm() {
     };
     
     //função responsavel por preencher quantos plots/nodes a farm possui!
-    function preencherInformacoesDaFarm(cropPlotsQuePossui, treeQuePossui, stoneQuePossui, ironQuePossui, goldQuePossui, crimstoneQuePossui, oilQuePossui) {
+    function preencherInformacoesDaFarm(cropPlotsQuePossui, 
+                treeQuePossui, treeT2QuePossui, treeT3QuePossui,
+                stoneQuePossui, stoneT2QuePossui, stoneT3QuePossui,
+                ironQuePossui, ironT2QuePossui, ironT3QuePossui,
+                goldQuePossui, goldT2QuePossui, goldT3QuePossui,
+                crimstoneQuePossui, 
+                oilQuePossui) {
+        
+        //Plots Crops
         plots = cropPlotsQuePossui;
         document.getElementById('plotsPossuidos').value = cropPlotsQuePossui;
 
+        //Trees
         mapaDeMinerals['wood'].qtdNodes = treeQuePossui;
         document.getElementById('treesPossuidas').value = treeQuePossui;
 
+        mapaDeMinerals['wood'].qtdNodesT2 = treeT2QuePossui;
+        document.getElementById('treesTier2').value = treeT2QuePossui || 0;
+
+        mapaDeMinerals['wood'].qtdNodesT3 = treeT3QuePossui;
+        document.getElementById('treesTier3').value = treeT3QuePossui || 0;
+
+        //Stones
         mapaDeMinerals['stone'].qtdNodes = stoneQuePossui;
         document.getElementById('stonesPossuidas').value = stoneQuePossui;
 
+        mapaDeMinerals['stone'].qtdNodesT2 = stoneT2QuePossui;
+        document.getElementById('stonesTier2').value = stoneT2QuePossui || 0;
+
+        mapaDeMinerals['stone'].qtdNodesT3 = stoneT3QuePossui;
+        document.getElementById('stonesTier3').value = stoneT3QuePossui || 0;
+
+        //Irons
         mapaDeMinerals['iron'].qtdNodes = ironQuePossui;
         document.getElementById('ironsPossuidos').value = ironQuePossui;
 
+        mapaDeMinerals['iron'].qtdNodesT2 = ironT2QuePossui;
+        document.getElementById('ironsTier2').value = ironT2QuePossui || 0;
+
+        mapaDeMinerals['iron'].qtdNodesT3 = ironT3QuePossui;
+        document.getElementById('ironsTier3').value = ironT3QuePossui || 0;
+
+        //Golds
         mapaDeMinerals['gold'].qtdNodes = goldQuePossui;
         document.getElementById('goldsPossuidos').value = goldQuePossui;
 
+        mapaDeMinerals['gold'].qtdNodesT2 = goldT2QuePossui;
+        document.getElementById('goldsTier2').value = goldT2QuePossui || 0;
+
+        mapaDeMinerals['gold'].qtdNodesT3 = goldT3QuePossui;
+        document.getElementById('goldsTier3').value = goldT3QuePossui || 0;
+
+        //Crim
         mapaDeMinerals['crimstone'].qtdNodes = crimstoneQuePossui;
         document.getElementById('crimstonesPossuidas').value = crimstoneQuePossui;
 
+        //Oil
         mapaDeMinerals['oil'].qtdNodes = oilQuePossui;
         document.getElementById('oilPossuidos').value = oilQuePossui;
 
