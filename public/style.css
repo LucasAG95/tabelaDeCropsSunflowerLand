@@ -231,6 +231,17 @@ button:hover {
   color: #ffffff;
 }
 
+#saidaMinerais {
+  padding: 20px;
+  border-radius: 14px;
+  margin-top: 2px;
+  box-shadow: 0 4px 12px rgba(17, 16, 16, 0.4);
+  font-size: 1px;
+  font-weight: bold;
+  background-color: #2a2a2a;
+  color: #ffffff;
+}
+
 /* ====================
    TABELA DE CROPS
 ======================= */
@@ -334,7 +345,7 @@ td input.quantidade-input {
 .tabelas-em-ordem {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 5px;
 }
 
 .resumo-cards {

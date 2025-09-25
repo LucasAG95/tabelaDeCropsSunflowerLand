@@ -142,15 +142,10 @@ function buffsAdicionadosMinerais() {
             collectiblesMinerals, 
             wearablesMinerals]);
         
-        let recursoTier1 = Number(mineral.qtdNodes);
-
-        let recursoTier2 = Number(mineral.qtdNodesT2 * 4);
+        //conta do buff ao fundir os recursos para um tier maior - / t1 = 1 recurso / t2 = 4 recursos do t1 / t3 = 4 recursos do t2 (16 recursos t1)
         let buffRecursoTier2 = Number(mineral.qtdNodesT2 * 0.5);
-
-        let recursoTier3 = Number(mineral.qtdNodesT3 * 16);
         let buffRecursoTier3 = Number(mineral.qtdNodesT3 * 2.5);
-
-        let buffMedioGeralAAdicionar = (buffRecursoTier2 + buffRecursoTier3) / (recursoTier1 + recursoTier2 + recursoTier3);
+        let buffMedioGeralAAdicionar = (buffRecursoTier2 + buffRecursoTier3) / Number(mineral.qtdNodes);
 
         mineral.mediaPorNode =
             ((mineral.mediaPorNodePadrao * buffs.multiplicaQtd) + buffMedioGeralAAdicionar + buffs.somaQtd + buffs.buffMineraisFixo + (buffs.somaQtdArea / mineral.qtdNodes) - buffs.somaDebuff)  * buffs.multiplicaInstaRecurso;

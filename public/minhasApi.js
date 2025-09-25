@@ -311,44 +311,44 @@ function numeroDaFarm() {
         document.getElementById('plotsPossuidos').value = cropPlotsQuePossui;
 
         //Trees
-        mapaDeMinerals['wood'].qtdNodes = treeQuePossui;
+        mapaDeMinerals['wood'].qtdNodesT1 = treeQuePossui;
         document.getElementById('treesPossuidas').value = treeQuePossui;
 
         mapaDeMinerals['wood'].qtdNodesT2 = treeT2QuePossui;
-        document.getElementById('treesTier2').value = treeT2QuePossui || 0;
+        document.getElementById('treesTier2').value = treeT2QuePossui;
 
         mapaDeMinerals['wood'].qtdNodesT3 = treeT3QuePossui;
-        document.getElementById('treesTier3').value = treeT3QuePossui || 0;
+        document.getElementById('treesTier3').value = treeT3QuePossui;
 
         //Stones
-        mapaDeMinerals['stone'].qtdNodes = stoneQuePossui;
+        mapaDeMinerals['stone'].qtdNodesT1 = stoneQuePossui;
         document.getElementById('stonesPossuidas').value = stoneQuePossui;
 
         mapaDeMinerals['stone'].qtdNodesT2 = stoneT2QuePossui;
-        document.getElementById('stonesTier2').value = stoneT2QuePossui || 0;
+        document.getElementById('stonesTier2').value = stoneT2QuePossui;
 
         mapaDeMinerals['stone'].qtdNodesT3 = stoneT3QuePossui;
-        document.getElementById('stonesTier3').value = stoneT3QuePossui || 0;
+        document.getElementById('stonesTier3').value = stoneT3QuePossui;
 
         //Irons
-        mapaDeMinerals['iron'].qtdNodes = ironQuePossui;
+        mapaDeMinerals['iron'].qtdNodesT1 = ironQuePossui;
         document.getElementById('ironsPossuidos').value = ironQuePossui;
 
         mapaDeMinerals['iron'].qtdNodesT2 = ironT2QuePossui;
-        document.getElementById('ironsTier2').value = ironT2QuePossui || 0;
+        document.getElementById('ironsTier2').value = ironT2QuePossui;
 
         mapaDeMinerals['iron'].qtdNodesT3 = ironT3QuePossui;
-        document.getElementById('ironsTier3').value = ironT3QuePossui || 0;
+        document.getElementById('ironsTier3').value = ironT3QuePossui;
 
         //Golds
-        mapaDeMinerals['gold'].qtdNodes = goldQuePossui;
+        mapaDeMinerals['gold'].qtdNodesT1 = goldQuePossui;
         document.getElementById('goldsPossuidos').value = goldQuePossui;
 
         mapaDeMinerals['gold'].qtdNodesT2 = goldT2QuePossui;
-        document.getElementById('goldsTier2').value = goldT2QuePossui || 0;
+        document.getElementById('goldsTier2').value = goldT2QuePossui;
 
         mapaDeMinerals['gold'].qtdNodesT3 = goldT3QuePossui;
-        document.getElementById('goldsTier3').value = goldT3QuePossui || 0;
+        document.getElementById('goldsTier3').value = goldT3QuePossui;
 
         //Crim
         mapaDeMinerals['crimstone'].qtdNodes = crimstoneQuePossui;

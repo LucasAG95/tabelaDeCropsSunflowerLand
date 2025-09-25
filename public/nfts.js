@@ -1155,14 +1155,14 @@ let collectiblesMinerals = [
         possui: false
     },
     {
-        id: 'tinTurtle',
+        id: 'tinTurtle', //ver oq fazer dps
         idNumber: 464,
         name: 'Tin Turtle',
         descricao: '+0.1 Stone - Efeito em 8 nodes',
         tipoDeRecurso: 'stone',
-        afeta: 'areaQtd',
-        sinal: '+',
-        buff: 0.8,
+        afeta: '',
+        sinal: '',
+        buff: 0.1,
         valor: '',
         possui: false
     },

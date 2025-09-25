@@ -147,7 +147,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         //simplificar para colocar os recursos na tabela
         let imagemRecurso = mapaDeMinerals[ferramenta.recursoAdquirido].id;
         let nomeRecurso = mapaDeMinerals[ferramenta.recursoAdquirido].name;
-        let nodesDoRecurso = mapaDeMinerals[ferramenta.recursoAdquirido].qtdNodes;
+        let nodesDoRecurso = Number(mapaDeMinerals[ferramenta.recursoAdquirido].qtdNodes);
         let mediaPorNodeDoRecurso = mapaDeMinerals[ferramenta.recursoAdquirido].mediaPorNode;
         let tempoRessurgimentoRecurso = mapaDeMinerals[ferramenta.recursoAdquirido].tempoComBuff;
         let vezesQuePretendeMinerar = mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar;
@@ -164,7 +164,14 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         let gastoComFerramentas = ferramentasUsadas * ferramenta.custoTotalEmCoins;
         let gastoConvertidoEmFlower = (1 / flowerEmCoins) * gastoComFerramentas;
 
-        let lucroFlower = mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar == 0 || ilha === 'Basic' ? 0 : ((valorMarketRecursos * oqueSobraOuFalta) * (1 - (taxa * desconto)));
+        let lucroFlower = 0;
+        if (valorMarketRecursos * oqueSobraOuFalta < 0) {
+            lucroFlower = valorMarketRecursos * oqueSobraOuFalta;
+        } else if (mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar == 0 || ilha === 'Basic') {
+            lucroFlower = 0;
+        } else {
+            lucroFlower = (valorMarketRecursos * oqueSobraOuFalta) * (1 - (taxa * desconto));
+        }
         lucroTotalFlower += lucroFlower;
 
         let comprarOuMinerar;

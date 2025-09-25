@@ -30,21 +30,26 @@ function salvarInformacoes() {
 
 //função para salvar os nodes que possui
 function salvarNodesPossuidos() {
-    mapaDeMinerals['wood'].qtdNodes = document.getElementById('treesPossuidas').value || 1;
-    mapaDeMinerals['wood'].qtdNodesT2 = document.getElementById('treesTier2').value || 0;
-    mapaDeMinerals['wood'].qtdNodesT3 = document.getElementById('treesTier3').value || 0;
+    mapaDeMinerals['wood'].qtdNodesT1 = document.getElementById('treesPossuidas').value;
+    mapaDeMinerals['wood'].qtdNodesT2 = document.getElementById('treesTier2').value;
+    mapaDeMinerals['wood'].qtdNodesT3 = document.getElementById('treesTier3').value;
+    mapaDeMinerals['wood'].qtdNodes = Number(mapaDeMinerals['wood'].qtdNodesT1) + Number((mapaDeMinerals['wood'].qtdNodesT2 * 4)) + Number((mapaDeMinerals['wood'].qtdNodesT3 * 16)) || 1;
+    console.log(`tenho ${mapaDeMinerals['wood'].qtdNodes} de arvores`)
 
-    mapaDeMinerals['stone'].qtdNodes = document.getElementById('stonesPossuidas').value || 1;
-    mapaDeMinerals['stone'].qtdNodesT2 = document.getElementById('stonesTier2').value || 0;
-    mapaDeMinerals['stone'].qtdNodesT3 = document.getElementById('stonesTier3').value || 0;
+    mapaDeMinerals['stone'].qtdNodesT1 = document.getElementById('stonesPossuidas').value;
+    mapaDeMinerals['stone'].qtdNodesT2 = document.getElementById('stonesTier2').value;
+    mapaDeMinerals['stone'].qtdNodesT3 = document.getElementById('stonesTier3').value;
+    mapaDeMinerals['stone'].qtdNodes = Number(mapaDeMinerals['stone'].qtdNodesT1) + Number((mapaDeMinerals['stone'].qtdNodesT2 * 4)) + Number((mapaDeMinerals['stone'].qtdNodesT3 * 16)) || 1;
 
-    mapaDeMinerals['iron'].qtdNodes = document.getElementById('ironsPossuidos').value || 1;
-    mapaDeMinerals['iron'].qtdNodesT2 = document.getElementById('ironsTier2').value || 0;
-    mapaDeMinerals['iron'].qtdNodesT3 = document.getElementById('ironsTier3').value || 0;
+    mapaDeMinerals['iron'].qtdNodesT1 = document.getElementById('ironsPossuidos').value;
+    mapaDeMinerals['iron'].qtdNodesT2 = document.getElementById('ironsTier2').value;
+    mapaDeMinerals['iron'].qtdNodesT3 = document.getElementById('ironsTier3').value;
+    mapaDeMinerals['iron'].qtdNodes = Number(mapaDeMinerals['iron'].qtdNodesT1) + Number((mapaDeMinerals['iron'].qtdNodesT2 * 4)) + Number((mapaDeMinerals['iron'].qtdNodesT3 * 16)) || 1;
 
-    mapaDeMinerals['gold'].qtdNodes = document.getElementById('goldsPossuidos').value || 1;
-    mapaDeMinerals['gold'].qtdNodesT2 = document.getElementById('goldsTier2').value || 0;
-    mapaDeMinerals['gold'].qtdNodesT3 = document.getElementById('goldsTier3').value || 0;
+    mapaDeMinerals['gold'].qtdNodesT1 = document.getElementById('goldsPossuidos').value;
+    mapaDeMinerals['gold'].qtdNodesT2 = document.getElementById('goldsTier2').value;
+    mapaDeMinerals['gold'].qtdNodesT3 = document.getElementById('goldsTier3').value;
+    mapaDeMinerals['gold'].qtdNodes = Number(mapaDeMinerals['gold'].qtdNodesT1) + Number((mapaDeMinerals['gold'].qtdNodesT2 * 4)) + Number((mapaDeMinerals['gold'].qtdNodesT3 * 16)) || 1;
 
     mapaDeMinerals['crimstone'].qtdNodes = document.getElementById('crimstonesPossuidas').value || 1;
 
