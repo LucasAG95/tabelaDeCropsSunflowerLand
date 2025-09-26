@@ -2,7 +2,7 @@
    ESTILO GERAL DO SITE - SUNFLOWERLAND
 ======================= */
 body {
-  font-family: 'Comic Neue', cursive, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background: #1e1e1e; /* preto claro estilo dark mode */
   padding: 30px;
   color: #e0e0e0; /* texto claro */
@@ -169,7 +169,6 @@ input[type="checkbox"]:disabled + .nft-img:hover {
   flex-wrap: wrap;
   align-items: flex-end;
 }
-
 
 .select-group {
   display: flex;
