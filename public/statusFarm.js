@@ -1,5 +1,6 @@
 //Duração do dia - 24h
 let vinteQuatroHoras = parseFloat(86_400_000);
+let umaHora = parseFloat(3_600_000);
 
 //=====================================================================================================================================================================
 
@@ -57,7 +58,6 @@ function salvarNodesPossuidos() {
     
     buffsAdicionadosMinerais();
 };
-
 
 //=====================================================================================================================================================================
 
@@ -197,5 +197,5 @@ function titulosDosSelectsEPreenchimentos() {
     document.getElementById('valor-do-flower').innerHTML = `<br>Valor do Flower: <img src="icones/flower.png" class="crop-img">$${precoDoFlower.toFixed(4)}`
     document.getElementById('valor-por-gem').innerHTML = `Preço por Gem: <img src="icones/gem.png" class="crop-img">$${precoPorGem.toFixed(4)} = <img src="icones/flower.png" class="crop-img">${precoDaGemEmFlower.toFixed(4)}<br>`
     document.getElementById('valor-por-gem').innerHTML += `Seed Restock: <img src="icones/gem.png" class="crop-img">$${(precoPorGem * 15).toFixed(4)} = <img src="icones/flower.png" class="crop-img">${(precoDaGemEmFlower * 15).toFixed(4)}<br>`
-}
+};
 

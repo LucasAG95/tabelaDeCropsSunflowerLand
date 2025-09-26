@@ -4,6 +4,7 @@ function statusCrops() {
     let tempoTotal = 0;
     let lucroTotalFlower = 0;
     let restockCropCombo = 0;
+    let cardCrops = '';
 
     // tabela principal continua igual
     let tabelaCrops = `
@@ -19,6 +20,7 @@ function statusCrops() {
             <th>Lucro na venda <br> por Coins</th>
             <th>Lucro no Market P2P<br>Taxa: ${(taxa * 100) * desconto}%</th>
             <th>Melhor opção<br>de Venda atual</th>
+            <th>Média de Lucro por Hora<br>(Desconta Gems)</th>
         </tr>
         </thead>
         <tbody>
@@ -26,7 +28,7 @@ function statusCrops() {
 
     crops.forEach(crop => {
         if(!crop.estacao.includes(estacao)) return;
-
+        
         let colheitaTotal = crop.quantidadePorPlot * crop.seedsPlantadas;
         let tempoFinalDaCrop = crop.tempoFinal * Math.ceil(crop.seedsPlantadas / plots);
         let custoDaSementeEmCoins = crop.seedsPlantadas == 0 ? crop.custoFinal : crop.custoFinal * crop.seedsPlantadas;
@@ -34,6 +36,11 @@ function statusCrops() {
         let lucroCoins = (crop.vendaFinal * colheitaTotal) - (crop.custoFinal * crop.seedsPlantadas);
         let lucroFlower = crop.seedsPlantadas == 0 || ilha === 'Basic' ? 0 : ((crop.vendaFlower * colheitaTotal) * (1 - (taxa * desconto))) - custoSementeEmFlower;
         
+        let rendimento24h = ((vinteQuatroHoras / crop.tempoFinal) * (plots * crop.quantidadePorPlot)) * (crop.vendaFlower * (1 - (taxa * desconto)));
+        let custoEm24h = ((vinteQuatroHoras / crop.tempoFinal) * plots) * (crop.custoFinal / flowerEmCoins);
+        let custoEmGems24h = ((((vinteQuatroHoras / crop.tempoFinal) * plots) / (crop.estoqueFinal)) * 15) * precoDaGemEmFlower;
+        let lucroEm24h = rendimento24h - (custoEm24h + custoEmGems24h);
+
         let melhorPorCoinsOuFlower;
         if(lucroFlower === 0){
             melhorPorCoinsOuFlower = '';
@@ -62,11 +69,17 @@ function statusCrops() {
             <td><img src="./icones/coins.png" class="crop-img">${lucroCoins.toFixed(2)}</td>            
             <td><img src="./icones/flower.png" class="crop-img">${lucroFlower.toFixed(4)}</td>
             <td>${melhorPorCoinsOuFlower}</td>
+            <td>
+                <img src="./crops/${crop.name}.png" class="crop-img"><br>
+                <img src="./icones/flower.png" class="crop-img">${(lucroEm24h / 24).toFixed(5)}
+            </td>
         </tr>
         `;
+
     });
 
     tabelaCrops += `</tbody></table>`;
+    
 
     //cálculo do resumo
     let precoRestockCropDolar = precoPorGem * (restockCropCombo * 15);
