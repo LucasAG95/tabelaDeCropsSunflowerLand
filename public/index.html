@@ -301,6 +301,18 @@
     <button id="salvarNodes" onclick="salvarNodesPossuidos()">Salvar</button>
   </section>
 
+  <!-- Modo que deseja calcular os minerais -->
+  <section class="linha-selects">
+    <div class="select-group"> 
+      <label for="tipo-de-calculo">Modo de calcular:</label>
+      <select id="tipo-de-calculo">
+        <option value="manual">Quantidade de vezes que MINERA por Dia</option>
+        <option value="rodada">Quantidade de RODADAS que faz por dia</option>
+        <option value="hora">Quantidade de HORAS que minera por dia</option>
+      </select>
+    </div>
+  </section>
+
   <!-- Área de saída para resultados de minerais -->
   <div id="saidaMinerais"></div>
 

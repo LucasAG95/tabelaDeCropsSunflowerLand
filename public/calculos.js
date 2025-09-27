@@ -271,27 +271,27 @@ function valoresMineriosEFerramentasEGastos() {
 
     ferramentas.forEach(ferramenta => {
         if(ferramenta.coins)
-            coinsGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.quantidade) * ferramenta.coins);
+            coinsGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * ferramenta.quantidade) * ferramenta.coins);
         if(ferramenta.wood)
-            woodGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.quantidade) * ferramenta.wood);
+            woodGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * ferramenta.quantidade) * ferramenta.wood);
         if(ferramenta.stone)
-            stoneGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.quantidade) * ferramenta.stone);
+            stoneGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * ferramenta.quantidade) * ferramenta.stone);
         if(ferramenta.iron)
-            ironGastos += ((mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.quantidade) * ferramenta.iron);
+            ironGastos += ((mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * ferramenta.quantidade) * ferramenta.iron);
         if(ferramenta.gold)
-            goldGastos += ((mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.quantidade) * ferramenta.gold);
+            goldGastos += ((mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * ferramenta.quantidade) * ferramenta.gold);
         if(ferramenta.crimstone)
-            crimstoneGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.quantidade) * ferramenta.crimstone);
+            crimstoneGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * ferramenta.quantidade) * ferramenta.crimstone);
         if(ferramenta.oil)
-            oilGastos += ((mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.quantidade) * ferramenta.oil);
+            oilGastos += ((mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * ferramenta.quantidade) * ferramenta.oil);
         
         //se possuir a skill Oil Rig troca pra wool o gasto
         if (mapaDeSkillsMachinery['oilRig'].possui) {
             if(ferramenta.wool)
-                woolGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.quantidade) * ferramenta.wool);
+                woolGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * ferramenta.quantidade) * ferramenta.wool);
         } else {
             if(ferramenta.leather)
-                leatherGastos += ((mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * ferramenta.quantidade) * ferramenta.leather);
+                leatherGastos += ((mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * ferramenta.quantidade) * ferramenta.leather);
         }; 
         
     });

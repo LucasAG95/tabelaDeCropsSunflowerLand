@@ -141,8 +141,8 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
             <th>Ferramentas <br> Estoque</th>
             <th>Tempo de <br> Ressurgimento</th>
             <th>Média feita<br>por Node</th>
-            <th>Nodes que vai quebrar <br><button onclick="nodesQuebrados()">Salvar</button></th>
-            <th>Tempo Total</th>            
+            <th><button onclick="nodesQuebrados()">Calcular</button></th>
+            <th>Tempo Total</th>
             <th>Ferramentas Usadas<br>Gasto Total</th>
             <th>Qtd. Média <br> Adquirida</th> 
             <th>Custo de produção<br>por Unidade</th>             
@@ -153,7 +153,10 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         </tr>
         </thead>
         <tbody>
-    `;  
+    `;
+    let selecionarTipoDeCalculo = 'manual'
+    selecionarTipoDeCalculo = document.getElementById('tipo-de-calculo');
+
     
     ferramentas.forEach(ferramenta => {
 
@@ -163,19 +166,21 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         let nodesDoRecurso = Number(mapaDeMinerals[ferramenta.recursoAdquirido].qtdNodes);
         let mediaPorNodeDoRecurso = mapaDeMinerals[ferramenta.recursoAdquirido].mediaPorNode;
         let tempoRessurgimentoRecurso = mapaDeMinerals[ferramenta.recursoAdquirido].tempoComBuff;
-        let vezesQuePretendeMinerar = mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar;
+        let custoDaFerramentaEmFlower = (1 / flowerEmCoins) * ferramenta.custoTotalEmCoins;
+
+        let vezesQuePretendeMinerar = mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas;
+        let ferramentasUsadas = vezesQuePretendeMinerar * ferramenta.quantidade;
+        let totalDeRecursosFarmados = mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * mapaDeMinerals[ferramenta.recursoAdquirido].mediaPorNode;
+        let tempoTotalDoMinerio = tempoRessurgimentoRecurso * Math.ceil(vezesQuePretendeMinerar / nodesDoRecurso); //rever isto
+
+        //rever posições 
         let valorMarketRecursos = Number(mapaDeMinerals[ferramenta.recursoAdquirido].valorMarket);
         let custoPorUnidadeRecursoEmFlower = Number(mapaDeMinerals[ferramenta.recursoAdquirido].custoEmFlower);
-        let totalDeRecursosFarmados = mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar * mapaDeMinerals[ferramenta.recursoAdquirido].mediaPorNode;
         let totalRecursoGastoComFerramenta = mapaDeMinerals[ferramenta.recursoAdquirido].gastoComFerramentas;
-        let oqueSobraOuFalta = totalDeRecursosFarmados - totalRecursoGastoComFerramenta;
-
-        
-        let tempoTotalDoMinerio = tempoRessurgimentoRecurso * Math.ceil(vezesQuePretendeMinerar / nodesDoRecurso);
-        let custoDaFerramentaEmFlower = (1 / flowerEmCoins) * ferramenta.custoTotalEmCoins;
-        let ferramentasUsadas = ferramenta.quantidade * vezesQuePretendeMinerar;
         let gastoComFerramentas = ferramentasUsadas * ferramenta.custoTotalEmCoins;
         let gastoConvertidoEmFlower = (1 / flowerEmCoins) * gastoComFerramentas;
+
+        let oqueSobraOuFalta = totalDeRecursosFarmados - totalRecursoGastoComFerramenta;
 
         let lucroFlower = 0;
         if (valorMarketRecursos * oqueSobraOuFalta < 0) {
@@ -200,7 +205,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         if(Math.ceil(ferramentasUsadas / ferramenta.estoqueComBuff) > reestockFerramentas){
             reestockFerramentas = Math.ceil(ferramentasUsadas / ferramenta.estoqueComBuff);
         }
-
+        
         tabelaMinerios += `
         <tr>
             <td><img src="./minerais/${ferramenta.id}.png" class="crop-img">${ferramenta.name} <br> <img src="./icones/reestock.png" class="crop-img">${ferramenta.estoqueComBuff}</td>
@@ -211,7 +216,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
             <td><img src="./minerais/${ferramenta.id}.png" class="crop-img">${ferramentasUsadas.toFixed(2)}<br><img src="./icones/flower.png" class="crop-img">${gastoConvertidoEmFlower.toFixed(4)}</td>
             <td><img src="./minerais/${imagemRecurso}.png" class="crop-img">${totalDeRecursosFarmados.toFixed(2)}</td>
             <td><img src="./icones/flower.png" class="crop-img">${custoPorUnidadeRecursoEmFlower.toFixed(4)}</td>
-            <td><img src="./icones/flower.png" class="crop-img">${valorMarketRecursos .toFixed(4)}</td>
+            <td><img src="./icones/flower.png" class="crop-img">${valorMarketRecursos.toFixed(4)}</td>
             <td><img src="./minerais/${imagemRecurso}.png" class="crop-img">${oqueSobraOuFalta.toFixed(2)}</td>
             <td><img src="./icones/flower.png" class="crop-img">${(lucroFlower).toFixed(4)}</td>
             <td>${comprarOuMinerar}</td>
@@ -256,9 +261,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
             </div>
         </div>
         `;
-
-
-
+    
     mostrarResultadoMinerals.innerHTML = `
         <div class="tabelas-em-ordem">
             ${tabelaResultadoFinalMinerios}
@@ -267,3 +270,5 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
     `;
 
 };
+
+

@@ -121,7 +121,6 @@ let eventoBountifulHarvest = 0; //ganha +1 ao colher frutas e crops
 
 function eventoDeBonus() {
     eventoBonus = document.getElementById('evento-bonus').value;
-    
 
     if (eventoBonus === 'sunshower') {
         eventoSunshower = 0.5
@@ -154,20 +153,42 @@ function sementesPlantadas() {
     buffsAdicionadosCrops();
 };
 
+//ao selecionar o modo, muda como calcula os minerais e traz novos resultados
+let modoDeCalcular = 'manual';
+function selecionarModoDeCalculo() {
+    modoDeCalcular = document.getElementById('tipo-de-calculo').value
+    console.log(`meu valor é de ${modoDeCalcular}`)
+
+    // limpa todos os inputs - (chat GPT)
+    document.querySelectorAll('.quantidade-input').forEach(input => {
+        input.value = '';
+    });
+
+    nodesQuebrados();
+}
+document.getElementById('tipo-de-calculo').addEventListener('change', selecionarModoDeCalculo);
+
 function nodesQuebrados() {
     document.querySelectorAll('.quantidade-input').forEach(input => { //Procura todos os inputs no HTML que têm a classe quantidade-input.
         let nome = input.dataset.name; //Lê o atributo data-name do input.
         let valor = input.value;
         let mineral = minerals.find(mineral => mineral.id === nome) //Procura no array crops um item com o mesmo nome que o data-name do input.
+
         if (mineral) {
             mineral.vezesQueVaiQuebrar = valor;
+            
+            if (modoDeCalcular === 'rodada') {
+                mineral.qtdQuebradasConvertidas = mineral.vezesQueVaiQuebrar * mineral.qtdNodes;
+            } else if (modoDeCalcular === 'hora') {
+                mineral.qtdQuebradasConvertidas = Math.floor((mineral.vezesQueVaiQuebrar * umaHora) / mineral.tempoComBuff) * mineral.qtdNodes;
+            } else {
+                mineral.qtdQuebradasConvertidas = mineral.vezesQueVaiQuebrar;
+            }
         };
 
     });
     buffsAdicionadosMinerais();
 };
-
-
 
 //=====================================================================================================================================================================
 
@@ -195,7 +216,9 @@ document.getElementById('pack-gems').addEventListener('change', valoresDasGems);
 //mostrar(modificar) 'titulos' das abas
 function titulosDosSelectsEPreenchimentos() {
     document.getElementById('valor-do-flower').innerHTML = `<br>Valor do Flower: <img src="icones/flower.png" class="crop-img">$${precoDoFlower.toFixed(4)}`
-    document.getElementById('valor-por-gem').innerHTML = `Preço por Gem: <img src="icones/gem.png" class="crop-img">$${precoPorGem.toFixed(4)} = <img src="icones/flower.png" class="crop-img">${precoDaGemEmFlower.toFixed(4)}<br>`
-    document.getElementById('valor-por-gem').innerHTML += `Seed Restock: <img src="icones/gem.png" class="crop-img">$${(precoPorGem * 15).toFixed(4)} = <img src="icones/flower.png" class="crop-img">${(precoDaGemEmFlower * 15).toFixed(4)}<br>`
+    document.getElementById('valor-por-gem').innerHTML = `Preço por Gem ➔ <img src="icones/gem.png" class="crop-img">$${precoPorGem.toFixed(4)} = <img src="icones/flower.png" class="crop-img">${precoDaGemEmFlower.toFixed(4)}<br><br>`
+    document.getElementById('valor-por-gem').innerHTML += `Seed Restock: 15<img src="icones/gem.png" class="crop-img">➔ $${(precoPorGem * 15).toFixed(4)} = <img src="icones/flower.png" class="crop-img">${(precoDaGemEmFlower * 15).toFixed(4)}<br>`
+    document.getElementById('valor-por-gem').innerHTML += `Tool Restock: 10<img src="icones/gem.png" class="crop-img">➔ $${(precoPorGem * 10).toFixed(4)} = <img src="icones/flower.png" class="crop-img">${(precoDaGemEmFlower * 10).toFixed(4)}<br>`
+    document.getElementById('valor-por-gem').innerHTML += `Full Restock: 20<img src="icones/gem.png" class="crop-img">➔ $${(precoPorGem * 20).toFixed(4)} = <img src="icones/flower.png" class="crop-img">${(precoDaGemEmFlower * 20).toFixed(4)}<br>`
 };
 
