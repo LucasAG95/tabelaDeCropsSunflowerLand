@@ -155,6 +155,7 @@ function sementesPlantadas() {
 
 //ao selecionar o modo, muda como calcula os minerais e traz novos resultados
 let modoDeCalcular = 'manual';
+let tituloJeitoDeMinerar = 'Qtd que vai quebrar';
 function selecionarModoDeCalculo() {
     modoDeCalcular = document.getElementById('tipo-de-calculo').value
     console.log(`meu valor é de ${modoDeCalcular}`)
@@ -163,6 +164,14 @@ function selecionarModoDeCalculo() {
     document.querySelectorAll('.quantidade-input').forEach(input => {
         input.value = '';
     });
+
+    if (modoDeCalcular === 'rodada') {
+        tituloJeitoDeMinerar = 'Qtd de Ciclos Minerando';
+    } else if (modoDeCalcular === 'hora') {
+        tituloJeitoDeMinerar = 'Qtd de Horas Minerando';
+    } else {
+        tituloJeitoDeMinerar = 'Qtd que vai Minerar';
+    }
 
     nodesQuebrados();
 }

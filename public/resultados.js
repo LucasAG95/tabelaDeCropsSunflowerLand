@@ -141,7 +141,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
             <th>Ferramentas <br> Estoque</th>
             <th>Tempo de <br> Ressurgimento</th>
             <th>Média feita<br>por Node</th>
-            <th><button onclick="nodesQuebrados()">Calcular</button></th>
+            <th><button onclick="nodesQuebrados()">Calcular</button><br>${tituloJeitoDeMinerar}</th>
             <th>Tempo Total</th>
             <th>Ferramentas Usadas<br>Gasto Total</th>
             <th>Qtd. Média <br> Adquirida</th> 
