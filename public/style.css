@@ -470,3 +470,71 @@ td input.quantidade-input {
 .tabela-minerais tr:nth-child(odd) {
   background-color: #242424;
 }
+
+/* ====================
+   TABELA DE PESCA/ESCAVAÇÃO (TAMANHO FIXO ESQUERDA)
+======================= */
+.tabela-pesca-escavacao {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 30px;
+  font-size: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid #333;
+
+  table-layout: fixed; /* colunas fixas */
+  width: 520px;        /* largura total da tabela */
+  margin-left: 0;      /* gruda na esquerda */
+}
+
+/* células padrão */
+.tabela-pesca-escavacao th,
+.tabela-pesca-escavacao td {
+  padding: 5px 1px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* cabeçalho */
+.tabela-pesca-escavacao th {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+/* listras alternadas */
+.tabela-pesca-escavacao tr:nth-child(even) {
+  background-color: #2c2c2c;
+}
+
+.tabela-pesca-escavacao tr:nth-child(odd) {
+  background-color: #242424;
+}
+
+/* larguras fixas para 5 colunas */
+.tabela-pesca-escavacao th:nth-child(1),
+.tabela-pesca-escavacao td:nth-child(1) {
+  width: 200px;
+}
+
+.tabela-pesca-escavacao th:nth-child(2),
+.tabela-pesca-escavacao td:nth-child(2) {
+  width: 200px;
+}
+
+.tabela-pesca-escavacao th:nth-child(3),
+.tabela-pesca-escavacao td:nth-child(3) {
+  width: 1px;
+}
+
+.tabela-pesca-escavacao th:nth-child(4),
+.tabela-pesca-escavacao td:nth-child(4) {
+  width: 250px;
+}
+
+.tabela-pesca-escavacao th:nth-child(5),
+.tabela-pesca-escavacao td:nth-child(5) {
+  width: 200px;
+}

@@ -28,6 +28,127 @@ const crops = [
     {name: 'Barley',      tempo: 172_800_000, tempoFinal: 172_800_000, custoDaSemente: 10,   custoFinal: '', vendaDaCrop: 12,   vendaFinal: '', vendaFlower: 0, estoqueDeSementes: 60,  estoqueFinal: 60,  quantidadePorPlot: 1, seedsPlantadas: '', tier: 'advanced', estacao: 'Spring, Autumn'}
 ];
 
+const fruits = [
+    {
+        name: 'Tomato',   
+        tempo: 7_200_000,
+        tempoFinal: 7_200_000,      
+        custoDaSemente: 5, 
+        custoFinal: '', 
+        vendaDaCrop: 2,
+        vendaFinal: '', 
+        vendaFlower: 0, 
+        qtdCiclosPadrao: 4, 
+        qtdCiclosFinal: 4,
+        estoqueDeSementes: 20, 
+        estoqueFinal: 20, 
+        quantidadePorPlot: 1, 
+        seedsPlantadas: '', 
+        tier: 'basic',    
+        estacao: 'Spring, Autumn'
+    },
+    {
+        name: 'Lemon',      
+        tempo: 14_400_000,     
+        tempoFinal: 14_400_000,     
+        custoDaSemente: 15,  
+        custoFinal: '', 
+        vendaDaCrop: 6, 
+        vendaFinal: '', 
+        vendaFlower: 0, 
+        qtdCiclosPadrao: 4, 
+        qtdCiclosFinal: 4,
+        estoqueDeSementes: 20, 
+        estoqueFinal: 20, 
+        quantidadePorPlot: 1, 
+        seedsPlantadas: '', 
+        tier: 'basic',    
+        estacao: 'Summer, Winter'
+    },
+    {
+        name: 'Blueberry',     
+        tempo: 21_600_000,     
+        tempoFinal: 21_600_000,     
+        custoDaSemente: 30, 
+        custoFinal: '', 
+        vendaDaCrop: 12,
+        vendaFinal: '', 
+        vendaFlower: 0, 
+        qtdCiclosPadrao: 4, 
+        qtdCiclosFinal: 4,
+        estoqueDeSementes: 20, 
+        estoqueFinal: 20, 
+        quantidadePorPlot: 1, 
+        seedsPlantadas: '', 
+        tier: 'medium',    
+        estacao: 'Spring, Winter'
+    },
+    {
+        name: 'Orange',     
+        tempo: 28_800_000,   
+        tempoFinal: 28_800_000,   
+        custoDaSemente: 50,  
+        custoFinal: '', 
+        vendaDaCrop: 18,  
+        vendaFinal: '', 
+        vendaFlower: 0,
+        qtdCiclosPadrao: 4, 
+        qtdCiclosFinal: 4,
+        estoqueDeSementes: 20, 
+        estoqueFinal: 20, 
+        quantidadePorPlot: 1, 
+        seedsPlantadas: '', 
+        tier: 'medium',    
+        estacao: 'Spring, Summer'
+    },
+    {
+        name: 'Apple',    
+        tempo: 43_200_000,   
+        tempoFinal: 43_200_000,   
+        custoDaSemente: 70,  
+        custoFinal: '', 
+        vendaDaCrop: 25,  
+        vendaFinal: '', 
+        vendaFlower: 0, 
+        qtdCiclosPadrao: 4, 
+        qtdCiclosFinal: 4,
+        estoqueDeSementes: 20, 
+        estoqueFinal: 20, 
+        quantidadePorPlot: 1, 
+        seedsPlantadas: '', 
+        tier: 'basic',    
+        estacao: 'Autumn, Winter'
+    },
+    {
+        name: 'Banana',      
+        tempo: 43_200_000,   
+        tempoFinal: 43_200_000,   
+        custoDaSemente: 70,  
+        custoFinal: '', 
+        vendaDaCrop: 25,  
+        vendaFinal: '', 
+        vendaFlower: 0, 
+        qtdCiclosPadrao: 4, 
+        qtdCiclosFinal: 4,
+        estoqueDeSementes: 20, 
+        estoqueFinal: 20, 
+        quantidadePorPlot: 1, 
+        seedsPlantadas: '', 
+        tier: 'medium',   
+        estacao: 'Summer, Autumn'
+    },
+]
+
+
+
+
+
+
+
+
+
+
+
 //============================================================================================================================================================================
 
 const minerals = [
@@ -37,6 +158,7 @@ const minerals = [
     { id: 'gold',       name: 'Gold',      qtdNodes: 1, qtdNodesT1: 0, qtdNodesT2: 0, qtdNodesT3: 0, tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNodePadrao: 1,           mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: '', qtdQuebradasConvertidas: ''},
     { id: 'crimstone',  name: 'Crimstone', qtdNodes: 1, qtdNodesT1: 0, qtdNodesT2: 0, qtdNodesT3: 0, tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNodePadrao: 1.4,         mediaPorNode: 1.4,         mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: '',   gastoComFerramentas: '', vezesQueVaiQuebrar: '', qtdQuebradasConvertidas: ''},
     { id: 'oil',        name: 'Oil',       qtdNodes: 1, qtdNodesT1: 0, qtdNodesT2: 0, qtdNodesT3: 0, tempoPadrao: 72_000_000, tempoComBuff: 72_000_000, mediaPorNodePadrao: 16.66666667, mediaPorNode: 16.66666667, mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: 0,    gastoComFerramentas: '', vezesQueVaiQuebrar: '', qtdQuebradasConvertidas: ''},
+    
     { id: 'peixe',      name: 'Peixe',     qtdNodes: 1, qtdNodesT1: 0, qtdNodesT2: 0, qtdNodesT3: 0, tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNodePadrao: 1,           mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: 0,    gastoComFerramentas: '', vezesQueVaiQuebrar: '', qtdQuebradasConvertidas: ''},    
     { id: 'escavacao',  name: 'Escavação', qtdNodes: 1, qtdNodesT1: 0, qtdNodesT2: 0, qtdNodesT3: 0, tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNodePadrao: 1,           mediaPorNode: 1,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: 0,    gastoComFerramentas: '', vezesQueVaiQuebrar: '', qtdQuebradasConvertidas: ''},
     { id: 'escavacao2', name: 'Escavação', qtdNodes: 1, qtdNodesT1: 0, qtdNodesT2: 0, qtdNodesT3: 0, tempoPadrao: 86_400_000, tempoComBuff: 86_400_000, mediaPorNodePadrao: 4,           mediaPorNode: 4,           mediaCustoEmCoins: '', custoEmFlower: '', valorMarket: 0,    gastoComFerramentas: '', vezesQueVaiQuebrar: '', qtdQuebradasConvertidas: ''},
@@ -54,14 +176,63 @@ const ferramentas = [
     { id: 'ironPickaxe',  name: 'Iron Pickaxe',  recursoAdquirido: 'gold',       custoTotalEmCoins: '', tier: 'picareta', quantidade: 1, estoquePadrao: 5,   estoqueComBuff: 5,   coinsPadrao: 80,  coins: 80,  wood: 3,  iron: 5},
     { id: 'goldPickaxe',  name: 'Gold Pickaxe',  recursoAdquirido: 'crimstone',  custoTotalEmCoins: '', tier: 'picareta', quantidade: 1, estoquePadrao: 5,   estoqueComBuff: 5,   coinsPadrao: 100, coins: 100, wood: 3,  gold: 3},
     { id: 'oilDrill',     name: 'Oil Drill',     recursoAdquirido: 'oil',        custoTotalEmCoins: '', tier: 'drill',    quantidade: 1, estoquePadrao: 5,   estoqueComBuff: 5,   coinsPadrao: 100, coins: 100, wood: 20, iron: 9, leather: 10, wool: 20},
-    
-    { id: 'rod',          name: 'Rod',           recursoAdquirido: 'peixe',      custoTotalEmCoins: '', tier: 'vara',     quantidade: 1, estoquePadrao: 50,  estoqueComBuff: 50,  coinsPadrao: 20,  coins: 20,  wood: 3,  stone: 1},
-    { id: 'sandShovel',   name: 'Sand Shovel',   recursoAdquirido: 'escavacao',  custoTotalEmCoins: '', tier: 'pa',       quantidade: 1, estoquePadrao: 50,  estoqueComBuff: 50,  coinsPadrao: 20,  coins: 20,  wood: 2 , stone: 1},
-    { id: 'sandDrill',    name: 'Sand Drill',    recursoAdquirido: 'escavacao2', custoTotalEmCoins: '', tier: 'drill',    quantidade: 1, estoquePadrao: 10,  estoqueComBuff: 10,  coinsPadrao: 40,  coins: 40,  wood: 3,  crimstone: 1, oil: 1, leather: 1},
 ];
 
+const ferramentasSecundarias = [
+    { 
+        id: 'rod',          
+        name: 'Rod',
+        recursoAdquirido: 'peixe',      
+        custoTotalEmCoins: '', 
+        tier: 'vara',     
+        quantidade: 1,
+        limiteDiarioPadrao: 30,
+        limiteComBuff: 30,
+        estoquePadrao: 50,
+        estoqueComBuff: 50,
+        coinsPadrao: 20,
+        coins: 20,
+        wood: 3,
+        stone: 1
+    },
+    { 
+        id: 'sandShovel',   
+        name: 'Sand Shovel',   
+        recursoAdquirido: 'escavacao',  
+        custoTotalEmCoins: '', 
+        tier: 'pa',       
+        quantidade: 1, 
+        limiteDiarioPadrao: 30,
+        limiteComBuff: 30,
+        estoquePadrao: 50,  
+        estoqueComBuff: 50,  
+        coinsPadrao: 20,  
+        coins: 20,  
+        wood: 2 , 
+        stone: 1
+    },
+    { 
+        id: 'sandDrill',    
+        name: 'Sand Drill',    
+        recursoAdquirido: 'escavacao2', 
+        custoTotalEmCoins: '', 
+        tier: 'drill',    
+        quantidade: 1,
+        limiteDiarioPadrao: 30,
+        limiteComBuff: 30,
+        estoquePadrao: 10,  
+        estoqueComBuff: 10,  
+        coinsPadrao: 40,  
+        coins: 40,  
+        wood: 3,  
+        crimstone: 1, 
+        oil: 1, 
+        leather: 1
+    },
+]
+let todasFerramentas = [].concat(ferramentas, ferramentasSecundarias)
 let mapaDeFerramentas = {}; // cria objeto vazio para guardar NFTs por id
-ferramentas.forEach(ferramenta => { //vai verificar e organizar por id das NFTs no mapaDeCollectibles, foi oque entendi
+todasFerramentas.forEach(ferramenta => { //vai verificar e organizar por id das NFTs no mapaDeCollectibles, foi oque entendi
     mapaDeFerramentas[ferramenta.id] = ferramenta; // adiciona cada NFT no objeto usando o id como chave
 });
 

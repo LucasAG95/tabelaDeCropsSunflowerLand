@@ -154,9 +154,6 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         </thead>
         <tbody>
     `;
-    let selecionarTipoDeCalculo = 'manual'
-    selecionarTipoDeCalculo = document.getElementById('tipo-de-calculo');
-
     
     ferramentas.forEach(ferramenta => {
 
@@ -193,7 +190,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         lucroTotalFlower += lucroFlower;
 
         let comprarOuMinerar;
-        if (valorMarketRecursos > custoPorUnidadeRecursoEmFlower) {
+        if (valorMarketRecursos > custoPorUnidadeRecursoEmFlower || nomeRecurso === 'Oil') {
             comprarOuMinerar = 'Minerar';
         } else if (valorMarketRecursos < custoPorUnidadeRecursoEmFlower) {
             comprarOuMinerar = 'Comprar';
@@ -226,6 +223,48 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
     });
     tabelaMinerios += `</tbody></table>`;
 
+
+    //para separar o preenchimento quando for pescar ou cavar!
+    let tabelaPescaEEscavacao = `
+    <table class="tabela-pesca-escavacao">
+        <thead>
+            <tr>
+                <th>Ferramentas <br> Estoque</th>
+                <th>Usos disponiveis<br>Diariamente</th>
+                <th></th>
+                <th><button onclick="nodesQuebrados()">Calcular</button><br>Qtd que vai usar</th>
+                <th>Ferramentas Usadas<br>Gasto Total</th>
+            </tr>
+        </thead>
+        <tbody>
+    `;
+
+    ferramentasSecundarias.forEach(ferramenta => {
+
+        let vezesQuePretendeMinerar = mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas;
+        let ferramentasUsadas = vezesQuePretendeMinerar * ferramenta.quantidade;
+        let gastoComFerramentas = ferramentasUsadas * ferramenta.custoTotalEmCoins;
+        let gastoConvertidoEmFlower = (1 / flowerEmCoins) * gastoComFerramentas;
+
+        //Total de reestock feitos com as ferramentas
+        if(Math.ceil(ferramentasUsadas / ferramenta.estoqueComBuff) > reestockFerramentas){
+            reestockFerramentas = Math.ceil(ferramentasUsadas / ferramenta.estoqueComBuff);
+        }
+
+
+        tabelaPescaEEscavacao += `
+            <tr>
+                <td><img src="./minerais/${ferramenta.id}.png" class="crop-img">${ferramenta.name} <br> <img src="./icones/reestock.png" class="crop-img">${ferramenta.estoqueComBuff}</td>
+                <td>${ferramenta.limiteComBuff}x<td>
+                <td><input type="number" placeholder="" data-name="${mapaDeMinerals[ferramenta.recursoAdquirido].id}" class="quantidade-input" value="${mapaDeMinerals[ferramenta.recursoAdquirido].vezesQueVaiQuebrar}"></td>
+                <td><img src="./minerais/${ferramenta.id}.png" class="crop-img">${ferramentasUsadas.toFixed(2)}<br><img src="./icones/flower.png" class="crop-img">${gastoConvertidoEmFlower.toFixed(4)}</td>
+
+            </tr>
+            `
+    });
+    tabelaPescaEEscavacao += `</tbody></table>`;
+
+    
     lucroTotalFlower -= (coinsGastas / flowerEmCoins) +
         (leatherGastos * mapaMarketRecursos['leather'].valor) +
         (woolGastas * mapaMarketRecursos['wool'].valor);
@@ -266,6 +305,7 @@ function statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGa
         <div class="tabelas-em-ordem">
             ${tabelaResultadoFinalMinerios}
             ${tabelaMinerios}
+            ${tabelaPescaEEscavacao}
         </div>
     `;
 

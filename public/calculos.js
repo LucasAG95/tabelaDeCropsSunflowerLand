@@ -269,7 +269,7 @@ function valoresMineriosEFerramentasEGastos() {
     let leatherGastos = 0;
     let woolGastas = 0;
 
-    ferramentas.forEach(ferramenta => {
+    todasFerramentas.forEach(ferramenta => {
         if(ferramenta.coins)
             coinsGastas += ((mapaDeMinerals[ferramenta.recursoAdquirido].qtdQuebradasConvertidas * ferramenta.quantidade) * ferramenta.coins);
         if(ferramenta.wood)
