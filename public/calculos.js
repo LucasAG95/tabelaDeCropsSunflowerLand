@@ -118,6 +118,38 @@ function buffsAdicionadosCrops() {
     statusCrops();
 };
 
+//==================================================================================================================================================================
+
+function buffsAdicionadosFruits() {
+    fruits.forEach(fruta => {
+        // chama a função genérica, passando todas as listas que afetam crops
+        const buffs = calcularBuffs(fruta, [
+            skillsFruits.tier1,
+            skillsFruits.tier2,
+            skillsFruits.tier3,
+            collectiblesFruits,
+            wearablesFruits,
+            novosCollectibles]);
+        
+        //aplica os buffs no objeto Crop
+        fruta.quantidadePorPlot =
+            (buffs.multiplicaQtd + buffs.somaQtd - buffs.somaDebuff + (eventoBountifulHarvest * buffs.buffDeEventoBountifulHarvest)) * buffs.multiplicaInstaRecurso;
+        fruta.tempoFinal = fruta.tempo * buffs.mudancaNoTempo;
+        fruta.custoFinal = fruta.custoDaSemente * buffs.reduzirGastoComCoins;
+        fruta.vendaFinal = fruta.vendaDaCrop * buffs.multiplicaVendaPorCoins;
+        fruta.estoqueFinal = (fruta.estoqueDeSementes * buffs.multiplicaEstoque) + buffs.somaEstoque;
+        
+        fruta.axe = 1;
+        if (mapaDeTodasArvoresDeSkills['logger'].possui) fruta.axe *= mapaDeTodasArvoresDeSkills['logger'].buff;
+        if (mapaDeTodasArvoresDeSkills['noAxeNoWorries'].possui) fruta.axe *= mapaDeTodasArvoresDeSkills['noAxeNoWorries'].buff;
+        if (mapaDeTodosCollectibles['foremanBeaver'].possui) fruta.axe *= mapaDeTodosCollectibles['foremanBeaver'].buff;
+
+        fruta.wood = 1;
+        if (mapaDeTodasArvoresDeSkills['noAxeNoWorries'].possui) fruta.wood *= mapaDeTodasArvoresDeSkills['noAxeNoWorries'].buff;
+        if (mapaDeTodasArvoresDeSkills['fruityWoody'].possui) fruta.wood += mapaDeTodasArvoresDeSkills['fruityWoody'].buff;
+    });
+    statusCrops();
+};
 
 //==================================================================================================================================================================
 
@@ -318,6 +350,7 @@ function valoresMineriosEFerramentasEGastos() {
     console.log(`vou gastar: ${coinsGastas} Coins + ${woodGastas} Woods + ${stoneGastas} Stones + ${ironGastos} Irons + ${goldGastos} Golds + ${crimstoneGastas} Crim + ${oilGastos} Oils +  ${leatherGastos} Leather`)
     
     statusMinerais(coinsGastas, woodGastas, stoneGastas, ironGastos, goldGastos, crimstoneGastas, oilGastos, leatherGastos, woolGastas, gastosConvertidoEmFlower);
+    statusCrops();
 }
 
 //==================================================================================================================================================================
@@ -329,16 +362,16 @@ function ativarBonusDasNftsESkills() {
     do {
         mudouBuff = false;
 
-        collectiblesCrops.forEach(collectibles => {
+        todosCollectibles.forEach(collectibles => {
             let buffAplicado = collectibles.buffBase ?? collectibles.buff;
 
             if(collectibles.condicional) {
-                let depende = mapaDeCollectiblesCrops[collectibles.condicional.dependeDe];
+                let depende = mapaDeTodosCollectibles[collectibles.condicional.dependeDe];
                 if (depende?.possui) buffAplicado = collectibles.condicional.novoBuff;
             };
 
             if(collectibles.condicionalSkill) {
-                let skill = mapaDeSkillsCrops[collectibles.condicionalSkill.dependeDe];
+                let skill = mapaDeTodasArvoresDeSkills[collectibles.condicionalSkill.dependeDe];
                 if (skill.possui) buffAplicado = collectibles.condicionalSkill.novoBuff;
             };
         

@@ -28,6 +28,14 @@ function atualizarValoresDeVendaPorFlower(apiValores) {
     });
     buffsAdicionadosCrops();
 
+    fruits.forEach(fruta => {
+        if (apiValores[fruta.name]) {
+            fruta.vendaFlower = apiValores[fruta.name];
+            console.log(`Crop: ${fruta.name} Valor: ${fruta.vendaFlower}`);
+        };
+    });
+    buffsAdicionadosFruits();
+
     minerals.forEach(mineral => {
         if (apiValores[mineral.name]) {
             mineral.valorMarket = apiValores[mineral.name];
@@ -63,6 +71,13 @@ function atualizarValoresDasNfts(apiCollectibles, apiWearables) {
         }
     });
 
+    collectiblesFruits.forEach(collectibles => {
+        if (mapaPrecoCollectibles[collectibles.idNumber]) {
+            collectibles.valor = mapaPrecoCollectibles[collectibles.idNumber].lastSalePrice;
+        }
+    });
+
+
     collectiblesMinerals.forEach(collectibles => {
         if (mapaPrecoCollectibles[collectibles.idNumber]) {
             collectibles.valor = mapaPrecoCollectibles[collectibles.idNumber].lastSalePrice;
@@ -81,6 +96,12 @@ function atualizarValoresDasNfts(apiCollectibles, apiWearables) {
         }
     });
 
+    wearablesFruits.forEach(wearables => {
+        if (mapaPrecoWearables[wearables.idNumber]) {
+            wearables.valor = mapaPrecoWearables[wearables.idNumber].lastSalePrice;
+        }
+    });
+
     wearablesMinerals.forEach(wearables => {
         if (mapaPrecoWearables[wearables.idNumber]) {
             wearables.valor = mapaPrecoWearables[wearables.idNumber].lastSalePrice;
@@ -94,7 +115,7 @@ function atualizarValoresDasNfts(apiCollectibles, apiWearables) {
         const checkbox = wrapper.querySelector('input');
         if (!checkbox) return;
 
-        const nft = [...collectiblesCrops, ...wearablesCrops, ...collectiblesMinerals, ...wearablesMinerals].find(item => item.id === checkbox.id);
+        const nft = [...collectiblesCrops, ...wearablesCrops, ...collectiblesFruits, ...wearablesFruits, ...collectiblesMinerals, ...wearablesMinerals].find(item => item.id === checkbox.id);
         if (!nft) return;
 
         let valorFlower = precoDoFlower
@@ -150,6 +171,8 @@ function numeroDaFarm() {
             //infos para preencher plots/nodes que possue na farm
             const cropPlotsQuePossui = data.farm.inventory['Crop Plot'];
 
+            const fruitPlotsQuePossui = data.farm.inventory['Fruit Patch'];
+
             const treeQuePossui = data.farm.inventory['Tree'];
             const treeT2QuePossui = data.farm.inventory['Ancient Tree'];
             const treeT3QuePossui = data.farm.inventory['Sacred Tree'];
@@ -170,7 +193,8 @@ function numeroDaFarm() {
 
             const oilQuePossui = data.farm.inventory['Oil Reserve'];
 
-            preencherInformacoesDaFarm(cropPlotsQuePossui, 
+            preencherInformacoesDaFarm(
+                cropPlotsQuePossui, fruitPlotsQuePossui, 
                 treeQuePossui, treeT2QuePossui, treeT3QuePossui,
                 stoneQuePossui, stoneT2QuePossui, stoneT3QuePossui,
                 ironQuePossui, ironT2QuePossui, ironT3QuePossui,
@@ -262,6 +286,29 @@ function numeroDaFarm() {
             };
         });
 
+        //Frutas
+        collectiblesFruits.forEach(collectibles => {
+            let checkbox = document.getElementById(collectibles.id);
+            if (collectiblesQuePossui[collectibles.name]) {
+                checkbox.checked = true;
+                collectibles.possui = true;
+            } else {
+                checkbox.checked = false;
+                collectibles.possui = false;
+            };
+        });
+
+        wearablesFruits.forEach(wearables => {
+            let checkbox = document.getElementById(wearables.id);
+            if (wearablesQuePossui[wearables.name] || wearablesQuePossui[wearables.name1] || wearablesQuePossui[wearables.name2] || wearablesQuePossui[wearables.name3] || wearablesQuePossui[wearables.name4]) {
+                checkbox.checked = true;
+                wearables.possui = true;
+            } else {
+                checkbox.checked = false;
+                wearables.possui = false;
+            };
+        });
+
         //Minerais
         collectiblesMinerals.forEach(collectibles => {
             let checkbox = document.getElementById(collectibles.id);
@@ -289,16 +336,18 @@ function numeroDaFarm() {
         nftsDeTierQuePossuemBuffDoAntecessor();
         ativarBonusDasNftsESkills();
         skillsCropsBloqueadas();
+        skillsFruitsBloqueadas();
         skillsTreesBloqueadas();
         skillsMineralsBloqueadas();
         skillsMachineryBloqueadas();
         buffsAdicionadosCrops();
+        buffsAdicionadosFruits();
         buffsAdicionadosMinerais();
         
     };
     
     //função responsavel por preencher quantos plots/nodes a farm possui!
-    function preencherInformacoesDaFarm(cropPlotsQuePossui, 
+    function preencherInformacoesDaFarm(cropPlotsQuePossui, fruitPlotsQuePossui,
                 treeQuePossui, treeT2QuePossui, treeT3QuePossui,
                 stoneQuePossui, stoneT2QuePossui, stoneT3QuePossui,
                 ironQuePossui, ironT2QuePossui, ironT3QuePossui,
@@ -309,6 +358,9 @@ function numeroDaFarm() {
         //Plots Crops
         plots = cropPlotsQuePossui;
         document.getElementById('plotsPossuidos').value = cropPlotsQuePossui;
+
+        fruitPlot = fruitPlotsQuePossui;
+        document.getElementById('fruitPlotsPossuidos').value = fruitPlotsQuePossui;
 
         //Trees
         mapaDeMinerals['wood'].qtdNodesT1 = treeQuePossui;

@@ -34,6 +34,28 @@ function valorTotalEmNftsETotalPontosEmSkills() {
     });
     document.getElementById('accordion-wearables-crops').innerHTML = `Crops: <img src="./icones/flower.png" class="crop-img">${valorEmWearablesCrops.toFixed(2)} ~ $${(valorEmWearablesCrops * precoDoFlower).toFixed(2)}`;
 
+    //soma dos valores em flower e dolar das Collectibles de Fruits
+    let valorEmCollectiblesFruits = 0;
+    collectiblesCrops.forEach(collectibles => {
+        let checkbox = document.getElementById(collectibles.id);
+
+        if(checkbox && checkbox.checked) {
+            valorEmCollectiblesFruits += Number(collectibles.valor);
+        };
+    });
+    document.getElementById('accordion-collectibles-fruits').innerHTML = `Fruits: <img src="./icones/flower.png" class="crop-img">${valorEmCollectiblesFruits.toFixed(2)} ~ $${(valorEmCollectiblesFruits * precoDoFlower).toFixed(2)}`;
+
+    //soma dos valores em flower e dolar das Wearables de Fruits
+    let valorEmWearablesFruits = 0;
+    wearablesFruits.forEach(wearables => {
+        let checkbox = document.getElementById(wearables.id);
+
+        if (checkbox && checkbox.checked) {
+            valorEmWearablesFruits += Number(wearables.valor);
+        };
+    });
+    document.getElementById('accordion-wearables-fruits').innerHTML = `Fruits: <img src="./icones/flower.png" class="crop-img">${valorEmWearablesFruits.toFixed(2)} ~ $${(valorEmWearablesFruits * precoDoFlower).toFixed(2)}`;
+
     //soma dos valores em flower e dolar das Collectibles de Minerals
     let valorEmCollectiblesMinerals = 0;
     collectiblesMinerals.forEach(collectibles => {
@@ -58,8 +80,8 @@ function valorTotalEmNftsETotalPontosEmSkills() {
 
 
     //valor total em Collectibles/Wearables!
-    let totalEmCollectibles = valorEmCollectiblesCrops + valorEmCollectiblesMinerals;
-    let totalEmWearables = valorEmWearablesCrops + valorEmWearablesMinerals;
+    let totalEmCollectibles = valorEmCollectiblesCrops + valorEmCollectiblesFruits + valorEmCollectiblesMinerals;
+    let totalEmWearables = valorEmWearablesCrops + valorEmWearablesFruits + valorEmWearablesMinerals;
     document.getElementById('total-valor-em-collectibles').innerHTML = `Collectibles: <img src="./icones/flower.png" class="crop-img">${totalEmCollectibles.toFixed(2)} ~ $${(totalEmCollectibles * precoDoFlower).toFixed(2)}`;
     document.getElementById('total-valor-em-wearables').innerHTML = `Wearables: <img src="./icones/flower.png" class="crop-img">${totalEmWearables.toFixed(2)} ~ $${(totalEmWearables * precoDoFlower).toFixed(2)}`;
 

@@ -11,6 +11,7 @@ function configurarCheckbox() {
                 skill.possui = checkbox.checked;
                 ativarBonusDasNftsESkills();
                 buffsAdicionadosCrops();
+                buffsAdicionadosFruits();
                 buffsAdicionadosMinerais();
             });
         };
@@ -26,11 +27,13 @@ function configurarCheckbox() {
                 skill.possui = checkbox.checked;
                 ativarBonusDasNftsESkills();
                 skillsCropsBloqueadas();
+                skillsFruitsBloqueadas();
                 skillsTreesBloqueadas();
                 skillsMineralsBloqueadas();
                 skillsMachineryBloqueadas();
                 valorTotalEmNftsETotalPontosEmSkills();
                 buffsAdicionadosCrops();
+                buffsAdicionadosFruits();
                 buffsAdicionadosMinerais();
             });
         };
@@ -50,6 +53,7 @@ function configurarCheckbox() {
                 valorTotalEmNftsETotalPontosEmSkills();
                 ativarBonusDasNftsESkills();
                 buffsAdicionadosCrops();
+                buffsAdicionadosFruits();
                 buffsAdicionadosMinerais();
             });
         };
@@ -66,6 +70,7 @@ function configurarCheckbox() {
                 valorTotalEmNftsETotalPontosEmSkills();
                 ativarBonusDasNftsESkills();
                 buffsAdicionadosCrops();
+                buffsAdicionadosFruits();
                 buffsAdicionadosMinerais();
             });
         };
@@ -102,6 +107,37 @@ function configurarCheckbox() {
             });
         };
     });
+
+    collectiblesFruits.forEach(collectibles => {
+        let checkbox = document.getElementById(collectibles.id);
+
+        if(checkbox) {
+            collectibles.possui = checkbox.checked;
+
+            checkbox.addEventListener('change', function() {
+                collectibles.possui = checkbox.checked;
+                valorTotalEmNftsETotalPontosEmSkills();
+                nftsDeTierQuePossuemBuffDoAntecessor();
+                ativarBonusDasNftsESkills();
+                buffsAdicionadosFruits();
+            });
+        };
+    });
+
+    wearablesFruits.forEach(wearables => {
+        let checkbox = document.getElementById(wearables.id);
+
+        if(checkbox) {
+            wearables.possui = checkbox.checked;
+
+            checkbox.addEventListener('change', function() {
+                wearables.possui = checkbox.checked;
+                valorTotalEmNftsETotalPontosEmSkills();
+                ativarBonusDasNftsESkills();
+                buffsAdicionadosFruits();
+            });
+        };
+    }); 
     
     collectiblesMinerals.forEach(collectibles => {
         let checkbox = document.getElementById(collectibles.id);
@@ -113,7 +149,9 @@ function configurarCheckbox() {
                 collectibles.possui = checkbox.checked;
                 valorTotalEmNftsETotalPontosEmSkills();
                 nftsDeTierQuePossuemBuffDoAntecessor();
+                ativarBonusDasNftsESkills();
                 buffsAdicionadosMinerais();
+                buffsAdicionadosFruits();
             });
         };
     }); 
@@ -127,7 +165,9 @@ function configurarCheckbox() {
             checkbox.addEventListener('change', function() {
                 wearables.possui = checkbox.checked;
                 valorTotalEmNftsETotalPontosEmSkills();
+                ativarBonusDasNftsESkills();
                 buffsAdicionadosMinerais();
+                buffsAdicionadosFruits();
             });
         };
     }); 
@@ -212,6 +252,10 @@ window.onload = function () {
     renderSkills(skillsCrops.tier1, 'skills-crop-tier1-container', './skills');
     renderSkills(skillsCrops.tier2, 'skills-crop-tier2-container', './skills');
     renderSkills(skillsCrops.tier3, 'skills-crop-tier3-container', './skills');
+    //Skills Fruits
+    renderSkills(skillsFruits.tier1, 'skills-fruit-tier1-container', './skills');
+    renderSkills(skillsFruits.tier2, 'skills-fruit-tier2-container', './skills');
+    renderSkills(skillsFruits.tier3, 'skills-fruit-tier3-container', './skills');
     //Skills Trees
     renderSkills(skillsTrees.tier1, 'skills-tree-tier1-container', './skills');
     renderSkills(skillsTrees.tier2, 'skills-tree-tier2-container', './skills');
@@ -228,10 +272,11 @@ window.onload = function () {
     // Collectibles
     renderNFTs(collectiblesCrops, 'collectibles-container-crops', './collectibles');
     renderNFTs(collectiblesMinerals, 'collectibles-container-minerals', './collectibles');
+    renderNFTs(collectiblesFruits, 'collectibles-container-fruits', './collectibles' );
 
     // Wearables
-
     renderNFTs(wearablesCrops, 'wearables-container-crops', './wearables');
+    renderNFTs(wearablesFruits, 'wearables-container-fruits', './wearables');
     renderNFTs(wearablesMinerals, 'wearables-container-minerals', './wearables');
 
     //NFTs da Temporada
@@ -243,11 +288,13 @@ window.onload = function () {
     nftsDeTierQuePossuemBuffDoAntecessor();
     skillsCropsBloqueadas();
     skillsTreesBloqueadas();
+    skillsFruitsBloqueadas();
     skillsMineralsBloqueadas();
     skillsMachineryBloqueadas();
     valorTotalEmNftsETotalPontosEmSkills();
     numeroDaFarm();
     buffsAdicionadosCrops();
+    buffsAdicionadosFruits();
     buffsAdicionadosMinerais();
 
 

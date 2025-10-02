@@ -4,7 +4,6 @@ function statusCrops() {
     let tempoTotal = 0;
     let lucroTotalFlower = 0;
     let restockCropCombo = 0;
-    let cardCrops = '';
 
     // tabela principal continua igual
     let tabelaCrops = `
@@ -20,7 +19,7 @@ function statusCrops() {
             <th>Lucro na venda <br> por Coins</th>
             <th>Lucro no Market P2P<br>Taxa: ${(taxa * 100) * desconto}%</th>
             <th>Melhor opção<br>de Venda atual</th>
-            <th>Média de Lucro por Hora<br>(Desconta Gems)</th>
+            <th>Média de Lucro por Hora<br>(Sem desconta Gems)</th>
         </tr>
         </thead>
         <tbody>
@@ -39,7 +38,7 @@ function statusCrops() {
         let rendimento24h = ((vinteQuatroHoras / crop.tempoFinal) * (plots * crop.quantidadePorPlot)) * (crop.vendaFlower * (1 - (taxa * desconto)));
         let custoEm24h = ((vinteQuatroHoras / crop.tempoFinal) * plots) * (crop.custoFinal / flowerEmCoins);
         let custoEmGems24h = ((((vinteQuatroHoras / crop.tempoFinal) * plots) / (crop.estoqueFinal)) * 15) * precoDaGemEmFlower;
-        let lucroEm24h = rendimento24h - (custoEm24h + custoEmGems24h);
+        let lucroEm24h = rendimento24h - (custoEm24h);
 
         let melhorPorCoinsOuFlower;
         if(lucroFlower === 0){
@@ -77,9 +76,99 @@ function statusCrops() {
         `;
 
     });
-
     tabelaCrops += `</tbody></table>`;
+
+    let numeroDeCiclosDasFrutas = 4;
+    if (mapaDeTodosCollectibles['immortalPear'].possui) numeroDeCiclosDasFrutas += mapaDeTodosCollectibles['immortalPear'].buff;
+
+
+
+    tabelaFruits = `
+    <table class="tabela-crops">
+        <thead>
+        <tr>
+            <th><img src="./icones/${estacao}.png" class="crop-img">Fruits<br>Estoque</th>     
+            <th>Colheita e Tempo<br>por ciclo</th>
+            <th>Sementes que vai Plantar <br><button onclick="sementesPlantadas()">Salvar</button></th>
+            <th>Colheita Total<br>Tempo Plantando</th>
+            <th>Machados Gastos<br>Madeira Ganhas</th>
+            <th>Gasto com Semente<br>e Machados</th>       
+            <th>Valor de Venda <br> Market P2P</th>
+            <th>Lucro em Coins <br>(Apenas Frutas)</th>
+            <th>Lucro no Market P2P<br>Taxa: ${(taxa * 100) * desconto}%</th>
+            <th>Melhor opção<br>de Venda atual</th>
+            <th>Média de Lucro por Hora<br>(Sem desconta Gems)</th>
+        </tr>
+        </thead>
+        <tbody>
+    `;
     
+    fruits.forEach(fruta => {
+        if(!fruta.estacao.includes(estacao)) return;
+        
+        let colheitaTotal = (fruta.quantidadePorPlot * 4) * fruta.seedsPlantadas;
+        let tempoFinalDaFruta = (fruta.tempoFinal * numeroDeCiclosDasFrutas) * Math.ceil(fruta.seedsPlantadas / fruitPlot);
+
+        let GastoComSementeEmCoins = fruta.custoFinal * fruta.seedsPlantadas;
+        let GastoComSementeEmFlower = ((1 / flowerEmCoins) * fruta.custoFinal) * fruta.seedsPlantadas;
+        
+        let qtdAxesUsados = fruta.axe * fruta.seedsPlantadas;
+        let gastoComAxesCoins = qtdAxesUsados * mapaDeFerramentas['axe'].custoTotalEmCoins;
+        let gastoComAxesFlower = (1 / flowerEmCoins) * gastoComAxesCoins;
+
+        let qtdWoodFeita = fruta.wood * fruta.seedsPlantadas;
+
+        let lucroCoins = (colheitaTotal * fruta.vendaFinal) - (GastoComSementeEmCoins);
+        let lucroFrutasMarket = ((fruta.vendaFlower * colheitaTotal) * (1 - (taxa * desconto))) - GastoComSementeEmFlower;
+        let lucroWoodMarket = ((qtdWoodFeita * mapaDeMinerals['wood'].valorMarket) * (1 - (taxa * desconto))) - gastoComAxesFlower;
+
+        let rendimentoFruta24h = ((vinteQuatroHoras / fruta.tempoFinal) * (fruitPlot * fruta.quantidadePorPlot)) * (fruta.vendaFlower * (1 - (taxa * desconto)));
+        let rendimentoWood24h = ((vinteQuatroHoras / (fruta.tempoFinal * numeroDeCiclosDasFrutas)) * (fruitPlot * fruta.wood)) * (mapaDeMinerals['wood'].valorMarket * (1 - (taxa * desconto)));
+
+        let custoFrutaEm24h = ((vinteQuatroHoras / (fruta.tempoFinal * numeroDeCiclosDasFrutas)) * fruitPlot) * (fruta.custoFinal / flowerEmCoins);
+        let custoAxeEm24h = ((vinteQuatroHoras / (fruta.tempoFinal * numeroDeCiclosDasFrutas)) * fruitPlot) * (mapaDeFerramentas['axe'].custoTotalEmCoins / flowerEmCoins)
+
+        let custoEmGems24h = ((((vinteQuatroHoras / (fruta.tempoFinal * numeroDeCiclosDasFrutas)) * fruitPlot) / (fruta.estoqueFinal)) * 15) * precoDaGemEmFlower;
+        let lucroEm24h = (rendimentoFruta24h + rendimentoWood24h) - (custoFrutaEm24h + custoAxeEm24h);
+
+        let melhorPorCoinsOuFlower;
+        if(lucroFrutasMarket === 0){
+            melhorPorCoinsOuFlower = '';
+        } else if(lucroFrutasMarket < (1 / flowerEmCoins) * lucroCoins){
+            melhorPorCoinsOuFlower = '<img src="./icones/coins.png" class="crop-img">Coins';
+        } else {
+            melhorPorCoinsOuFlower = '<img src="./icones/flower.png" class="crop-img">Flower';
+        }
+
+        //Total de reestock feitos com as crops
+        if(Math.ceil(fruta.seedsPlantadas / fruta.estoqueFinal) > restockCropCombo){
+            restockCropCombo = Math.ceil(fruta.seedsPlantadas / fruta.estoqueFinal);
+        }
+
+        tabelaFruits += `
+        <tr>
+            <td><img src="./crops/${fruta.name}.png" class="crop-img">${fruta.name} <br> <img src="./icones/reestock.png" class="crop-img">${fruta.estoqueFinal}</td>
+            <td><img src="./crops/${fruta.name}.png" class="crop-img">${fruta.quantidadePorPlot} <br> <img src="./icones/tempo.png" class="crop-img">${formatarTempoDaCrop(fruta.tempoFinal)}</td>
+            <td><input type="number" placeholder="" data-name="${fruta.name}" class="quantidade-input" value="${fruta.seedsPlantadas}"></td>
+            <td><img src="./crops/${fruta.name}.png" class="crop-img">${colheitaTotal.toFixed(2)} <br> <img src="./icones/tempo.png" class="crop-img">${formatarTempoDaCrop(tempoFinalDaFruta)}</td>
+            <td><img src="./minerais/${mapaDeFerramentas['axe'].id}.png" class="crop-img">${qtdAxesUsados}<br><img src="./minerais/${mapaDeMinerals['wood'].id}.png" class="crop-img">${qtdWoodFeita}</td>                
+            <td><img src="./icones/coins.png" class="crop-img">${(GastoComSementeEmCoins + gastoComAxesCoins).toFixed(2)}<br><img src="./icones/flower.png" class="crop-img">${(GastoComSementeEmFlower + gastoComAxesFlower).toFixed(4)}</td>
+            <td><img src="./crops/${fruta.name}.png" class="crop-img"> <br> <img src="./icones/flower.png" class="crop-img">${fruta.vendaFlower}</td>
+            <td><img src="./crops/${fruta.name}.png" class="crop-img"> <br> <img src="./icones/coins.png" class="crop-img">${lucroCoins}</td>
+            <td>
+                <img src="./crops/${fruta.name}.png" class="crop-img"><img src="./icones/flower.png" class="crop-img">${lucroFrutasMarket.toFixed(4)}<br>
+                <img src="./minerais/${mapaDeMinerals['wood'].id}.png" class="crop-img"><img src="./icones/flower.png" class="crop-img">${lucroWoodMarket.toFixed(4)}
+            </td>
+            <td>${melhorPorCoinsOuFlower}</td>
+            <td>
+                <img src="./crops/${fruta.name}.png" class="crop-img"> + <img src="./minerais/${mapaDeMinerals['wood'].id}.png" class="crop-img"><br>
+                <img src="./icones/flower.png" class="crop-img">${(lucroEm24h / 24).toFixed(5)}
+            </td>
+        </tr>
+        `;
+
+    });
+
 
     //cálculo do resumo
     let precoRestockCropDolar = precoPorGem * (restockCropCombo * 15);
@@ -123,6 +212,7 @@ function statusCrops() {
         <div class="tabelas-em-ordem">
             ${tabelaResultadoFinal}
             ${tabelaCrops}
+            ${tabelaFruits}
         </div>
     `;
 }

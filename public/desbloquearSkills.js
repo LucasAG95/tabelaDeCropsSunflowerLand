@@ -44,6 +44,52 @@ function skillsCropsBloqueadas() {
     textoParaDesbloquearSkill(3, 7, totalDePontosGastos, aroveDeAbilidades, tituloDoAcordion);
 };
 
+function skillsFruitsBloqueadas() {
+    let aroveDeAbilidades = 'fruit';
+    let tituloDoAcordion = 'Fruit Patch';
+    let pontosTier1 = 0;
+    let pontosTier2 = 0;
+    let pontosTier3 = 0;
+    let totalDePontosGastos = 0;
+
+    todasSkillsFruits.forEach(skill => {
+        let checkbox = document.getElementById(skill.id)
+
+        // Tier 1 sempre pode ser contado
+        if(skill.pontosNecessários === 1 && checkbox.checked) {
+            pontosTier1 += skill.pontosNecessários;
+        };
+
+        // Tier 2 só conta se já tiver pontos suficientes no Tier 1
+        if(skill.pontosNecessários === 2 && checkbox.checked && pontosTier1 >= 2) {
+            pontosTier2 += skill.pontosNecessários;
+        };
+
+        // Tier 3 só conta se já tiver pontos suficientes no Tier 1 + 2
+        if(skill.pontosNecessários === 3 && checkbox.checked && (pontosTier1 + pontosTier2) >= 5) {
+            pontosTier3 += skill.pontosNecessários;
+        };
+
+        //Bloquear tier 2 e 3 das skills ate condições serem falsas
+        if (pontosTier1 < 2 && skill.pontosNecessários === 2) {
+            checkbox.disabled = true;
+            checkbox.checked = false;
+            skill.possui = false;
+        } else if ((pontosTier1 + pontosTier2) < 5 && skill.pontosNecessários === 3) {
+            checkbox.disabled = true;
+            checkbox.checked = false;
+            skill.possui = false;
+        } else {
+            checkbox.disabled = false;
+        };
+        
+    });
+    totalDePontosGastos = pontosTier1 + pontosTier2 + pontosTier3;
+    console.log(totalDePontosGastos);
+
+    textoParaDesbloquearSkill(2, 5, totalDePontosGastos, aroveDeAbilidades, tituloDoAcordion);
+};
+
 function skillsTreesBloqueadas() {
     let aroveDeAbilidades = 'tree';
     let tituloDoAcordion = 'Trees';

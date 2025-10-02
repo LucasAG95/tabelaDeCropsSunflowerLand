@@ -12,6 +12,8 @@ document.getElementById('flower-em-coins').value = 1000;
 let plots = parseInt(9);
 document.getElementById('plotsPossuidos').value = plots; // Isso serve para ja mostrar o valor de plots no html
 
+let fruitPlot = 1;
+
 function salvarInformacoes() {
     plots = document.getElementById('plotsPossuidos').value;
     if (plots < 9) {
@@ -20,6 +22,8 @@ function salvarInformacoes() {
         document.getElementById('plotsPossuidos').value = plots;
     };
 
+    fruitPlot = document.getElementById('fruitPlotsPossuidos').value;
+    
     //mostrar o valor inserido do flower em coins ao salvar
     flowerEmCoins = document.getElementById('flower-em-coins').value;
     console.log(flowerEmCoins)
@@ -27,6 +31,7 @@ function salvarInformacoes() {
     //chama as funções para atualizar
     buffsAdicionadosMinerais();
     buffsAdicionadosCrops();
+    buffsAdicionadosFruits();
 };
 
 //função para salvar os nodes que possui
@@ -67,6 +72,7 @@ function selecionandoEstacao() {
     estacao = document.getElementById('estacaoSelect').value;
     //titulosDosSelectsEPreenchimentos();
     buffsAdicionadosCrops();
+    buffsAdicionadosFruits();
 };
 document.getElementById('estacaoSelect').addEventListener('change', selecionandoEstacao);
 
@@ -88,6 +94,7 @@ function ilhaPrestigioAtual() { // Função central que lê o <select>, calcula 
         taxa = 0.15
     };
     buffsAdicionadosCrops();
+    buffsAdicionadosFruits();
     buffsAdicionadosMinerais();
 };
 //registra um ouvinte de evento no <select id="ilhaSelect">.
@@ -134,6 +141,7 @@ function eventoDeBonus() {
     }
     //titulosDosSelectsEPreenchimentos();
     buffsAdicionadosCrops();
+    buffsAdicionadosFruits();
 }
 document.getElementById('evento-bonus').addEventListener('change', eventoDeBonus)
 
@@ -144,13 +152,22 @@ function sementesPlantadas() {
     document.querySelectorAll('.quantidade-input').forEach(input => { //Procura todos os inputs no HTML que têm a classe quantidade-input.
         let nome = input.dataset.name; //Lê o atributo data-name do input.
         let valor = input.value;
-        let crop = crops.find(c => c.name === nome) //Procura no array crops um item com o mesmo nome que o data-name do input. c é abreviação de crop e nome dada a variavel
+        
+        //Para Crops
+        let crop = crops.find(c => c.name === nome); //Procura no array crops um item com o mesmo nome que o data-name do input. c é abreviação de crop e nome dada a variavel
         if (crop) {
             crop.seedsPlantadas = valor;
         };
 
+        //Para Frutas
+        let fruta = fruits.find(f => f.name === nome);
+        if (fruta) {
+            fruta.seedsPlantadas = valor;
+        }
+
     });
     buffsAdicionadosCrops();
+    buffsAdicionadosFruits();
 };
 
 //ao selecionar o modo, muda como calcula os minerais e traz novos resultados
@@ -215,6 +232,7 @@ function valoresDasGems() {
     //funções chamadas
     titulosDosSelectsEPreenchimentos();
     buffsAdicionadosCrops();
+    buffsAdicionadosFruits();
     buffsAdicionadosMinerais();
 }
 document.getElementById('pack-gems').addEventListener('change', valoresDasGems);

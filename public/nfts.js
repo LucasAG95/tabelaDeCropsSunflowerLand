@@ -134,7 +134,6 @@ let novosWearables = [
             tempo: 0.85,
             ironPickaxe: 1.1,
             gold: 1.1
-            
         },
         valor: '',
         possui: false
@@ -1021,6 +1020,280 @@ console.log(mapaDeCollectiblesCrops)
 
 //======================================================================================================================================================================
 
+let collectiblesFruits = [
+    //NFTs feitos no ferreiro
+    {
+        id: 'immortalPear',
+        idNumber: '',
+        name: 'Immortal Pear',
+        descricao: 'Árvores frutíferas duram +1 rodada',
+        estacao: 'todas',
+        tipoDeCrop: 'todas',
+        afeta: 'ciclos',
+        sinal: '+',
+        buffBase: 1,
+        condicionalSkill: {
+            dependeDe: 'pearTurbocharge',
+            novoBuff: 2
+        },
+        buff: 1,
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'macaw',
+        idNumber: '',
+        name: 'Macaw',
+        descricao: '+0.1 Fruta (menos frutas da GH)',
+        estacao: 'todas',
+        tipoDeCrop: 'todas',
+        afeta: 'quantidade',
+        sinal: '+',
+        buffBase: 0.1,
+        condicionalSkill: {
+            dependeDe: 'loyalMacaw',
+            novoBuff: 0.2
+        },
+        buff: 0.1,
+        valor: '',
+        possui: false
+    },
+    //Collectibles - Frutas
+    {   
+        id: 'cannonball',
+        idNumber: 2105,
+        name: 'Cannonball',
+        descricao: '-25% de tempo no crescimento do Tomate',
+        estacao: 'todas',
+        tipoDeCrop: 'Tomato',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.75,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'tomatoClown',
+        idNumber: 2122,
+        name: 'Tomato Clown',
+        descricao: '-50% de tempo no crescimento do Tomate',
+        estacao: 'todas',
+        tipoDeCrop: 'Tomato',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.5,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'tomatoBombard',
+        idNumber: 2128,
+        name: 'Tomato Bombard',
+        descricao: '+1 Tomate',
+        estacao: 'todas',
+        tipoDeCrop: 'Tomato',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 1,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'lemonShark',
+        idNumber: 1539,
+        name: 'Lemon Shark',
+        descricao: '+0.2 limões',
+        estacao: 'todas',
+        tipoDeCrop: 'Lemon',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 0.2,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'revelingLemon',
+        idNumber: 2109,
+        name: 'Reveling Lemon',
+        descricao: '+0.25 limões',
+        estacao: 'todas',
+        tipoDeCrop: 'Lemon',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 0.25,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'lemonFrog',
+        idNumber: 2114,
+        name: 'Lemon Frog',
+        descricao: '-25% de tempo no crescimento do Limão',
+        estacao: 'todas',
+        tipoDeCrop: 'Lemon',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.75,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'lemonTeaBath',
+        idNumber: 2121,
+        name: 'Lemon Tea Bath',
+        descricao: '-50% de tempo no crescimento do Limão',
+        estacao: 'todas',
+        tipoDeCrop: 'Lemon',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.5,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'blackBearry',
+        idNumber: 444,
+        name: 'Black Bearryh',
+        descricao: '+1 Blueberry',
+        estacao: 'todas',
+        tipoDeCrop: 'Blueberry',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 1,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'squirrelMonkey',
+        idNumber: 443,
+        name: 'Squirrel Monkey',
+        descricao: '-50% de tempo no crescimento da Orange',
+        estacao: 'todas',
+        tipoDeCrop: 'Orange',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.5,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'ladyBug',
+        idNumber: 442,
+        name: 'Lady Bug',
+        descricao: '+0.25 Apple',
+        estacao: 'todas',
+        tipoDeCrop: 'Apple',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 0.25,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'nana',
+        idNumber: 487,
+        name: 'Nana',
+        descricao: '-10% de tempo no crescimento do Banana',
+        estacao: 'todas',
+        tipoDeCrop: 'Banana',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.9,
+        valor: '',
+        possui: false
+    },
+    {   
+        id: 'bananaChicken',
+        idNumber: 488,
+        name: 'Banana Chicken',
+        descricao: '+0.1 Banana',
+        estacao: 'todas',
+        tipoDeCrop: 'Banana',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 0.1,
+        valor: '',
+        possui: false
+    },
+];
+
+let wearablesFruits = [
+    
+    {
+        id: 'camelOnesie',
+        idNumber: 350,
+        name: 'Camel Onesie',
+        descricao: '+0.1 Frutas (menos frutas da GH)',
+        estacao: 'todas',
+        tipoDeCrop: 'todas',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 0.1,
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'fruitPickerApron',
+        idNumber: '',
+        name: 'Fruit Picker Apron',
+        descricao: '+0.1 Apple, Blueberry, Orange e Banana',
+        estacao: 'todas',
+        tipoDeCrop: ['Apple', 'Blueberry', 'Orange', 'Banana'],
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 0.1,
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'lemonShield',
+        idNumber: 371,
+        name: 'Lemon Shield',
+        descricao: '+1 Limão',
+        estacao: 'todas',
+        tipoDeCrop: 'Lemon',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 1,
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'bananaOnesie',
+        idNumber: 251,
+        name: 'Banana Onesie',
+        descricao: '-20% no tempo de crescimento da Banana',
+        estacao: 'todas',
+        tipoDeCrop: 'Banana',
+        afeta: 'tempo',
+        sinal: 'x',
+        buff: 0.8,
+        valor: '',
+        possui: false
+    },
+    {
+        id: 'bananaAmulet',
+        idNumber: 250,
+        name: 'Banana Amulet',
+        descricao: '+0.5 Bananas',
+        estacao: 'todas',
+        tipoDeCrop: 'Banana',
+        afeta: 'quantidade',
+        sinal: '+',
+        buff: 0.5,
+        valor: '',
+        possui: false
+    },
+];
+
+let mapaDeCollectiblesFruits = {};
+collectiblesFruits.forEach(collectibles => { 
+    mapaDeCollectiblesFruits[collectibles.id] = collectibles; 
+});
+console.log(mapaDeCollectiblesFruits)
+
+//======================================================================================================================================================================
+
 let collectiblesMinerals = [
     {
         id: 'toolshed',
@@ -1433,3 +1706,13 @@ wearablesMinerals = [
         possui: false 
     },
 ];
+
+//isso é um jeito novo de fazer concat
+let todosCollectibles = [...collectiblesCrops, ...collectiblesFruits, ...collectiblesMinerals];
+let todosWearables = [...wearablesCrops, ...wearablesFruits, ...wearablesFruits];
+
+let mapaDeTodosCollectibles = {};
+todosCollectibles.forEach(collectibles => { 
+    mapaDeTodosCollectibles[collectibles.id] = collectibles; 
+});
+console.log(mapaDeTodosCollectibles)

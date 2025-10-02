@@ -210,6 +210,176 @@ console.log(mapaDeSkillsCrops);
 
 //=============================================================================================================================================================================
 
+let skillsFruits = {
+    tier1: [
+        {
+            id: 'fruitfulFumble',
+            name: 'Fruitful Fumble',
+            descricao: '+0.1 Fruit Yield',
+            tipoDeCrop: 'todas',
+            afeta: 'quantidade',
+            sinal: '+',
+            pontosNecessários: 1,
+            buff: 0.1,
+            possui: false
+        },
+        {
+            id: 'fruityHeaven',
+            name: 'Fruity Heaven',
+            descricao: '-10% do custo em sementes de fruta',
+            tipoDeCrop: 'todas',
+            afeta: 'custoCoins',
+            sinal: 'x',
+            pontosNecessários: 1,
+            buff: 0.9,
+            possui: false
+        },
+        {
+            id: 'fruityProfit',
+            name: 'Fruity Profit',
+            descricao: '+50% de coins nas entregas do Tango',
+            tipoDeCrop: 'todas',
+            afeta: 'delivery',
+            sinal: 'x',
+            pontosNecessários: 1,
+            buff: 1.5,
+            possui: false
+        },
+        //rever essa abaixo
+        {
+            id: 'loyalMacaw',
+            name: 'Loyal Macaw',
+            descricao: 'Efeito Double Macaw\'s',
+            tipoDeCrop: 'macaw',
+            afeta: 'quantidade',
+            sinal: '+',
+            pontosNecessários: 1,
+            buff: 0.1,
+            possui: false
+        },
+        //rever tbm
+        {
+            id: 'noAxeNoWorries',
+            name: 'No Axe No Worries',
+            descricao: 'Corte galhos de frutas sem machados, -1 madeira dos galhos de frutas',
+            tipoDeCrop: 'axe',
+            afeta: '',
+            sinal: 'x',
+            pontosNecessários: 1,
+            buff: 0,
+            possui: false
+        },
+    ],
+    tier2: [
+        {
+            id: 'catchup',
+            name: 'Catchup',
+            descricao: '-10% de tempo no crescimento das frutas',
+            tipoDeCrop: 'todas',
+            afeta: 'tempo',
+            sinal: 'x',
+            pontosNecessários: 2,
+            buff: 0.9,
+            possui: false
+        },
+        {
+            id: 'fruityWoody',
+            name: 'Fruity Woody',
+            descricao: '+1 madeira dos galhos e caules de frutas',
+            tipoDeCrop: 'wood',
+            afeta: '',
+            sinal: '+',
+            pontosNecessários: 2,
+            buff: 1,
+            possui: false
+        },
+        {
+            id: 'pearTurbocharge',
+            name: 'Pear Turbocharge',
+            descricao: 'Dobre o efeito da Immortal Pear\'s',
+            tipoDeCrop: 'todas',
+            afeta: '',
+            sinal: '+',
+            pontosNecessários: 2,
+            buff: 1,
+            possui: false
+        },
+        {
+            id: 'crimeFruit',
+            name: 'Crime Fruit',
+            descricao: '+10 no estoque de sementes de Tomate e Limão',
+            tipoDeCrop: ['Tomato', 'Lemon'],
+            afeta: 'estoque',
+            sinal: '+',
+            pontosNecessários: 2,
+            buff: 10,
+            possui: false
+        },
+    ],
+    tier3: [
+        {
+            id: 'generousOrchard',
+            name: 'Generous Orchard',
+            descricao: '20% de chance de +1 no rendimento de frutas',
+            tipoDeCrop: 'todas',
+            afeta: 'quantidade',
+            sinal: '+',
+            pontosNecessários: 3,
+            buff: 0.2,
+            possui: false
+        },
+        {
+            id: 'longPickings',
+            name: 'Long Pickings',
+            descricao: '-50% no tempo de crescimento das maçãs e bananas, +100% no tempo de crescimento para todas as outras frutas.',
+            tipoDeCrop: ['Apple', 'Banana'],
+            afeta: 'tempo',
+            sinal: 'x',
+            pontosNecessários: 3,
+            buff: 0.5,
+            possui: false,
+            cropReduzida: ['Tomato', 'Lemon', 'Blueberry', 'Orange'],
+            deBuff: 2,
+        },
+        {
+            id: 'shortPickings',
+            name: 'Short Pickings',
+            descricao: '-50% no tempo de crescimento dos mirtilos e laranjas, +100% no tempo de crescimento para todas as outras frutas.',
+            tipoDeCrop: ['Blueberry', 'Orange'],
+            afeta: 'tempo',
+            sinal: 'x',
+            pontosNecessários: 3,
+            buff: 0.5,
+            possui: false,
+            cropReduzida: ['Tomato', 'Lemon', 'Apple', 'Banana'],
+            deBuff: 2,
+        },
+        {
+            id: 'zestyVibes',
+            name: 'Zesty Vibes',
+            descricao: '+1 no rendimento de Tomate e Limão, -0,25 no rendimento para todas as outras frutas.',
+            tipoDeCrop: ['Tomato', 'Lemon'],
+            afeta: 'quantidade',
+            sinal: '+',
+            pontosNecessários: 3,
+            buff: 1,
+            possui: false,
+            cropReduzida: ['Blueberry', 'Orange', 'Apple', 'Banana'],
+            deBuff: 0.25,
+        },
+    ]
+};  
+
+let todasSkillsFruits = [].concat(skillsFruits.tier1, skillsFruits.tier2, skillsFruits.tier3);
+
+let mapaDeSkillsFruits = {};
+todasSkillsFruits.forEach(skills => { 
+    mapaDeSkillsFruits[skills.id] = skills;
+});
+console.log(mapaDeSkillsFruits);
+
+//=============================================================================================================================================================================
+
 let skillsTrees = {
     tierLegacy: [
         {
@@ -730,4 +900,15 @@ console.log(mapaDeSkillsMachinery);
 
 //Juntas toda arvore de skill para que ao criar as checkbox seja mais rapido e menor o codigo!
 let todasSkillsLegacy = [].concat(skillsCrops.tierLegacy, skillsTrees.tierLegacy ,skillsMinerals.tierLegacy);
-let todasSkillsComTier = [].concat(skillsCrops.tier1, skillsCrops.tier2, skillsCrops.tier3, skillsTrees.tier1, skillsTrees.tier2, skillsTrees.tier3, skillsMinerals.tier1, skillsMinerals.tier2, skillsMinerals.tier3, skillsMachinery.tier1, skillsMachinery.tier2, skillsMachinery.tier3);
+let todasSkillsComTier = [].concat(skillsCrops.tier1, skillsCrops.tier2, skillsCrops.tier3,
+    skillsFruits.tier1, skillsFruits.tier2, skillsFruits.tier3,
+    skillsTrees.tier1, skillsTrees.tier2, skillsTrees.tier3,
+    skillsMinerals.tier1, skillsMinerals.tier2, skillsMinerals.tier3,
+    skillsMachinery.tier1, skillsMachinery.tier2, skillsMachinery.tier3
+);
+let todasSkills = [...todasSkillsLegacy, ...todasSkillsComTier]
+
+let mapaDeTodasArvoresDeSkills = {};
+todasSkills.forEach(skills => {
+    mapaDeTodasArvoresDeSkills[skills.id] = skills;
+});

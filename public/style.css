@@ -538,3 +538,10 @@ td input.quantidade-input {
 .tabela-pesca-escavacao td:nth-child(5) {
   width: 200px;
 }
+
+/* tamanho dos icones */
+.icon-btn {
+  width: 15px;   /* largura fixa */
+  height: 15px;  /* altura fixa */
+  object-fit: contain; /* garante que não deforme a proporção */
+}

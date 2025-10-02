@@ -101,6 +101,23 @@
         </div>
       </div>
 
+      <!-- Skills de Fruits (Tier 1, 2 e 3) -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <img src="./icones/skillFruit.png" alt="Ícone Crops" class="icon-btn">
+          <span id="accordion-skill-fruit">Fruit Patch</span>
+        </button>
+        <div class="accordion-content">
+          <div id="skills-fruit-tier1-container" class="skill-container"></div>
+          <div id="skills-fruit-tier2-container" class="skill-container">
+            <p class="texto-skill-desbloquear" id="accordion-skill-fruit-tier2"></p>
+          </div>
+          <div id="skills-fruit-tier3-container" class="skill-container">
+            <p class="texto-skill-desbloquear" id="accordion-skill-fruit-tier3"></p>
+          </div>
+        </div>
+      </div>
+
       <!-- Skills de Trees (Tier 1, 2 e 3) -->
       <div class="accordion">
         <button class="accordion-btn">
@@ -168,6 +185,16 @@
         </div>
       </div>
 
+      <!-- Collectibles de Fruits -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <span id="accordion-collectibles-fruits"></span>
+        </button>
+        <div class="accordion-content">
+          <div id="collectibles-container-fruits" class="nft-container"></div>
+        </div>
+      </div>
+
       <!-- Collectibles de Minerals -->
       <div class="accordion">
         <button class="accordion-btn">
@@ -190,6 +217,16 @@
         </button>
         <div class="accordion-content">
           <div id="wearables-container-crops" class="nft-container"></div>
+        </div>
+      </div>
+
+      <!-- Wearables de Fruits -->
+      <div class="accordion">
+        <button class="accordion-btn">
+          <span id="accordion-wearables-fruits">Fruits:</span>
+        </button>
+        <div class="accordion-content">
+          <div id="wearables-container-fruits" class="nft-container"></div>
         </div>
       </div>
 
@@ -248,8 +285,13 @@
     </div>
 
     <div class="select-group">
-      <label for="plotsPossuidos">Quantidade de plots:</label>
+      <label for="plotsPossuidos">Qtd Crop Plots:</label>
       <input id="plotsPossuidos" type="number" placeholder="Ex: 70">
+    </div>
+
+    <div class="select-group">
+      <label for="fruitPlotsPossuidos">Qtd Fruit Plots:</label>
+      <input id="fruitPlotsPossuidos" type="number" placeholder="Ex: 15">
     </div>
 
     <button id="salvarInfos" onclick="salvarInformacoes()">Salvar</button>
