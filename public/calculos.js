@@ -16,6 +16,7 @@ function calcularBuffs(recurso, listasDeBuffs) {
 
     //altera o tempo que demora para a crop crescer ou recurso ser produzido!
     let mudancaNoTempo = 1;
+    let mudancaNoTempoDebuff = 1;
     
     //muda a quantidade de estoque de crops, ferramentas entre outros recursos que possa vir, de acordo com os buffs que tem
     let multiplicaEstoque = 1;
@@ -47,6 +48,10 @@ function calcularBuffs(recurso, listasDeBuffs) {
                 somaDebuff += nftOuSkill.deBuff;
             };
 
+            if (nftOuSkill.afeta.includes('tempo') && nftOuSkill.sinal === 'x' && tipoReducao &&
+                (tipoReducao === 'todas' || tipoReducao.includes(recurso.tier) || tipoReducao.includes(recurso.name) || tipoReducao.includes(recurso.id))) {
+                mudancaNoTempoDebuff *= nftOuSkill.deBuff;
+            };
 
             //verifica qual propriedade usar: tipoDeCrop ou tipoDeRecurso.
             const tipo = nftOuSkill.tipoDeCrop || nftOuSkill.tipoDeRecurso ;
@@ -91,6 +96,7 @@ function calcularBuffs(recurso, listasDeBuffs) {
         somaDebuff,
         multiplicaInstaRecurso,
         mudancaNoTempo,
+        mudancaNoTempoDebuff,
         multiplicaEstoque,
         somaEstoque,
         reduzirGastoComCoins,
@@ -134,7 +140,7 @@ function buffsAdicionadosFruits() {
         //aplica os buffs no objeto Crop
         fruta.quantidadePorPlot =
             (buffs.multiplicaQtd + buffs.somaQtd - buffs.somaDebuff + (eventoBountifulHarvest * buffs.buffDeEventoBountifulHarvest)) * buffs.multiplicaInstaRecurso;
-        fruta.tempoFinal = fruta.tempo * buffs.mudancaNoTempo;
+        fruta.tempoFinal = fruta.tempo * buffs.mudancaNoTempo * buffs.mudancaNoTempoDebuff;
         fruta.custoFinal = fruta.custoDaSemente * buffs.reduzirGastoComCoins;
         fruta.vendaFinal = fruta.vendaDaCrop * buffs.multiplicaVendaPorCoins;
         fruta.estoqueFinal = (fruta.estoqueDeSementes * buffs.multiplicaEstoque) + buffs.somaEstoque;
